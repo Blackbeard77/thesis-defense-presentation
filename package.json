@@ -1,0 +1,29 @@
+{
+  "name": "thesis-defense-presentation",
+  "version": "1.0.0",
+  "description": "A polished reveal.js template for thesis/project/defense presentations.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blackbeard77/thesis-defense-presentation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Blackbeard77/thesis-defense-presentation/issues"
+  },
+  "homepage": "https://github.com/Blackbeard77/thesis-defense-presentation#readme",
+  "dependencies": {
+    "reveal.js": "^6.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^10.0.3",
+    "serve": "^14.2.6"
+  }
+}
