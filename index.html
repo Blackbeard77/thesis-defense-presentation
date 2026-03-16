@@ -3,33 +3,35 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Defense Presentation Template</title>
+    <title>Bachelor Thesis</title>
     <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css" id="theme">
-
     <link rel="stylesheet" href="./styles.css" />
 </head>
   <body>
     <div class="reveal">
       <div class="slides">
+
+        <img src="./assets/images/srh_logo.png" class="srh-logo" />
+
         <!-- 1. TITLE -->
         <section class="title-slide" data-background-gradient="linear-gradient(135deg, #0b1020, #121a33 40%, #1a2550)">
-          <div class="eyebrow">Defense Presentation Template</div>
+          <div class="eyebrow">Bachelor Thesis</div>
           <h1>{Project / Thesis Title}</h1>
           <p class="subtitle">{A clean one-line subtitle or problem statement}</p>
 
           <div class="title-meta">
             <div>
               <span class="meta-label">Presented by</span>
-              <strong>{Your Name}</strong>
+              <strong>Ashraf Lehawany</strong>
             </div>
             <div>
               <span class="meta-label">Supervisor</span>
-              <strong>{Supervisor Name}</strong>
+              <strong>Prof. Dr. Andreas Jäger</strong>
             </div>
             <div>
               <span class="meta-label">Date</span>
-              <strong>{Defense Date}</strong>
+              <strong>26.03.2026</strong>
             </div>
           </div>
 
@@ -310,6 +312,7 @@
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.0/dist/reveal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.0/dist/plugin/notes.js"></script>
     <script>
+
       Reveal.initialize({
         hash: true,
         controls: true,
@@ -318,7 +321,7 @@
         transition: 'slide',
         backgroundTransition: 'fade',
         autoAnimate: true,
-        center: false,
+        center: true,
         navigationMode: 'default',
         showNotes: false,
         plugins: [RevealNotes]

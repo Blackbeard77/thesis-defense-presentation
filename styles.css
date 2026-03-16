@@ -55,6 +55,7 @@
 }
 
 .reveal strong {
+  font-size: 0.20em;
   color: white;
 }
 
@@ -289,6 +290,15 @@ ul {
 
 .reveal ::selection {
   background: rgba(96, 165, 250, 0.35);
+}
+
+.srh-logo {
+  position: fixed;
+  top:  0px;
+  right: 0px;
+  width: 60px;
+  opacity: 0.9;
+  z-index: 0;
 }
 
 @media (max-width: 900px) {
