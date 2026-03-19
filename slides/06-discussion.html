@@ -1,0 +1,338 @@
+<!-- ============================================================
+     SLIDE 06 — DISCUSSION (nested vertical slides)
+     Press → to leave this chapter, ↓ to go deeper inside it
+     ============================================================ -->
+<section>
+
+    <!-- 6.0 ── Chapter Divider -->
+    <section class="slide-chapter" data-num="05">
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <div class="chapter-num">05 / Discussion</div>
+        <h2>Discussion</h2>
+        <p class="chapter-sub">Integration Effort &nbsp;·&nbsp; Runtime Behaviour &nbsp;·&nbsp; Tradeoffs &nbsp;·&nbsp; Limitations</p>
+    </section>
+
+
+    <!-- 6.1 ── Integration Effort & Dependencies -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Discussion</h3>
+        <h2>Integration Effort &amp; Dependencies</h2>
+
+        <div class="cols3">
+
+            <div class="card card-blue fragment fade-up">
+                <div style="font-family:var(--font-mono); color:var(--accent); font-size:0.7em; margin-bottom:0.5em; letter-spacing:0.1em;">DIALOG TREE</div>
+                <span class="tag green">No 3rd party tools</span>
+                <span class="tag green">No network</span>
+                <br><br>
+                <p style="font-size:0.85em;">
+                    Manual authoring of all 6 options and conditional branches.
+                    Simple C# switch-case logic.
+                    <strong>High content effort</strong>, but
+                    minimal technical overhead.
+                </p>
+                <div style="font-family:var(--font-mono); font-size:0.7em; color:var(--muted); margin-top:0.5em;">
+                    Effort: <span style="color:var(--yellow);">Content-heavy</span>
+                </div>
+            </div>
+
+            <div class="card card-orange fragment fade-up">
+                <div style="font-family:var(--font-mono); color:var(--srh); font-size:0.7em; margin-bottom:0.5em; letter-spacing:0.1em;">LOCAL LLM</div>
+                <span class="tag orange">LLMUnity package</span>
+                <span class="tag yellow">Model setup</span>
+                <br><br>
+                <p style="font-size:0.85em;">
+                    One-time config of LLMUnity framework,
+                    model download (GGUF format), and
+                    <strong>prompt engineering</strong>.
+                    No external dependencies once set up.
+                </p>
+                <div style="font-family:var(--font-mono); font-size:0.7em; color:var(--muted); margin-top:0.5em;">
+                    Effort: <span style="color:var(--srh);">Technical setup</span>
+                </div>
+            </div>
+
+            <div class="card card-blue fragment fade-up">
+                <div style="font-family:var(--font-mono); color:var(--accent); font-size:0.7em; margin-bottom:0.5em; letter-spacing:0.1em;">CLOUD LLM</div>
+                <span class="tag red">API key required</span>
+                <span class="tag red">Network needed</span>
+                <span class="tag red">Vendor lock-in</span>
+                <br><br>
+                <p style="font-size:0.85em;">
+                    API integration, async request handling,
+                    response parsing, error management —
+                    plus <strong>prompt engineering</strong>
+                    to constrain outputs.
+                </p>
+                <div style="font-family:var(--font-mono); font-size:0.7em; color:var(--muted); margin-top:0.5em;">
+                    Effort: <span style="color:var(--red);">Technical + Operational</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="callout fragment fade-up" style="margin-top:0.9rem;">
+            💡 <strong>Key insight:</strong> All LLM-based systems shift complexity from
+            <em>content authoring</em> (dialog trees) to
+            <em>runtime orchestration</em> — prompt design, context management,
+            and output filtering.
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Discussion · Integration Effort</span>
+        </div>
+    </section>
+
+
+    <!-- 6.2 ── Runtime Behaviour -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Discussion</h3>
+        <h2>Runtime Behaviour &amp; Performance</h2>
+
+        <div class="cols">
+            <div>
+                <p>Each system showed a <strong>distinct performance profile</strong>
+                    under identical conditions:</p>
+
+                <div class="card card-blue fragment fade-up" style="margin-top:0.7rem;">
+                    <strong style="color:var(--accent);">Dialog Tree</strong><br>
+                    <span style="font-size:0.85em; color:var(--text-soft);">
+            Flat CPU, near-zero latency.
+            All responses retrieved from pre-authored structures —
+            no computation at runtime.
+          </span>
+                </div>
+
+                <div class="card card-blue fragment fade-up" style="margin-top:0.6rem;">
+                    <strong style="color:var(--accent);">Cloud LLM (OpenAI)</strong><br>
+                    <span style="font-size:0.85em; color:var(--text-soft);">
+            Low local CPU — inference runs externally.
+            Latency comes from <em>network + generation time</em>.
+            Visible response windows in the graphs.
+          </span>
+                </div>
+
+                <div class="card card-orange fragment fade-up" style="margin-top:0.6rem;">
+                    <strong style="color:var(--srh);">Local LLM</strong><br>
+                    <span style="font-size:0.85em; color:var(--text-soft);">
+            High CPU spikes during generation.
+            Latency comparable to cloud for small models.
+            Larger models cause <strong>sustained CPU saturation</strong>
+            — incompatible with real-time dialog.
+          </span>
+                </div>
+            </div>
+
+            <div class="fragment fade-up">
+                <div class="callout-orange" style="margin-bottom:0.7rem;">
+                    <strong>The sweet spot:</strong> Gemma 3 (1B) achieved
+                    latency comparable to OpenAI while running
+                    entirely offline — the best local trade-off.
+                </div>
+
+                <!-- Visual tradeoff spectrum -->
+                <div class="card" style="padding:1.2rem;">
+                    <div style="font-family:var(--font-mono); font-size:0.5em; color:var(--muted); margin-bottom:0.8rem; letter-spacing:0.1em;">PERFORMANCE SPECTRUM</div>
+                    <div style="display:flex; flex-direction:column; gap:0.5rem; font-size:0.6em;">
+                        <div style="display:flex; align-items:center; gap:0.6rem;">
+                            <div style="width:8px; height:8px; border-radius:50%; background:var(--accent);"></div>
+                            <span style="color:var(--text-soft); flex:1;">Dialog Tree</span>
+                            <div style="flex:2; background:var(--surface-2); border-radius:3px; height:6px; overflow:hidden;">
+                                <div style="width:100%; height:100%; background:var(--accent); border-radius:3px;"></div>
+                            </div>
+                            <span style="color:var(--accent); width:3em; text-align:right;">Best</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:0.6rem;">
+                            <div style="width:8px; height:8px; border-radius:50%; background:var(--srh);"></div>
+                            <span style="color:var(--text-soft); flex:1;">Gemma 1B</span>
+                            <div style="flex:2; background:var(--surface-2); border-radius:3px; height:6px; overflow:hidden;">
+                                <div style="width:80%; height:100%; background:var(--srh); border-radius:3px;"></div>
+                            </div>
+                            <span style="color:var(--srh); width:3em; text-align:right;">Good</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:0.6rem;">
+                            <div style="width:8px; height:8px; border-radius:50%; background:var(--green);"></div>
+                            <span style="color:var(--text-soft); flex:1;">OpenAI GPT-4o</span>
+                            <div style="flex:2; background:var(--surface-2); border-radius:3px; height:6px; overflow:hidden;">
+                                <div style="width:72%; height:100%; background:var(--green); border-radius:3px;"></div>
+                            </div>
+                            <span style="color:var(--green); width:3em; text-align:right;">Good</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:0.6rem;">
+                            <div style="width:8px; height:8px; border-radius:50%; background:var(--yellow);"></div>
+                            <span style="color:var(--text-soft); flex:1;">DeepSeek 1.5B</span>
+                            <div style="flex:2; background:var(--surface-2); border-radius:3px; height:6px; overflow:hidden;">
+                                <div style="width:40%; height:100%; background:var(--yellow); border-radius:3px;"></div>
+                            </div>
+                            <span style="color:var(--yellow); width:3em; text-align:right;">Fair</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:0.6rem;">
+                            <div style="width:8px; height:8px; border-radius:50%; background:var(--red);"></div>
+                            <span style="color:var(--text-soft); flex:1;">Mistral 7B</span>
+                            <div style="flex:2; background:var(--surface-2); border-radius:3px; height:6px; overflow:hidden;">
+                                <div style="width:12%; height:100%; background:var(--red); border-radius:3px;"></div>
+                            </div>
+                            <span style="color:var(--red); width:3em; text-align:right;">Poor</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Discussion · Runtime Behaviour</span>
+        </div>
+    </section>
+
+
+    <!-- 6.3 ── Tradeoffs -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Discussion</h3>
+        <h2>Tradeoffs</h2>
+
+        <div class="cols">
+
+            <div>
+                <div class="card card-blue fragment fade-up">
+                    <strong style="color:var(--accent);">Dialog Tree</strong><br><br>
+                    <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.5rem;">
+                        <span class="tag green">Predictable</span>
+                        <span class="tag green">Zero cost</span>
+                        <span class="tag green">Fast</span>
+                    </div>
+                    <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                        <span class="tag red">Rigid</span>
+                        <span class="tag red">High authoring</span>
+                        <span class="tag red">No scalability</span>
+                    </div>
+                    <p style="font-size:0.8em; margin-top:0.6rem;">
+                        Best for <em>small, well-defined</em> interaction scenarios
+                        where every path can be fully enumerated.
+                    </p>
+                </div>
+
+                <div class="card card-orange fragment fade-up" style="margin-top:0.7rem;">
+                    <strong style="color:var(--srh);">Local LLM</strong><br><br>
+                    <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.5rem;">
+                        <span class="tag green">No API cost</span>
+                        <span class="tag green">Private</span>
+                        <span class="tag green">Flexible</span>
+                    </div>
+                    <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                        <span class="tag red">High hardware req.</span>
+                        <span class="tag yellow">Prompt engineering</span>
+                    </div>
+                    <p style="font-size:0.8em; margin-top:0.6rem;">
+                        Best when <em>moderate flexibility</em> is needed
+                        without external dependencies or recurring costs.
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <div class="card card-blue fragment fade-up">
+                    <strong style="color:var(--accent);">Cloud LLM</strong><br><br>
+                    <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.5rem;">
+                        <span class="tag green">Most capable</span>
+                        <span class="tag green">Low local HW</span>
+                        <span class="tag green">Best accuracy</span>
+                    </div>
+                    <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                        <span class="tag red">Recurring cost</span>
+                        <span class="tag red">Network dep.</span>
+                        <span class="tag red">Vendor lock-in</span>
+                    </div>
+                    <p style="font-size:0.8em; margin-top:0.6rem;">
+                        Best when <em>maximum capability</em> justifies
+                        the additional cost and external service reliance.
+                    </p>
+                </div>
+
+                <div class="callout-orange fragment fade-up" style="margin-top:0.7rem;">
+                    <strong>Important:</strong> No single "best" solution exists.
+                    The right choice depends on game genre, team size,
+                    budget, and desired player experience.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Discussion · Tradeoffs</span>
+        </div>
+    </section>
+
+
+    <!-- 6.4 ── Limitations -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Discussion</h3>
+        <h2>Limitations</h2>
+
+        <div class="cols">
+            <div>
+                <ul>
+                    <li class="fragment fade-up">
+                        <strong>Single NPC, small scenario</strong> —
+                        findings may not directly generalise to
+                        open-world settings or large NPC casts
+                    </li>
+                    <li class="fragment fade-up">
+                        <strong>No concurrent sessions tested</strong> —
+                        the "breaking point" for local LLMs under
+                        parallel dialog load remains unknown
+                    </li>
+                    <li class="fragment fade-up">
+                        <strong>No user study</strong> —
+                        player experience and perceived dialog quality
+                        were not formally evaluated
+                    </li>
+                    <li class="fragment fade-up">
+                        <strong>Pre-trained models only</strong> —
+                        fine-tuned or game-specific models were
+                        outside the scope of this work
+                    </li>
+                    <li class="fragment fade-up">
+                        <strong>No hybrid architectures tested</strong> —
+                        RAG, multi-agent setups, and tree + LLM
+                        combinations were not explored
+                    </li>
+                </ul>
+            </div>
+
+            <div class="fragment fade-up">
+                <div class="card card-orange">
+                    <strong>Scope reminder</strong><br><br>
+                    <p style="font-size:0.85em;">
+                        This study was intentionally focused on
+                        a <em>controlled prototype condition</em> —
+                        one NPC, six dialog options, five runs.
+                    </p>
+                    <p style="font-size:0.85em; margin-top:0.5rem;">
+                        The goal was a <strong>developer-oriented
+                        comparison framework</strong>, not a universal
+                        prescription for all game types.
+                    </p>
+                </div>
+
+                <div class="callout fragment fade-up" style="margin-top:0.7rem;">
+                    These limitations are <strong>natural next steps</strong>
+                    for future research — outlined in the Conclusion.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Discussion · Limitations</span>
+        </div>
+    </section>
+
+</section>
+<!-- end Chapter: Discussion -->

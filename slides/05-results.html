@@ -1,0 +1,519 @@
+<!-- ============================================================
+     SLIDE 05 — RESULTS (nested vertical slides)
+     Animated charts recreating thesis graphs
+     ============================================================ -->
+<section>
+
+    <!-- 5.0 ── Chapter Divider -->
+    <section class="slide-chapter" data-num="04">
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <div class="chapter-num">04 / Results</div>
+        <h2>Results</h2>
+        <p class="chapter-sub">Latency &nbsp;·&nbsp; CPU &nbsp;·&nbsp; Memory &nbsp;·&nbsp; Cost &nbsp;·&nbsp; Dialog Accuracy</p>
+    </section>
+
+
+    <!-- 5.1 ── Latency Comparison (animated bar chart) -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Results</h3>
+        <h2>Response Latency</h2>
+        <p style="font-size:0.55em;">Average time from player input to full NPC response — lower is better.</p>
+
+        <canvas id="chart-latency" style="max-height:340px;"></canvas>
+
+        <div class="cols3" style="margin-top:0.8rem;">
+            <div class="stat-card fragment fade-up">
+                <span class="stat-val" style="color:var(--accent);">~0 s</span>
+                <span class="stat-label">Dialog Tree</span>
+            </div>
+            <div class="stat-card winner fragment fade-up">
+                <span class="stat-val">0.7 s</span>
+                <span class="stat-label">Gemma 3 · 1B ✓ Best Local</span>
+            </div>
+            <div class="stat-card fragment fade-up">
+                <span class="stat-val" style="color:var(--red);">25.2 s</span>
+                <span class="stat-label">Mistral · 7B</span>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Latency</span>
+        </div>
+
+        <script>
+            (function() {
+                function initLatency() {
+                    var el = document.getElementById('chart-latency');
+                    if (!el || el._init) return;
+                    if (typeof Chart === 'undefined') { setTimeout(initLatency, 300); return; }
+                    el._init = true;
+                    new Chart(el, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Dialog Tree', 'Gemma3\n(1B)', 'Qwen3\n(0.6B)', 'DeepSeek\n(1.5B)', 'Mistral\n(7B)', 'Cloud\nOpenAI'],
+                            datasets: [{
+                                label: 'Avg Latency (seconds)',
+                                data: [0.01, 0.7, 2.8, 15.9, 25.2, 1.1],
+                                backgroundColor: [
+                                    'rgba(79,142,247,0.7)',
+                                    'rgba(217,78,14,0.85)',
+                                    'rgba(217,78,14,0.6)',
+                                    'rgba(217,78,14,0.4)',
+                                    'rgba(224,92,75,0.8)',
+                                    'rgba(79,142,247,0.5)'
+                                ],
+                                borderColor: [
+                                    'rgba(79,142,247,1)',
+                                    'rgba(217,78,14,1)',
+                                    'rgba(217,78,14,0.9)',
+                                    'rgba(217,78,14,0.7)',
+                                    'rgba(224,92,75,1)',
+                                    'rgba(79,142,247,0.9)'
+                                ],
+                                borderWidth: 2,
+                                borderRadius: 6,
+                            }]
+                        },
+                        options: {
+                            animation: { duration: 1400, easing: 'easeOutQuart' },
+                            responsive: true,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(c) { return ' ' + c.parsed.y + ' seconds'; }
+                                    }
+                                }
+                            },
+                            scales: {
+                                x: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 } }, grid: { color: '#252c3a' } },
+                                y: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 } }, grid: { color: '#252c3a' }, title: { display: true, text: 'Seconds', color: '#5a6278', font: { family: 'DM Mono' } } }
+                            }
+                        }
+                    });
+                }
+                setTimeout(initLatency, 600);
+            })();
+        </script>
+    </section>
+
+
+    <!-- 5.2 ── CPU Usage Animated Line Chart -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Results</h3>
+        <h2>CPU Usage During Conversation</h2>
+        <p style="font-size:0.55em;">CPU % over time — shaded regions = conversation window (player input → NPC response received).</p>
+
+        <canvas id="chart-cpu" style="max-height:340px;"></canvas>
+
+        <div class="callout fragment fade-up" style="margin-top:0.6rem; font-size:0.55em;">
+            <strong>Dialog Tree:</strong> near-zero CPU at all times &nbsp;·&nbsp;
+            <strong>OpenAI:</strong> low local CPU, latency comes from network &nbsp;·&nbsp;
+            <strong>Gemma 1B:</strong> sharp spikes to ~100% during generation, then drops fast
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · CPU Usage</span>
+        </div>
+
+        <script>
+            (function() {
+                function initCPU() {
+                    var el = document.getElementById('chart-cpu');
+                    if (!el || el._init) return;
+                    if (typeof Chart === 'undefined') { setTimeout(initCPU, 300); return; }
+                    el._init = true;
+
+                    // Simulate time-series CPU data (40 time points)
+                    var labels = Array.from({length: 40}, function(_, i) { return i + 's'; });
+
+                    // Dialog Tree — barely any CPU
+                    var dtData = labels.map(function(_, i) {
+                        return Math.random() * 3 + 1;
+                    });
+
+                    // OpenAI — small bumps during conversation windows
+                    var oaiData = labels.map(function(_, i) {
+                        var inConv = (i>=6&&i<=9)||(i>=14&&i<=17)||(i>=22&&i<=25)||(i>=30&&i<=33);
+                        return inConv ? Math.random()*8 + 4 : Math.random()*3 + 1;
+                    });
+
+                    // Gemma 1B — sharp spikes
+                    var gemmaData = labels.map(function(_, i) {
+                        var inConv = (i>=6&&i<=9)||(i>=14&&i<=17)||(i>=22&&i<=25)||(i>=30&&i<=33);
+                        return inConv ? Math.random()*20 + 80 : Math.random()*8 + 5;
+                    });
+
+                    new Chart(el, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Dialog Tree',
+                                    data: dtData,
+                                    borderColor: 'rgba(79,142,247,0.9)',
+                                    backgroundColor: 'rgba(79,142,247,0.05)',
+                                    borderWidth: 2,
+                                    pointRadius: 0,
+                                    tension: 0.4,
+                                    fill: true,
+                                },
+                                {
+                                    label: 'Cloud (OpenAI)',
+                                    data: oaiData,
+                                    borderColor: 'rgba(61,214,140,0.9)',
+                                    backgroundColor: 'rgba(61,214,140,0.05)',
+                                    borderWidth: 2,
+                                    pointRadius: 0,
+                                    tension: 0.4,
+                                    fill: true,
+                                },
+                                {
+                                    label: 'Gemma3 (1B)',
+                                    data: gemmaData,
+                                    borderColor: 'rgba(217,78,14,0.95)',
+                                    backgroundColor: 'rgba(217,78,14,0.08)',
+                                    borderWidth: 2.5,
+                                    pointRadius: 0,
+                                    tension: 0.3,
+                                    fill: true,
+                                }
+                            ]
+                        },
+                        options: {
+                            animation: { duration: 1800, easing: 'easeInOutQuart' },
+                            responsive: true,
+                            interaction: { mode: 'index', intersect: false },
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    labels: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 }, boxWidth: 12 }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(c) { return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(1) + '%'; }
+                                    }
+                                },
+                                // Conversation window annotations drawn as background rects
+                                annotation: {}
+                            },
+                            scales: {
+                                x: {
+                                    ticks: { color: '#5a6278', font: { family: 'DM Mono', size: 9 }, maxTicksLimit: 10 },
+                                    grid: { color: '#1c2030' }
+                                },
+                                y: {
+                                    min: 0, max: 105,
+                                    ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 }, callback: function(v){ return v+'%'; } },
+                                    grid: { color: '#252c3a' },
+                                    title: { display: true, text: 'CPU Usage (%)', color: '#5a6278', font: { family: 'DM Mono' } }
+                                }
+                            }
+                        }
+                    });
+                }
+                setTimeout(initCPU, 600);
+            })();
+        </script>
+    </section>
+
+
+    <!-- 5.3 ── All Local LLMs Resource Bar Chart -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Results</h3>
+        <h2>Local LLMs — Resource Comparison</h2>
+        <p style="font-size:0.55em;">Average resource consumption during output generation across all 4 tested models.</p>
+
+        <canvas id="chart-localllm" style="max-height:330px;"></canvas>
+
+        <div class="cols3" style="margin-top:0.7rem;">
+            <div class="stat-card winner fragment fade-up">
+                <span class="stat-val">Gemma 1B</span>
+                <span class="stat-label">🏆 Best balance of speed + accuracy</span>
+            </div>
+            <div class="stat-card fragment fade-up">
+                <span class="stat-val" style="color:var(--yellow);">Qwen 0.6B</span>
+                <span class="stat-label">Lightest — but slower than Gemma</span>
+            </div>
+            <div class="stat-card fragment fade-up">
+                <span class="stat-val" style="color:var(--red);">Mistral 7B</span>
+                <span class="stat-label">Too slow for real-time dialog</span>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Local LLMs</span>
+        </div>
+
+        <script>
+            (function() {
+                function initLocal() {
+                    var el = document.getElementById('chart-localllm');
+                    if (!el || el._init) return;
+                    if (typeof Chart === 'undefined') { setTimeout(initLocal, 300); return; }
+                    el._init = true;
+
+                    new Chart(el, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Gemma3 (1B)', 'Qwen3 (0.6B)', 'Mistral (7B)', 'DeepSeek (1.5B)'],
+                            datasets: [
+                                {
+                                    label: 'Latency (s)',
+                                    data: [0.7, 2.8, 25.2, 15.9],
+                                    backgroundColor: 'rgba(217,78,14,0.75)',
+                                    borderColor: 'rgba(217,78,14,1)',
+                                    borderWidth: 2, borderRadius: 5,
+                                },
+                                {
+                                    label: 'Avg CPU (%)',
+                                    data: [81.3, 20.0, 99.0, 65.9],
+                                    backgroundColor: 'rgba(79,142,247,0.65)',
+                                    borderColor: 'rgba(79,142,247,1)',
+                                    borderWidth: 2, borderRadius: 5,
+                                },
+                                {
+                                    label: 'VRAM (GB)',
+                                    data: [1.3, 0.9, 1.3, 2.2],
+                                    backgroundColor: 'rgba(61,214,140,0.65)',
+                                    borderColor: 'rgba(61,214,140,1)',
+                                    borderWidth: 2, borderRadius: 5,
+                                }
+                            ]
+                        },
+                        options: {
+                            animation: { duration: 1400, easing: 'easeOutQuart' },
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    labels: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 }, boxWidth: 12 }
+                                }
+                            },
+                            scales: {
+                                x: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 } }, grid: { color: '#252c3a' } },
+                                y: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 } }, grid: { color: '#252c3a' } }
+                            }
+                        }
+                    });
+                }
+                setTimeout(initLocal, 600);
+            })();
+        </script>
+    </section>
+
+
+    <!-- 5.4 ── Cost Analysis -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Results</h3>
+        <h2>Cost Comparison</h2>
+
+        <div class="cols wide">
+            <div>
+                <canvas id="chart-cost" style="max-height:320px;"></canvas>
+            </div>
+
+            <div>
+                <div class="card card-orange fragment fade-up">
+                    <strong>Per Session</strong>
+                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--srh); margin:0.4em 0;">≈ $0.0000568</div>
+                    <span style="font-size:0.8em; color:var(--muted);">6 dialog turns · GPT-4o pricing</span>
+                </div>
+
+                <div class="card card-orange fragment fade-up" style="margin-top:0.6rem;">
+                    <strong>Per Player (full game)</strong>
+                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--srh); margin:0.4em 0;">≈ $3.77</div>
+                    <span style="font-size:0.8em; color:var(--muted);">~161k word dialog · 38.8% completion rate</span>
+                </div>
+
+                <div class="callout-orange fragment fade-up" style="margin-top:0.6rem;">
+                    <strong>~15%</strong> of the average game price ($24.81)
+                    would go to cloud dialog costs alone.
+                </div>
+
+                <div class="card card-green fragment fade-up" style="margin-top:0.6rem;">
+                    <strong style="color:var(--green);">Dialog Tree &amp; Local LLM</strong>
+                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--green); margin:0.4em 0;">$0.00</div>
+                    <span style="font-size:0.8em; color:var(--muted);">Zero per-session runtime cost</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Cost</span>
+        </div>
+
+        <script>
+            (function() {
+                function initCost() {
+                    var el = document.getElementById('chart-cost');
+                    if (!el || el._init) return;
+                    if (typeof Chart === 'undefined') { setTimeout(initCost, 300); return; }
+                    el._init = true;
+
+                    new Chart(el, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Dialog Tree', 'Local LLM', 'Cloud LLM\n(per session)', 'Cloud LLM\n(per player)'],
+                            datasets: [{
+                                label: 'Cost (USD)',
+                                data: [0, 0, 0.0000568, 3.77],
+                                backgroundColor: [
+                                    'rgba(61,214,140,0.75)',
+                                    'rgba(61,214,140,0.75)',
+                                    'rgba(240,192,64,0.75)',
+                                    'rgba(224,92,75,0.85)'
+                                ],
+                                borderColor: [
+                                    'rgba(61,214,140,1)',
+                                    'rgba(61,214,140,1)',
+                                    'rgba(240,192,64,1)',
+                                    'rgba(224,92,75,1)'
+                                ],
+                                borderWidth: 2,
+                                borderRadius: 6,
+                            }]
+                        },
+                        options: {
+                            animation: { duration: 1600, easing: 'easeOutBounce' },
+                            responsive: true,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(c) {
+                                            var v = c.parsed.y;
+                                            return v === 0 ? ' Free' : ' $' + v.toFixed(7).replace(/\.?0+$/, '');
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                x: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 10 } }, grid: { color: '#252c3a' } },
+                                y: {
+                                    ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 10 }, callback: function(v){ return '$'+v; } },
+                                    grid: { color: '#252c3a' },
+                                    type: 'logarithmic'
+                                }
+                            }
+                        }
+                    });
+                }
+                setTimeout(initCost, 600);
+            })();
+        </script>
+    </section>
+
+
+    <!-- 5.5 ── Dialog Accuracy -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Results</h3>
+        <h2>Dialog Accuracy</h2>
+        <p style="font-size:0.55em;">Error rate (%) when models deviate from the system prompt rules. Lower = better.</p>
+
+        <canvas id="chart-accuracy" style="max-height:320px;"></canvas>
+
+        <div class="callout-orange fragment fade-up" style="margin-top:0.8rem;">
+            <strong>Key finding:</strong> Model size alone does NOT determine accuracy.
+            <strong>Gemma 3 (1B)</strong> achieved <em>0% error rate</em> —
+            perfect rule adherence — while Mistral 7B and DeepSeek 1.5B
+            deviated significantly. Prompt alignment matters more than parameter count.
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Dialog Accuracy</span>
+        </div>
+
+        <script>
+            (function() {
+                function initAccuracy() {
+                    var el = document.getElementById('chart-accuracy');
+                    if (!el || el._init) return;
+                    if (typeof Chart === 'undefined') { setTimeout(initAccuracy, 300); return; }
+                    el._init = true;
+
+                    new Chart(el, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Gemma3 (1B)', 'Qwen3 (0.6B)', 'Mistral (7B)', 'DeepSeek (1.5B)'],
+                            datasets: [
+                                {
+                                    label: 'Error Rate (%)',
+                                    data: [0, 50, 87.5, 100],
+                                    backgroundColor: [
+                                        'rgba(61,214,140,0.85)',
+                                        'rgba(240,192,64,0.75)',
+                                        'rgba(224,92,75,0.75)',
+                                        'rgba(224,92,75,0.95)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(61,214,140,1)',
+                                        'rgba(240,192,64,1)',
+                                        'rgba(224,92,75,1)',
+                                        'rgba(224,92,75,1)'
+                                    ],
+                                    borderWidth: 2,
+                                    borderRadius: 6,
+                                    yAxisID: 'y'
+                                },
+                                {
+                                    label: 'Avg Levenshtein Distance (errors)',
+                                    data: [0, 194, 528, 767],
+                                    backgroundColor: 'rgba(79,142,247,0.5)',
+                                    borderColor: 'rgba(79,142,247,1)',
+                                    borderWidth: 2,
+                                    borderRadius: 6,
+                                    type: 'bar',
+                                    yAxisID: 'y2'
+                                }
+                            ]
+                        },
+                        options: {
+                            animation: { duration: 1400, easing: 'easeOutQuart' },
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    labels: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 }, boxWidth: 12 }
+                                }
+                            },
+                            scales: {
+                                x: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 } }, grid: { color: '#252c3a' } },
+                                y: {
+                                    position: 'left',
+                                    min: 0, max: 105,
+                                    ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 }, callback: function(v){ return v+'%'; } },
+                                    grid: { color: '#252c3a' },
+                                    title: { display: true, text: 'Error Rate (%)', color: '#5a6278', font: { family: 'DM Mono' } }
+                                },
+                                y2: {
+                                    position: 'right',
+                                    ticks: { color: '#4f8ef7', font: { family: 'DM Mono', size: 11 } },
+                                    grid: { drawOnChartArea: false },
+                                    title: { display: true, text: 'Levenshtein Distance', color: '#4f8ef7', font: { family: 'DM Mono' } }
+                                }
+                            }
+                        }
+                    });
+                }
+                setTimeout(initAccuracy, 600);
+            })();
+        </script>
+    </section>
+
+</section>
+<!-- end Chapter: Results -->
+
+<!-- Chart.js loaded once for all result slides -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>

@@ -1,0 +1,181 @@
+<!-- ============================================================
+     SLIDE 02 — INTRODUCTION (nested vertical slides)
+     Press → to leave this chapter, ↓ to go deeper inside it
+     ============================================================ -->
+<section>
+
+    <!-- 2.0 ── Chapter Divider -->
+    <section class="slide-chapter" data-num="01">
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <div class="chapter-num">01 / Introduction</div>
+        <h2>Introduction</h2>
+        <p class="chapter-sub">Motivation &nbsp;·&nbsp; Problem Definition &nbsp;·&nbsp; Research Question</p>
+    </section>
+
+
+    <!-- 2.1 ── Motivation -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Introduction</h3>
+        <h2>Motivation</h2>
+
+        <div class="cols wide">
+            <div>
+                <p>
+                    Dialog systems are a <strong>fundamental component</strong> of modern video games —
+                    shaping interaction between players and NPCs, and directly influencing
+                    how narratives are delivered and experienced.
+                </p>
+                <ul>
+                    <li class="fragment fade-up">Player expectations for <em>immersive</em>, reactive NPCs are rising</li>
+                    <li class="fragment fade-up">Dialog must satisfy both <strong>narrative goals</strong> and <strong>technical constraints</strong></li>
+                    <li class="fragment fade-up">Traditional solutions are struggling to keep up with scale</li>
+                    <li class="fragment fade-up">New AI approaches introduce exciting — but untested — possibilities</li>
+                </ul>
+            </div>
+
+            <div class="fragment fade-up">
+                <div class="card card-orange">
+                    <strong>The Gap</strong><br><br>
+                    <span style="color:var(--text-soft); font-size:0.9em;">
+            Most existing work focuses on <em>narrative quality</em> or
+            <em>immersion</em> — very little addresses the
+            <strong>technical feasibility</strong> of integrating
+            these systems in real game development.
+          </span>
+                </div>
+
+                <div class="card card-blue" style="margin-top:0.8rem;">
+                    <strong>This Thesis</strong><br><br>
+                    <span style="color:var(--text-soft); font-size:0.9em;">
+            Fills that gap with a <strong>developer-oriented</strong>
+            technical comparison built inside a real Unity prototype.
+          </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Introduction · Motivation</span>
+        </div>
+    </section>
+
+
+    <!-- 2.2 ── Problem Definition -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Introduction</h3>
+        <h2>Problem Definition</h2>
+
+        <div class="cols3">
+
+            <div class="card card-blue fragment fade-up">
+                <div style="font-family:var(--font-mono); color:var(--accent); font-size:0.75em; margin-bottom:0.5em;">
+                    DIALOG TREES
+                </div>
+                <span class="tag green">Predictable</span>
+                <span class="tag green">Cheap</span>
+                <br><br>
+                <span class="tag red">Rigid</span>
+                <span class="tag red">Hard to scale</span>
+                <br><br>
+                <p style="margin-top:0.6rem;">
+                    Manual authoring effort grows
+                    <strong>exponentially</strong> as game
+                    complexity increases.
+                </p>
+            </div>
+
+            <div class="card card-orange fragment fade-up">
+                <div style="font-family:var(--font-mono); color:var(--srh); font-size:0.75em; margin-bottom:0.5em;">
+                    LOCAL LLM
+                </div>
+                <span class="tag green">Private</span>
+                <span class="tag green">No API cost</span>
+                <br><br>
+                <span class="tag red">High hardware</span>
+                <span class="tag yellow">Complex setup</span>
+                <br><br>
+                <p style="margin-top:0.6rem;">
+                    Offers <strong>independence</strong> and customization
+                    but demands substantial
+                    computational resources.
+                </p>
+            </div>
+
+            <div class="card card-blue fragment fade-up">
+                <div style="font-family:var(--font-mono); color:var(--accent); font-size:0.75em; margin-bottom:0.5em;">
+                    CLOUD LLM
+                </div>
+                <span class="tag green">Powerful</span>
+                <span class="tag green">Easy access</span>
+                <br><br>
+                <span class="tag red">Pay-per-use</span>
+                <span class="tag red">Network dep.</span>
+                <br><br>
+                <p style="margin-top:0.6rem;">
+                    Highly capable but introduces
+                    <strong>recurring costs</strong> and
+                    reliance on external providers.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="callout fragment fade-up" style="margin-top:1rem;">
+            💡 <strong>The core problem:</strong> Developers — especially in small studios —
+            have <strong>no structured framework</strong> to decide which approach fits their
+            project's resource, performance, and design constraints.
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Introduction · Problem Definition</span>
+        </div>
+    </section>
+
+
+    <!-- 2.3 ── Research Question -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Introduction</h3>
+        <h2>Research Question</h2>
+
+        <p>This thesis is guided by the following central research question:</p>
+
+        <div class="rq-box fragment fade-up">
+            "What technical potentials and limitations arise when implementing NPC dialog
+            systems using traditional dialog trees, local large language models (LLMs),
+            or cloud-based AI models- and how do these approaches compare in terms of
+            <em>feasibility</em>, <em>performance</em>, and <em>scalability</em>
+            within a Unity prototype environment?"
+        </div>
+
+<!--        <div style="margin-top:1.2rem;" class="fragment fade-up">-->
+<!--            <p style="font-size:0.55em; color:var(&#45;&#45;muted); margin-bottom:0.5em;">-->
+<!--                EVALUATED DIMENSIONS-->
+<!--            </p>-->
+<!--            <span class="tag orange">Latency</span>-->
+<!--            <span class="tag orange">CPU Usage</span>-->
+<!--            <span class="tag orange">Memory</span>-->
+<!--            <span class="tag orange">Cost</span>-->
+<!--            <span class="tag">Dialog Accuracy</span>-->
+<!--            <span class="tag">Scalability</span>-->
+<!--            <span class="tag">Integration Effort</span>-->
+<!--            <span class="tag">Dependencies</span>-->
+<!--        </div>-->
+
+<!--        <div class="callout-orange fragment fade-up" style="margin-top:1rem;">-->
+<!--            <strong>Scope:</strong> One Unity prototype · One NPC (Ilya Sokolov) ·-->
+<!--            Controlled interaction scenarios · Developer-oriented perspective-->
+<!--        </div>-->
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Introduction · Research Question</span>
+        </div>
+    </section>
+
+</section>
+<!-- end Chapter: Introduction -->

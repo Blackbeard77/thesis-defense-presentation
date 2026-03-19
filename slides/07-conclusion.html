@@ -1,0 +1,213 @@
+<!-- ============================================================
+     SLIDE 07 — CONCLUSION (nested vertical slides)
+     Press → to leave this chapter, ↓ to go deeper inside it
+     ============================================================ -->
+<section>
+
+    <!-- 7.0 ── Chapter Divider -->
+    <section class="slide-chapter" data-num="06">
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <div class="chapter-num">06 / Conclusion</div>
+        <h2>Conclusion</h2>
+        <p class="chapter-sub">Key Findings &nbsp;·&nbsp; Recommendations &nbsp;·&nbsp; Future Work</p>
+    </section>
+
+
+    <!-- 7.1 ── Key Findings -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Conclusion</h3>
+        <h2>Key Findings</h2>
+
+        <p>Answering the research question — within the controlled Unity prototype:</p>
+
+        <div class="cols3" style="margin-top:0.6rem;">
+
+            <div class="card card-blue fragment fade-up">
+                <div style="font-family:var(--font-mono); color:var(--accent); font-size:0.65em; letter-spacing:0.1em; margin-bottom:0.4em;">DIALOG TREE</div>
+                <span class="tag green">Most efficient</span>
+                <span class="tag green">Most predictable</span>
+                <br><br>
+                <p style="font-size:0.85em;">
+                    Near-zero runtime cost and latency.
+                    Full narrative control.
+                    But <strong>manual authoring effort</strong>
+                    grows exponentially with scale.
+                </p>
+            </div>
+
+            <div class="card card-winner fragment fade-up">
+                <div style="font-family:var(--font-mono); color:var(--srh); font-size:0.65em; letter-spacing:0.1em; margin-bottom:0.4em;">LOCAL LLM 🏆</div>
+                <span class="tag orange">Viable compromise</span>
+                <span class="tag green">Zero runtime cost</span>
+                <br><br>
+                <p style="font-size:0.85em;">
+                    Gemma 3 (1B) achieved <strong>0% error rate</strong>
+                    and latency comparable to cloud —
+                    entirely offline. Surprising result.
+                </p>
+            </div>
+
+            <div class="card card-blue fragment fade-up">
+                <div style="font-family:var(--font-mono); color:var(--accent); font-size:0.65em; letter-spacing:0.1em; margin-bottom:0.4em;">CLOUD LLM</div>
+                <span class="tag green">Most capable</span>
+                <span class="tag red">Recurring cost</span>
+                <br><br>
+                <p style="font-size:0.85em;">
+                    GPT-4o was the only model that
+                    inferred branching rules from prompt alone.
+                    But <strong>~15% of game price</strong>
+                    goes to dialog costs per player.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="rq-box fragment fade-up" style="margin-top:1rem; font-size:0.6em;">
+            A locally deployed LLM can approximate deterministic dialog behavior
+            <em>surprisingly well</em> using only prompting and contextualization —
+            without fine-tuning, at zero ongoing cost, and with competitive latency.
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Conclusion · Key Findings</span>
+        </div>
+    </section>
+
+
+    <!-- 7.2 ── Recommendations for Developers -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Conclusion</h3>
+        <h2>Recommendations for Developers</h2>
+
+        <div class="cols wide">
+            <div>
+                <ul>
+                    <li class="fragment fade-up">
+                        <strong>Small games / tight scope?</strong><br>
+                        <span style="color:var(--text-soft);">
+              Use <em>dialog trees</em> — minimal complexity,
+              fully predictable, easy to test.
+            </span>
+                    </li>
+                    <li class="fragment fade-up" style="margin-top:0.5rem;">
+                        <strong>Need flexibility without external deps?</strong><br>
+                        <span style="color:var(--text-soft);">
+              Use a <em>local LLM</em> with careful prompt design —
+              near-deterministic behavior is achievable.
+            </span>
+                    </li>
+                    <li class="fragment fade-up" style="margin-top:0.5rem;">
+                        <strong>Need max capability and can afford it?</strong><br>
+                        <span style="color:var(--text-soft);">
+              Use <em>cloud LLMs</em> — but plan for recurring
+              costs and vendor dependency.
+            </span>
+                    </li>
+                    <li class="fragment fade-up" style="margin-top:0.5rem;">
+                        <strong>Never treat LLMs as black boxes</strong><br>
+                        <span style="color:var(--text-soft);">
+              Always embed them in pipelines with
+              <em>prompt templates</em>, context selection,
+              and output filtering.
+            </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="fragment fade-up">
+                <div class="callout-orange">
+                    <strong>The bottom line</strong><br><br>
+                    There is no universally optimal solution.
+                    The best dialog system depends on
+                    <em>game genre</em>, <em>team size</em>,
+                    <em>budget</em>, and
+                    <em>desired player experience</em>.
+                </div>
+
+                <div class="card card-orange" style="margin-top:0.7rem;">
+                    <strong>Plan for scale early</strong><br><br>
+                    <p style="font-size:0.85em;">
+                        Whether you use a handcrafted tree,
+                        a hybrid approach, or an LLM-centric
+                        architecture — this decision
+                        <strong>strongly influences maintainability</strong>
+                        over the game's full lifetime.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Conclusion · Recommendations</span>
+        </div>
+    </section>
+
+
+    <!-- 7.3 ── Future Work -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Conclusion</h3>
+        <h2>Future Work</h2>
+
+        <div class="cols">
+            <div>
+                <p>Several natural next steps emerge from this prototype:</p>
+                <ul>
+                    <li class="fragment fade-up">
+                        <strong>Multiple NPCs &amp; complex quests</strong> —
+                        find where performance and consistency start to break down
+                    </li>
+                    <li class="fragment fade-up" style="margin-top:0.4rem;">
+                        <strong>Concurrent dialog sessions</strong> —
+                        evaluate local LLM behavior under parallel load
+                    </li>
+                    <li class="fragment fade-up" style="margin-top:0.4rem;">
+                        <strong>Hybrid architectures</strong> —
+                        combine dialog trees with LLM fallback for best of both
+                    </li>
+                    <li class="fragment fade-up" style="margin-top:0.4rem;">
+                        <strong>Retrieval-Augmented Generation (RAG)</strong> —
+                        inject game lore dynamically to improve grounding
+                    </li>
+                    <li class="fragment fade-up" style="margin-top:0.4rem;">
+                        <strong>Purpose-trained models</strong> —
+                        fine-tune small models specifically for NPC dialog
+                    </li>
+                    <li class="fragment fade-up" style="margin-top:0.4rem;">
+                        <strong>User studies</strong> —
+                        formally evaluate perceived dialog quality and immersion
+                    </li>
+                </ul>
+            </div>
+
+            <div class="fragment fade-up">
+                <div class="card card-orange">
+                    <strong>Revisit as models improve</strong><br><br>
+                    <p style="font-size:0.85em;">
+                        Language models continue to evolve rapidly.
+                        Repeating similar prototype studies in the future
+                        will reveal how the feasibility landscape
+                        shifts as smaller models become more capable.
+                    </p>
+                </div>
+
+                <div class="callout fragment fade-up" style="margin-top:0.7rem;">
+                    This thesis contributes a
+                    <strong>developer-oriented comparison framework</strong>
+                    — a starting point, not a final answer.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Conclusion · Future Work</span>
+        </div>
+    </section>
+
+</section>
+<!-- end Chapter: Conclusion -->

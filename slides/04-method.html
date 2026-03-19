@@ -1,0 +1,224 @@
+<!-- ============================================================
+     SLIDE 04 — METHOD (nested vertical slides)
+     Press → to leave this chapter, ↓ to go deeper inside it
+     ============================================================ -->
+<section>
+
+    <!-- 4.0 ── Chapter Divider -->
+    <section class="slide-chapter" data-num="03">
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <div class="chapter-num">03 / Method</div>
+        <h2>Method</h2>
+        <p class="chapter-sub">Research Approach &nbsp;·&nbsp; Prototype &nbsp;·&nbsp; Architecture &nbsp;·&nbsp; Hardware &nbsp;·&nbsp; Evaluation Metrics</p>
+    </section>
+
+
+    <!-- 4.1 ── Research Approach -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Method</h3>
+        <h2>Research Approach</h2>
+
+        <div class="cols wide">
+            <div>
+                <p>
+                    This study follows <strong>Design Science Research (DSR)</strong> —
+                    an artifact-centered methodology focused on constructing and
+                    evaluating technological artifacts to address identified problems.
+                </p>
+                <ul>
+                    <li class="fragment fade-up">Knowledge is generated through <em>design, implementation and assessment</em></li>
+                    <li class="fragment fade-up">The artifact is both a <strong>technical construct</strong> and an <strong>experimental instrument</strong></li>
+                    <li class="fragment fade-up">Benchmarking ensures <em>structured comparison</em> across measurable dimensions</li>
+                    <li class="fragment fade-up">Case study design <strong>constrains scope</strong> to isolate structural differences</li>
+                </ul>
+            </div>
+
+            <div class="fragment fade-up">
+                <div class="card card-orange">
+                    <strong>The Artifact</strong><br><br>
+                    <span style="color:var(--text-soft); font-size:0.85em;">
+            A Unity prototype implementing
+            <strong>3 interchangeable dialog backends</strong>
+            in an identical scene — only the dialog system changes,
+            everything else stays the same.
+          </span>
+                </div>
+
+                <div class="card card-blue" style="margin-top:0.7rem;">
+                    <strong>Why this design?</strong><br><br>
+                    <span style="color:var(--text-soft); font-size:0.85em;">
+            Evaluating feasibility requires
+            <em>concrete deployment</em>, not theoretical speculation.
+            Controlled conditions reduce confounding variables.
+          </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Method · Research Approach</span>
+        </div>
+    </section>
+
+
+    <!-- 4.2 ── Prototype & Scenario -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Method</h3>
+        <h2>Prototype &amp; Scenario Design</h2>
+
+        <div class="cols">
+            <div>
+                <p>
+                    The scenario takes place in <strong>Petrovalsk</strong> —
+                    a fictional post-apocalyptic Soviet town.
+                    The player interacts with NPC <em>Ilya Sokolov</em>.
+                </p>
+
+                <div class="card card-orange fragment fade-up" style="margin-top:0.8rem;">
+                    <strong>6 Dialog Options</strong><br><br>
+                    <ul style="margin:0; padding-left:1em; font-size:0.85em; line-height:1.9;">
+                        <li>Hi</li>
+                        <li>Who are you?</li>
+                        <li>What is this place?</li>
+                        <li>Where is everybody? <span class="tag orange" style="font-size:0.7em;">unlocks 2 branches</span></li>
+                        <li>Taken by who?</li>
+                        <li>How do I survive?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <div class="callout fragment fade-up">
+                    <strong>Why controlled?</strong><br><br>
+                    All three implementations use the
+                    <strong>identical scene</strong>:
+                    same assets, lighting, character models,
+                    UI layout, and dialog objectives.
+                    Only the <em>backend logic</em> differs.
+                </div>
+
+                <div class="arch-flow fragment fade-up" style="flex-direction:column; align-items:flex-start; gap:0.3rem; margin-top:0.8rem;">
+                    <div class="arch-node orange">DialogUIManager</div>
+                    <div class="arch-arrow" style="margin-left:1rem;">↓ delegates to</div>
+                    <div style="display:flex; gap:0.5rem;">
+                        <div class="arch-node" style="font-size:0.75em;">DialogUI_Tree.cs</div>
+                        <div class="arch-node" style="font-size:0.75em;">DialogUI_LocalLlm.cs</div>
+                        <div class="arch-node" style="font-size:0.75em;">DialogUI_OpenAI.cs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Method · Prototype &amp; Scenario</span>
+        </div>
+    </section>
+
+
+    <!-- 4.3 ── Hardware Environment -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Method</h3>
+        <h2>Hardware Environment</h2>
+
+        <p>All local LLM tests were conducted on the following hardware configuration:</p>
+
+        <div class="stat-grid fragment fade-up">
+            <div class="stat-card">
+                <span class="stat-val">i9-9900K</span>
+                <span class="stat-label">CPU · 3.60 GHz</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-val">32 GB</span>
+                <span class="stat-label">System RAM</span>
+            </div>
+            <div class="stat-card winner">
+                <span class="stat-val">RTX 2080 Ti</span>
+                <span class="stat-label">GPU · 11 GB VRAM</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-val">NVMe</span>
+                <span class="stat-label">Samsung 970 EVO Plus</span>
+            </div>
+        </div>
+
+        <div class="cols" style="margin-top:1rem;">
+            <div class="card card-orange fragment fade-up">
+                <strong>Local Models Tested</strong><br><br>
+                <ul style="margin:0; padding-left:1em; font-size:0.85em; line-height:1.9;">
+                    <li>Gemma 3 <span class="tag green">1B</span></li>
+                    <li>Qwen 3 <span class="tag green">0.6B</span></li>
+                    <li>DeepSeek R1 Distill Qwen <span class="tag yellow">1.5B</span></li>
+                    <li>Mistral <span class="tag red">7B</span></li>
+                </ul>
+            </div>
+
+            <div class="card card-blue fragment fade-up">
+                <strong>Shared Config for all Models</strong><br><br>
+                <table style="font-size:0.8em; width:100%; border-collapse:collapse;">
+                    <tr><td style="color:var(--muted); padding:0.2em 0;">Temperature</td><td style="color:var(--text-soft);">0 (deterministic)</td></tr>
+                    <tr><td style="color:var(--muted); padding:0.2em 0;">Top-P</td><td style="color:var(--text-soft);">0</td></tr>
+                    <tr><td style="color:var(--muted); padding:0.2em 0;">Max Tokens</td><td style="color:var(--text-soft);">100</td></tr>
+                    <tr><td style="color:var(--muted); padding:0.2em 0;">Context Window</td><td style="color:var(--text-soft);">2048</td></tr>
+                    <tr><td style="color:var(--muted); padding:0.2em 0;">Quantization</td><td style="color:var(--text-soft);">Q4_K_M</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Method · Hardware</span>
+        </div>
+    </section>
+
+
+    <!-- 4.4 ── Evaluation Metrics -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Method</h3>
+        <h2>Evaluation Metrics</h2>
+
+        <div class="cols">
+            <div>
+                <h4 style="color:var(--srh); margin-bottom:0.4em;">Quantitative</h4>
+                <div class="card card-orange fragment fade-up">
+                    <ul style="margin:0; padding-left:1em; font-size:0.85em; line-height:2;">
+                        <li><strong>Latency</strong> — time from player input to full NPC response (ms / s)</li>
+                        <li><strong>CPU usage</strong> — average core utilisation (%)</li>
+                        <li><strong>RAM usage</strong> — system memory consumption (GB)</li>
+                        <li><strong>VRAM usage</strong> — GPU memory demand (GB)</li>
+                        <li><strong>Cost</strong> — per-session &amp; per-player USD estimate</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h4 style="color:var(--accent); margin-bottom:0.4em;">Qualitative</h4>
+                <div class="card card-blue fragment fade-up">
+                    <ul style="margin:0; padding-left:1em; font-size:0.85em; line-height:2;">
+                        <li><strong>Dialog Accuracy</strong> — adherence to system prompt rules</li>
+                        <li><strong>Persona consistency</strong> — does Ilya stay in character?</li>
+                        <li><strong>Reproducibility</strong> — output variance across 5 repeated runs</li>
+                    </ul>
+                </div>
+
+                <div class="callout fragment fade-up" style="margin-top:0.8rem;">
+                    <strong>Protocol:</strong> 5 complete runs per system ·
+                    Fixed interaction script · Same hardware &amp; build ·
+                    Logged via <em>CsvLogger</em> component
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Method · Evaluation Metrics</span>
+        </div>
+    </section>
+
+</section>
+<!-- end Chapter: Method -->

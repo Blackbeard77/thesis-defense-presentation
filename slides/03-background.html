@@ -1,0 +1,253 @@
+<!-- ============================================================
+     SLIDE 03 — BACKGROUND (nested vertical slides)
+     Press → to leave this chapter, ↓ to go deeper inside it
+     ============================================================ -->
+<section>
+
+    <!-- 3.0 ── Chapter Divider -->
+    <section class="slide-chapter" data-num="02">
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <div class="chapter-num">02 / Background</div>
+        <h2>Background</h2>
+        <p class="chapter-sub">NPC Dialog Systems &nbsp;·&nbsp; Dialog Trees &nbsp;·&nbsp; Local LLM &nbsp;·&nbsp; Cloud LLM</p>
+    </section>
+
+
+    <!-- 3.1 ── NPC Dialog Systems in Video Games -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Background</h3>
+        <h2>NPC Dialog Systems in Video Games</h2>
+
+        <div class="cols wide">
+            <div>
+                <p>
+                    NPC dialog systems mediate structured conversations between
+                    players and virtual characters — using predefined trees,
+                    state machines, or rule-based logic to control
+                    <strong>what each character says and when</strong>.
+                </p>
+                <ul>
+                    <li class="fragment fade-up">Early approaches relied on <em>hand-crafted grammars</em> — labor intensive and hard to scale</li>
+                    <li class="fragment fade-up">Believability depends on the <strong>cognitive gap</strong> between expected and perceived NPC behavior</li>
+                    <li class="fragment fade-up">Dialog must align with <strong>plot, genre, NPC identity</strong> and player actions</li>
+                    <li class="fragment fade-up">Modern ML techniques make <em>automated NPC dialog generation</em> increasingly feasible</li>
+                </ul>
+            </div>
+
+            <div class="fragment fade-up">
+                <div class="card card-orange">
+                    <strong style="font-size:0.85em;">Feature Characterization Schema</strong>
+                    <br><br>
+                    <table class="compare-table" style="font-size:0.85em;">
+                        <tbody>
+                        <tr><td style="color:var(--srh);">World</td><td>Post-apocalyptic Soviet town</td></tr>
+                        <tr><td style="color:var(--srh);">Role</td><td>Cautious watchman</td></tr>
+                        <tr><td style="color:var(--srh);">Personality</td><td>Secretive, paranoid, loyal</td></tr>
+                        <tr><td style="color:var(--srh);">State</td><td>Hiding, watching The System</td></tr>
+                        <tr><td style="color:var(--srh);">Goal</td><td>Survive &amp; warn the player</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top:0.6rem; font-size:0.8em; color:var(--muted);">
+                        Ilya Sokolov — NPC used in this thesis
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Background · NPC Dialog Systems</span>
+        </div>
+    </section>
+
+
+    <!-- 3.2 ── Dialog Trees -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Background</h3>
+        <h2>Dialog Trees</h2>
+
+        <div class="cols">
+            <div>
+                <p>
+                    Dialog trees represent a <strong>finite state machine</strong> —
+                    nodes hold NPC responses, edges represent player choices.
+                    Every path is <em>pre-authored</em> and deterministic.
+                </p>
+
+                <!-- Visual flow diagram of a dialog tree -->
+                <div class="arch-flow fragment fade-up" style="flex-direction:column; align-items:flex-start; gap:0.3rem;">
+                    <div class="arch-node orange">Conversation Start</div>
+                    <div class="arch-arrow" style="margin-left:1rem;">↓</div>
+                    <div style="display:flex; gap:0.5rem;" class="fragment fade-up">
+                        <div class="arch-node">Hi</div>
+                        <div class="arch-node">Who are you?</div>
+                        <div class="arch-node">Where is everybody?</div>
+                    </div>
+                    <div class="arch-arrow" style="margin-left:1rem;">↓ (unlocks)</div>
+                    <div style="display:flex; gap:0.5rem;" class="fragment fade-up">
+                        <div class="arch-node orange">Taken by who?</div>
+                        <div class="arch-node orange">How do I survive?</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="card card-green fragment fade-up">
+                    <strong style="color:var(--green);">✓ Strengths</strong><br><br>
+                    <ul style="margin:0; padding-left:1em; font-size:0.85em;">
+                        <li>Full narrative control</li>
+                        <li>Near-zero runtime cost</li>
+                        <li>Easy to test &amp; validate</li>
+                        <li>No external dependencies</li>
+                    </ul>
+                </div>
+
+                <div class="card card-red fragment fade-up" style="margin-top:0.7rem;">
+                    <strong style="color:var(--red);">✗ Limitations</strong><br><br>
+                    <ul style="margin:0; padding-left:1em; font-size:0.85em;">
+                        <li>Rigid — no improvisation</li>
+                        <li>Authoring effort grows <strong>exponentially</strong></li>
+                        <li>Every branch must be manually written</li>
+                        <li>Not scalable for large games</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Background · Dialog Trees</span>
+        </div>
+    </section>
+
+
+    <!-- 3.3 ── Large Language Models -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Background</h3>
+        <h2>Large Language Models (LLMs)</h2>
+
+        <div class="cols">
+            <div>
+                <p>
+                    LLMs are <strong>transformer-based neural networks</strong> trained on
+                    massive text corpora — they generate responses
+                    <em>probabilistically</em> at runtime based on learned
+                    statistical patterns.
+                </p>
+
+                <div class="arch-flow fragment fade-up" style="flex-direction:column; align-items:flex-start; gap:0.3rem;">
+                    <div class="arch-node orange">System Prompt + NPC Persona</div>
+                    <div class="arch-arrow" style="margin-left:1rem;">↓</div>
+                    <div class="arch-node">Player Input (token)</div>
+                    <div class="arch-arrow" style="margin-left:1rem;">↓</div>
+                    <div class="arch-node">Transformer Self-Attention</div>
+                    <div class="arch-arrow" style="margin-left:1rem;">↓</div>
+                    <div class="arch-node orange">Generated NPC Response</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="callout fragment fade-up">
+                    <strong>Key difference from dialog trees</strong><br><br>
+                    Dialog trees produce <em>identical</em> output for identical input.
+                    LLMs sample from a probability distribution —
+                    same prompt can yield <strong>different responses</strong> each time.
+                </div>
+
+                <div class="card card-red fragment fade-up" style="margin-top:0.7rem;">
+                    <strong style="color:var(--red);">⚠ Challenges</strong><br><br>
+                    <ul style="margin:0; padding-left:1em; font-size:0.85em;">
+                        <li><strong>Hallucinations</strong> — fluent but wrong outputs</li>
+                        <li>Non-determinism complicates testing</li>
+                        <li>Requires prompt engineering for consistency</li>
+                        <li>Computational overhead at runtime</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Background · Large Language Models</span>
+        </div>
+    </section>
+
+
+    <!-- 3.4 ── Local LLM vs Cloud LLM -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <h3>Background</h3>
+        <h2>Local LLM vs Cloud LLM</h2>
+
+        <table class="compare-table">
+            <thead>
+            <tr>
+                <th>Property</th>
+                <th>Dialog Tree</th>
+                <th>Local LLM</th>
+                <th>Cloud LLM</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="fragment fade-up">
+                <td>Deterministic outputs</td>
+                <td class="yes">Yes</td>
+                <td class="no">No</td>
+                <td class="no">No</td>
+            </tr>
+            <tr class="fragment fade-up">
+                <td>Narrative control</td>
+                <td class="yes">Full</td>
+                <td class="mid">Limited</td>
+                <td class="mid">Limited</td>
+            </tr>
+            <tr class="fragment fade-up">
+                <td>Runtime latency</td>
+                <td class="yes">Near-zero</td>
+                <td class="mid">Model-dependent</td>
+                <td class="mid">Network-dependent</td>
+            </tr>
+            <tr class="fragment fade-up">
+                <td>Network dependency</td>
+                <td class="yes">None</td>
+                <td class="yes">None</td>
+                <td class="no">Required</td>
+            </tr>
+            <tr class="fragment fade-up">
+                <td>Per-token cost</td>
+                <td class="yes">$0</td>
+                <td class="yes">$0</td>
+                <td class="no">Pay-per-use</td>
+            </tr>
+            <tr class="fragment fade-up">
+                <td>Hardware demand</td>
+                <td class="yes">Minimal</td>
+                <td class="no">High</td>
+                <td class="yes">Minimal</td>
+            </tr>
+            <tr class="fragment fade-up">
+                <td>Content scalability</td>
+                <td class="no">Low</td>
+                <td class="yes">High</td>
+                <td class="yes">High</td>
+            </tr>
+            <tr class="fragment fade-up">
+                <td>Manual authoring effort</td>
+                <td class="no">High</td>
+                <td class="yes">Low</td>
+                <td class="yes">Low</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Background · Comparison</span>
+        </div>
+    </section>
+
+</section>
+<!-- end Chapter: Background -->
