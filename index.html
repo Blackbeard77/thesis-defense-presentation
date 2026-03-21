@@ -12,6 +12,63 @@
   <!-- Your custom styles (always AFTER reveal, so yours win) -->
   <link rel="stylesheet" href="styles.css" />
 
+  <!------------------------------------------------------>
+  <!--  Chart.js Library to the project-->
+  <!------------------------------------------------------>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+
+  <style>
+    .graph-container {
+      position: relative;
+      height: 340px;
+      margin-top: 1.2rem;
+    }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .metric-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .metric-box.winner {
+      border-color: var(--srh);
+      box-shadow: 0 0 20px var(--srh-glow);
+    }
+
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: 1.6em;
+      color: var(--accent);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .metric-box.winner .metric-value {
+      color: var(--srh);
+    }
+
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 0.38em;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1.4;
+    }
+  </style>
+
   <!-- Reveal.js syntax highlight theme (for code blocks) -->
   <!-- <link rel="stylesheet" href="node_modules/reveal.js/plugin/highlight/monokai.css" /> -->
 </head>
@@ -29,8 +86,6 @@
 
 <script>
   // ── CHAPTER FILES ──────────────────────────────────────
-  // Add or remove files here to control what's in the deck.
-  // Order matters — they appear in this exact sequence.
   const chapters = [
     'slides/00-title.html',
     'slides/01-agenda.html',
@@ -43,9 +98,6 @@
     'slides/08-qa.html',
   ];
 
-  // ── LOADER ────────────────────────────────────────────
-  // Fetches each chapter file and injects it into the deck,
-  // then initializes Reveal.js once everything is loaded.
   async function loadSlides() {
     const container = document.getElementById('slide-container');
 
@@ -59,58 +111,155 @@
       }
     }
 
-    // ── REVEAL CONFIG ────────────────────────────────────
+    // Initialize Reveal ONCE, AFTER slides are loaded
     Reveal.initialize({
-      // Navigation
-      hash:           true,   // URL updates per slide (bookmarkable)
-      history:        true,   // browser back/forward works
-
-      // Layout
-      width:          1280,
-      height:         720,
+      hash:           true,
+      history:        true,
+      width:          1920,
+      height:         1080,
       margin:         0.04,
       minScale:       0.2,
       maxScale:       2.0,
-
-      // Transitions
-      transition:           'fade',   // none | fade | slide | convex | zoom
+      transition:           'slide',
       transitionSpeed:      'default',
       backgroundTransition: 'fade',
-
-      // Controls & UI
       controls:       true,
       controlsLayout: 'bottom-right',
       progress:       true,
-      slideNumber:    'c/t',          // shows "3 / 24" style
+      slideNumber:    'c/t',
       showSlideNumber:'all',
-
-      // Fragments (the "appear one by one" effect)
       fragments:      true,
-
-      // Plugins
       plugins: []
     });
 
-    // ── ANIMATE BAR CHARTS ───────────────────────────────
-    // Runs after Reveal is ready — triggers bar fill animations
-    // when a results slide becomes visible.
-    Reveal.on('slidechanged', animateBars);
-    Reveal.on('ready',        animateBars);
-
-    function animateBars() {
-      const current = Reveal.getCurrentSlide();
-      if (!current) return;
-      current.querySelectorAll('.bar-fill[data-width]').forEach(bar => {
-        // Small delay so the transition is visible
+    // Animate latency bars when fragments appear
+    Reveal.on('fragmentshown', function(event) {
+      const barFill = event.fragment.querySelector('.bar-fill');
+      if (barFill && barFill.dataset.width) {
         setTimeout(() => {
-          bar.style.width = bar.dataset.width;
-        }, 200);
-      });
+          barFill.style.width = barFill.dataset.width + '%';
+        }, 100);
+      }
+
+      const metricValue = event.fragment.querySelector('.metric-value[data-count]');
+      if (metricValue && !metricValue.classList.contains('counted')) {
+        metricValue.classList.add('counted');
+        animateValue(metricValue, 0, parseFloat(metricValue.dataset.count), 1200);
+      }
+    });
+
+    // Initialize charts AFTER Reveal is ready (slides exist in DOM)
+    Reveal.on('ready', function() {
+      const cpuGpuCtx = document.getElementById('cpuGpuChart');
+      if (cpuGpuCtx) {
+        new Chart(cpuGpuCtx, {
+          type: 'bar',
+          data: {
+            labels: ['Dialog Tree', 'Cloud (GPT-4o)', 'Gemma 3 1B', 'Qwen 3 0.6B', 'DeepSeek 1.5B', 'Mistral 7B'],
+            datasets: [
+              {
+                label: 'CPU Usage (%)',
+                data: [10, 15, 81, 20, 66, 99],
+                backgroundColor: 'rgba(217, 78, 14, 0.7)',
+                borderColor: '#D94E0E',
+                borderWidth: 2
+              },
+              {
+                label: 'GPU Usage (%)',
+                data: [2, 3, 5, 5, 5, 5],
+                backgroundColor: 'rgba(79, 142, 247, 0.7)',
+                borderColor: '#4f8ef7',
+                borderWidth: 2
+              }
+            ]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      const ramVramCtx = document.getElementById('ramVramChart');
+      if (ramVramCtx) {
+        new Chart(ramVramCtx, {
+          type: 'bar',
+          data: {
+            labels: ['Dialog Tree', 'Cloud (GPT-4o)', 'Gemma 3 1B', 'Qwen 3 0.6B', 'DeepSeek 1.5B', 'Mistral 7B'],
+            datasets: [
+              {
+                label: 'RAM (GB)',
+                data: [0.5, 0.6, 1.3, 1.2, 1.5, 1.4],
+                backgroundColor: 'rgba(61, 214, 140, 0.7)',
+                borderColor: '#3dd68c',
+                borderWidth: 2
+              },
+              {
+                label: 'VRAM (GB)',
+                data: [0.2, 0.2, 1.8, 1.0, 2.2, 2.0],
+                backgroundColor: 'rgba(240, 192, 64, 0.7)',
+                borderColor: '#f0c040',
+                borderWidth: 2
+              }
+            ]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      const cpuTimelineCtx = document.getElementById('cpuTimelineChart');
+      if (cpuTimelineCtx) {
+        new Chart(cpuTimelineCtx, {
+          type: 'line',
+          data: {
+            labels: ['0s', '30s', '60s', '90s', '120s', '150s'],
+            datasets: [
+              {
+                label: 'Dialog Tree',
+                data: [10, 10, 10, 10, 10, 10],
+                borderColor: '#3dd68c',
+                backgroundColor: 'rgba(61, 214, 140, 0.1)',
+                tension: 0.4,
+                fill: true,
+                borderWidth: 2
+              },
+              {
+                label: 'Cloud (GPT-4o)',
+                data: [12, 18, 15, 20, 16, 14],
+                borderColor: '#4f8ef7',
+                backgroundColor: 'rgba(79, 142, 247, 0.1)',
+                tension: 0.4,
+                fill: true,
+                borderWidth: 2
+              },
+              {
+                label: 'Gemma 3 1B (Local)',
+                data: [20, 100, 25, 100, 30, 20],
+                borderColor: '#D94E0E',
+                backgroundColor: 'rgba(217, 78, 14, 0.1)',
+                tension: 0.4,
+                fill: true,
+                borderWidth: 2
+              }
+            ]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+    });
+
+    function animateValue(element, start, end, duration) {
+      let startTime = null;
+      const isInteger = Number.isInteger(end);
+      function frame(currentTime) {
+        if (!startTime) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const current = progress * (end - start) + start;
+        element.textContent = isInteger ? Math.round(current) : current.toFixed(1);
+        if (progress < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
     }
   }
 
   loadSlides();
 </script>
-
 </body>
 </html>

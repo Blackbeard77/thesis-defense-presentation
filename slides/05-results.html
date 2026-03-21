@@ -6,16 +6,17 @@
 
     <!-- 5.0 ── Chapter Divider -->
     <section class="slide-chapter" data-num="04">
-        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
         <div class="chapter-num">04 / Results</div>
         <h2>Results</h2>
-        <p class="chapter-sub">Latency &nbsp;·&nbsp; CPU &nbsp;·&nbsp; Memory &nbsp;·&nbsp; Cost &nbsp;·&nbsp; Dialog Accuracy</p>
+        <p class="chapter-sub">Latency &nbsp;·&nbsp; CPU &nbsp;·&nbsp; Memory &nbsp;·&nbsp; Cost &nbsp;·&nbsp; Dialog
+            Accuracy</p>
     </section>
 
 
     <!-- 5.1 ── Latency Comparison (animated bar chart) -->
     <section>
-        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
         <h3>Results</h3>
         <h2>Response Latency</h2>
         <p style="font-size:0.55em;">Average time from player input to full NPC response — lower is better.</p>
@@ -43,11 +44,14 @@
         </div>
 
         <script>
-            (function() {
+            (function () {
                 function initLatency() {
                     var el = document.getElementById('chart-latency');
                     if (!el || el._init) return;
-                    if (typeof Chart === 'undefined') { setTimeout(initLatency, 300); return; }
+                    if (typeof Chart === 'undefined') {
+                        setTimeout(initLatency, 300);
+                        return;
+                    }
                     el._init = true;
                     new Chart(el, {
                         type: 'bar',
@@ -77,23 +81,33 @@
                             }]
                         },
                         options: {
-                            animation: { duration: 1400, easing: 'easeOutQuart' },
+                            animation: {duration: 1400, easing: 'easeOutQuart'},
                             responsive: true,
                             plugins: {
-                                legend: { display: false },
+                                legend: {display: false},
                                 tooltip: {
                                     callbacks: {
-                                        label: function(c) { return ' ' + c.parsed.y + ' seconds'; }
+                                        label: function (c) {
+                                            return ' ' + c.parsed.y + ' seconds';
+                                        }
                                     }
                                 }
                             },
                             scales: {
-                                x: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 } }, grid: { color: '#252c3a' } },
-                                y: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 } }, grid: { color: '#252c3a' }, title: { display: true, text: 'Seconds', color: '#5a6278', font: { family: 'DM Mono' } } }
+                                x: {
+                                    ticks: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}},
+                                    grid: {color: '#252c3a'}
+                                },
+                                y: {
+                                    ticks: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}},
+                                    grid: {color: '#252c3a'},
+                                    title: {display: true, text: 'Seconds', color: '#5a6278', font: {family: 'DM Mono'}}
+                                }
                             }
                         }
                     });
                 }
+
                 setTimeout(initLatency, 600);
             })();
         </script>
@@ -102,10 +116,11 @@
 
     <!-- 5.2 ── CPU Usage Animated Line Chart -->
     <section>
-        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
         <h3>Results</h3>
         <h2>CPU Usage During Conversation</h2>
-        <p style="font-size:0.55em;">CPU % over time — shaded regions = conversation window (player input → NPC response received).</p>
+        <p style="font-size:0.55em;">CPU % over time — shaded regions = conversation window (player input → NPC response
+            received).</p>
 
         <canvas id="chart-cpu" style="max-height:340px;"></canvas>
 
@@ -121,31 +136,36 @@
         </div>
 
         <script>
-            (function() {
+            (function () {
                 function initCPU() {
                     var el = document.getElementById('chart-cpu');
                     if (!el || el._init) return;
-                    if (typeof Chart === 'undefined') { setTimeout(initCPU, 300); return; }
+                    if (typeof Chart === 'undefined') {
+                        setTimeout(initCPU, 300);
+                        return;
+                    }
                     el._init = true;
 
                     // Simulate time-series CPU data (40 time points)
-                    var labels = Array.from({length: 40}, function(_, i) { return i + 's'; });
+                    var labels = Array.from({length: 40}, function (_, i) {
+                        return i + 's';
+                    });
 
                     // Dialog Tree — barely any CPU
-                    var dtData = labels.map(function(_, i) {
+                    var dtData = labels.map(function (_, i) {
                         return Math.random() * 3 + 1;
                     });
 
                     // OpenAI — small bumps during conversation windows
-                    var oaiData = labels.map(function(_, i) {
-                        var inConv = (i>=6&&i<=9)||(i>=14&&i<=17)||(i>=22&&i<=25)||(i>=30&&i<=33);
-                        return inConv ? Math.random()*8 + 4 : Math.random()*3 + 1;
+                    var oaiData = labels.map(function (_, i) {
+                        var inConv = (i >= 6 && i <= 9) || (i >= 14 && i <= 17) || (i >= 22 && i <= 25) || (i >= 30 && i <= 33);
+                        return inConv ? Math.random() * 8 + 4 : Math.random() * 3 + 1;
                     });
 
                     // Gemma 1B — sharp spikes
-                    var gemmaData = labels.map(function(_, i) {
-                        var inConv = (i>=6&&i<=9)||(i>=14&&i<=17)||(i>=22&&i<=25)||(i>=30&&i<=33);
-                        return inConv ? Math.random()*20 + 80 : Math.random()*8 + 5;
+                    var gemmaData = labels.map(function (_, i) {
+                        var inConv = (i >= 6 && i <= 9) || (i >= 14 && i <= 17) || (i >= 22 && i <= 25) || (i >= 30 && i <= 33);
+                        return inConv ? Math.random() * 20 + 80 : Math.random() * 8 + 5;
                     });
 
                     new Chart(el, {
@@ -186,17 +206,19 @@
                             ]
                         },
                         options: {
-                            animation: { duration: 1800, easing: 'easeInOutQuart' },
+                            animation: {duration: 1800, easing: 'easeInOutQuart'},
                             responsive: true,
-                            interaction: { mode: 'index', intersect: false },
+                            interaction: {mode: 'index', intersect: false},
                             plugins: {
                                 legend: {
                                     display: true,
-                                    labels: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 }, boxWidth: 12 }
+                                    labels: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}, boxWidth: 12}
                                 },
                                 tooltip: {
                                     callbacks: {
-                                        label: function(c) { return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(1) + '%'; }
+                                        label: function (c) {
+                                            return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(1) + '%';
+                                        }
                                     }
                                 },
                                 // Conversation window annotations drawn as background rects
@@ -204,19 +226,31 @@
                             },
                             scales: {
                                 x: {
-                                    ticks: { color: '#5a6278', font: { family: 'DM Mono', size: 9 }, maxTicksLimit: 10 },
-                                    grid: { color: '#1c2030' }
+                                    ticks: {color: '#5a6278', font: {family: 'DM Mono', size: 9}, maxTicksLimit: 10},
+                                    grid: {color: '#1c2030'}
                                 },
                                 y: {
                                     min: 0, max: 105,
-                                    ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 }, callback: function(v){ return v+'%'; } },
-                                    grid: { color: '#252c3a' },
-                                    title: { display: true, text: 'CPU Usage (%)', color: '#5a6278', font: { family: 'DM Mono' } }
+                                    ticks: {
+                                        color: '#a8afc4',
+                                        font: {family: 'DM Mono', size: 11},
+                                        callback: function (v) {
+                                            return v + '%';
+                                        }
+                                    },
+                                    grid: {color: '#252c3a'},
+                                    title: {
+                                        display: true,
+                                        text: 'CPU Usage (%)',
+                                        color: '#5a6278',
+                                        font: {family: 'DM Mono'}
+                                    }
                                 }
                             }
                         }
                     });
                 }
+
                 setTimeout(initCPU, 600);
             })();
         </script>
@@ -225,10 +259,11 @@
 
     <!-- 5.3 ── All Local LLMs Resource Bar Chart -->
     <section>
-        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
         <h3>Results</h3>
         <h2>Local LLMs — Resource Comparison</h2>
-        <p style="font-size:0.55em;">Average resource consumption during output generation across all 4 tested models.</p>
+        <p style="font-size:0.55em;">Average resource consumption during output generation across all 4 tested
+            models.</p>
 
         <canvas id="chart-localllm" style="max-height:330px;"></canvas>
 
@@ -253,11 +288,14 @@
         </div>
 
         <script>
-            (function() {
+            (function () {
                 function initLocal() {
                     var el = document.getElementById('chart-localllm');
                     if (!el || el._init) return;
-                    if (typeof Chart === 'undefined') { setTimeout(initLocal, 300); return; }
+                    if (typeof Chart === 'undefined') {
+                        setTimeout(initLocal, 300);
+                        return;
+                    }
                     el._init = true;
 
                     new Chart(el, {
@@ -289,21 +327,28 @@
                             ]
                         },
                         options: {
-                            animation: { duration: 1400, easing: 'easeOutQuart' },
+                            animation: {duration: 1400, easing: 'easeOutQuart'},
                             responsive: true,
                             plugins: {
                                 legend: {
                                     display: true,
-                                    labels: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 }, boxWidth: 12 }
+                                    labels: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}, boxWidth: 12}
                                 }
                             },
                             scales: {
-                                x: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 } }, grid: { color: '#252c3a' } },
-                                y: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 } }, grid: { color: '#252c3a' } }
+                                x: {
+                                    ticks: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}},
+                                    grid: {color: '#252c3a'}
+                                },
+                                y: {
+                                    ticks: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}},
+                                    grid: {color: '#252c3a'}
+                                }
                             }
                         }
                     });
                 }
+
                 setTimeout(initLocal, 600);
             })();
         </script>
@@ -312,7 +357,7 @@
 
     <!-- 5.4 ── Cost Analysis -->
     <section>
-        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
         <h3>Results</h3>
         <h2>Cost Comparison</h2>
 
@@ -324,13 +369,17 @@
             <div>
                 <div class="card card-orange fragment fade-up">
                     <strong>Per Session</strong>
-                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--srh); margin:0.4em 0;">≈ $0.0000568</div>
+                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--srh); margin:0.4em 0;">≈
+                        $0.0000568
+                    </div>
                     <span style="font-size:0.8em; color:var(--muted);">6 dialog turns · GPT-4o pricing</span>
                 </div>
 
                 <div class="card card-orange fragment fade-up" style="margin-top:0.6rem;">
                     <strong>Per Player (full game)</strong>
-                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--srh); margin:0.4em 0;">≈ $3.77</div>
+                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--srh); margin:0.4em 0;">≈
+                        $3.77
+                    </div>
                     <span style="font-size:0.8em; color:var(--muted);">~161k word dialog · 38.8% completion rate</span>
                 </div>
 
@@ -341,7 +390,9 @@
 
                 <div class="card card-green fragment fade-up" style="margin-top:0.6rem;">
                     <strong style="color:var(--green);">Dialog Tree &amp; Local LLM</strong>
-                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--green); margin:0.4em 0;">$0.00</div>
+                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--green); margin:0.4em 0;">
+                        $0.00
+                    </div>
                     <span style="font-size:0.8em; color:var(--muted);">Zero per-session runtime cost</span>
                 </div>
             </div>
@@ -353,11 +404,14 @@
         </div>
 
         <script>
-            (function() {
+            (function () {
                 function initCost() {
                     var el = document.getElementById('chart-cost');
                     if (!el || el._init) return;
-                    if (typeof Chart === 'undefined') { setTimeout(initCost, 300); return; }
+                    if (typeof Chart === 'undefined') {
+                        setTimeout(initCost, 300);
+                        return;
+                    }
                     el._init = true;
 
                     new Chart(el, {
@@ -384,13 +438,13 @@
                             }]
                         },
                         options: {
-                            animation: { duration: 1600, easing: 'easeOutBounce' },
+                            animation: {duration: 1600, easing: 'easeOutBounce'},
                             responsive: true,
                             plugins: {
-                                legend: { display: false },
+                                legend: {display: false},
                                 tooltip: {
                                     callbacks: {
-                                        label: function(c) {
+                                        label: function (c) {
                                             var v = c.parsed.y;
                                             return v === 0 ? ' Free' : ' $' + v.toFixed(7).replace(/\.?0+$/, '');
                                         }
@@ -398,16 +452,26 @@
                                 }
                             },
                             scales: {
-                                x: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 10 } }, grid: { color: '#252c3a' } },
+                                x: {
+                                    ticks: {color: '#a8afc4', font: {family: 'DM Mono', size: 10}},
+                                    grid: {color: '#252c3a'}
+                                },
                                 y: {
-                                    ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 10 }, callback: function(v){ return '$'+v; } },
-                                    grid: { color: '#252c3a' },
+                                    ticks: {
+                                        color: '#a8afc4',
+                                        font: {family: 'DM Mono', size: 10},
+                                        callback: function (v) {
+                                            return '$' + v;
+                                        }
+                                    },
+                                    grid: {color: '#252c3a'},
                                     type: 'logarithmic'
                                 }
                             }
                         }
                     });
                 }
+
                 setTimeout(initCost, 600);
             })();
         </script>
@@ -416,10 +480,11 @@
 
     <!-- 5.5 ── Dialog Accuracy -->
     <section>
-        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo" />
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
         <h3>Results</h3>
         <h2>Dialog Accuracy</h2>
-        <p style="font-size:0.55em;">Error rate (%) when models deviate from the system prompt rules. Lower = better.</p>
+        <p style="font-size:0.55em;">Error rate (%) when models deviate from the system prompt rules. Lower =
+            better.</p>
 
         <canvas id="chart-accuracy" style="max-height:320px;"></canvas>
 
@@ -436,11 +501,14 @@
         </div>
 
         <script>
-            (function() {
+            (function () {
                 function initAccuracy() {
                     var el = document.getElementById('chart-accuracy');
                     if (!el || el._init) return;
-                    if (typeof Chart === 'undefined') { setTimeout(initAccuracy, 300); return; }
+                    if (typeof Chart === 'undefined') {
+                        setTimeout(initAccuracy, 300);
+                        return;
+                    }
                     el._init = true;
 
                     new Chart(el, {
@@ -480,40 +548,378 @@
                             ]
                         },
                         options: {
-                            animation: { duration: 1400, easing: 'easeOutQuart' },
+                            animation: {duration: 1400, easing: 'easeOutQuart'},
                             responsive: true,
                             plugins: {
                                 legend: {
                                     display: true,
-                                    labels: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 }, boxWidth: 12 }
+                                    labels: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}, boxWidth: 12}
                                 }
                             },
                             scales: {
-                                x: { ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 } }, grid: { color: '#252c3a' } },
+                                x: {
+                                    ticks: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}},
+                                    grid: {color: '#252c3a'}
+                                },
                                 y: {
                                     position: 'left',
                                     min: 0, max: 105,
-                                    ticks: { color: '#a8afc4', font: { family: 'DM Mono', size: 11 }, callback: function(v){ return v+'%'; } },
-                                    grid: { color: '#252c3a' },
-                                    title: { display: true, text: 'Error Rate (%)', color: '#5a6278', font: { family: 'DM Mono' } }
+                                    ticks: {
+                                        color: '#a8afc4',
+                                        font: {family: 'DM Mono', size: 11},
+                                        callback: function (v) {
+                                            return v + '%';
+                                        }
+                                    },
+                                    grid: {color: '#252c3a'},
+                                    title: {
+                                        display: true,
+                                        text: 'Error Rate (%)',
+                                        color: '#5a6278',
+                                        font: {family: 'DM Mono'}
+                                    }
                                 },
                                 y2: {
                                     position: 'right',
-                                    ticks: { color: '#4f8ef7', font: { family: 'DM Mono', size: 11 } },
-                                    grid: { drawOnChartArea: false },
-                                    title: { display: true, text: 'Levenshtein Distance', color: '#4f8ef7', font: { family: 'DM Mono' } }
+                                    ticks: {color: '#4f8ef7', font: {family: 'DM Mono', size: 11}},
+                                    grid: {drawOnChartArea: false},
+                                    title: {
+                                        display: true,
+                                        text: 'Levenshtein Distance',
+                                        color: '#4f8ef7',
+                                        font: {family: 'DM Mono'}
+                                    }
                                 }
                             }
                         }
                     });
                 }
+
                 setTimeout(initAccuracy, 600);
             })();
         </script>
     </section>
 
+    <!-- SLIDE 1: CPU & GPU Resource Usage -->
+    <section class="slide p-16 col">
+        <h3>Performance Analysis</h3>
+        <h2 class="mb-6">CPU &amp; GPU Resource Usage</h2>
+
+        <div class="graph-container">
+            <canvas id="cpuGpuChart"></canvas>
+        </div>
+
+        <div class="callout fragment fade-up" style="margin-top: 1rem;">
+            <strong>Key Finding:</strong> Local LLMs show 81-99% CPU utilization during generation, while Dialog Tree
+            and Cloud LLM remain under 20%.
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Dialog Accuracy</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 2: Memory Consumption Comparison -->
+    <section class="slide p-16 col">
+        <h3>Performance Analysis</h3>
+        <h2 class="mb-6">Memory Consumption</h2>
+
+        <div class="graph-container">
+            <canvas id="ramVramChart"></canvas>
+        </div>
+
+        <div class="cols" style="margin-top: 1rem; gap: 1rem;">
+            <div class="card card-blue">
+                <strong>RAM Usage:</strong> Local LLMs require 1.2-1.5 GB during runtime
+            </div>
+            <div class="card card-orange">
+                <strong>VRAM Usage:</strong> Scales from 1 GB (0.6B) to 2.2 GB (1.5B params)
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Dialog Accuracy</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 3: Response Latency Comparison -->
+    <section class="slide p-16 col">
+        <h3>Performance Analysis</h3>
+        <h2 class="mb-6">Response Latency Comparison</h2>
+
+        <div class="bar-chart">
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">Dialog Tree</div>
+                <div class="bar-track">
+                    <div class="bar-fill dt" data-width="0.1"></div>
+                </div>
+                <div class="bar-val">~0ms</div>
+            </div>
+
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">Cloud (GPT-4o)</div>
+                <div class="bar-track">
+                    <div class="bar-fill cloud" data-width="3"></div>
+                </div>
+                <div class="bar-val">~700ms</div>
+            </div>
+
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">Gemma 3 1B</div>
+                <div class="bar-track">
+                    <div class="bar-fill local" data-width="3.5"></div>
+                </div>
+                <div class="bar-val">~700ms</div>
+            </div>
+
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">Qwen 3 0.6B</div>
+                <div class="bar-track">
+                    <div class="bar-fill local" data-width="14"></div>
+                </div>
+                <div class="bar-val">~2.8s</div>
+            </div>
+
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">DeepSeek 1.5B</div>
+                <div class="bar-track">
+                    <div class="bar-fill local" data-width="79.5"></div>
+                </div>
+                <div class="bar-val">~15.9s</div>
+            </div>
+
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">Mistral 7B</div>
+                <div class="bar-track">
+                    <div class="bar-fill local" data-width="100"></div>
+                </div>
+                <div class="bar-val">~25.2s</div>
+            </div>
+        </div>
+
+        <div class="callout-orange fragment fade-up" style="margin-top: 1.5rem;">
+            <strong>Critical Threshold:</strong> Latencies above 3s are incompatible with real-time interactive
+            dialogue.
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Dialog Accuracy</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: Local LLM Performance Summary -->
+    <section class="slide p-16 col">
+        <h3>Evaluation Results</h3>
+        <h2 class="mb-6">Local LLM Performance Summary</h2>
+
+        <div class="metrics-row">
+            <div class="metric-box winner fragment fade-up" data-fragment-index="0">
+                <span class="metric-value" data-count="0.7">0.7</span>
+                <span class="metric-label">Gemma 3 1B<br>Latency (s)</span>
+            </div>
+
+            <div class="metric-box fragment fade-up" data-fragment-index="1">
+                <span class="metric-value" data-count="2.8">2.8</span>
+                <span class="metric-label">Qwen 3 0.6B<br>Latency (s)</span>
+            </div>
+
+            <div class="metric-box fragment fade-up" data-fragment-index="2">
+                <span class="metric-value" data-count="15.9">15.9</span>
+                <span class="metric-label">DeepSeek 1.5B<br>Latency (s)</span>
+            </div>
+
+            <div class="metric-box fragment fade-up" data-fragment-index="3">
+                <span class="metric-value" data-count="25.2">25.2</span>
+                <span class="metric-label">Mistral 7B<br>Latency (s)</span>
+            </div>
+        </div>
+
+        <div class="metrics-row" style="margin-top: 0.8rem;">
+            <div class="metric-box winner fragment fade-up" data-fragment-index="4">
+                <span class="metric-value" data-count="81">81</span>
+                <span class="metric-label">Gemma 3 1B<br>CPU Usage (%)</span>
+            </div>
+
+            <div class="metric-box fragment fade-up" data-fragment-index="5">
+                <span class="metric-value" data-count="20">20</span>
+                <span class="metric-label">Qwen 3 0.6B<br>CPU Usage (%)</span>
+            </div>
+
+            <div class="metric-box fragment fade-up" data-fragment-index="6">
+                <span class="metric-value" data-count="66">66</span>
+                <span class="metric-label">DeepSeek 1.5B<br>CPU Usage (%)</span>
+            </div>
+
+            <div class="metric-box fragment fade-up" data-fragment-index="7">
+                <span class="metric-value" data-count="99">99</span>
+                <span class="metric-label">Mistral 7B<br>CPU Usage (%)</span>
+            </div>
+        </div>
+
+        <div class="callout fragment fade-up" style="margin-top: 1.5rem;">
+            <strong>Optimal Balance:</strong> Gemma 3 1B achieves lowest latency while maintaining moderate resource
+            consumption.
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Dialog Accuracy</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: Prompt Adherence Accuracy -->
+    <section class="slide p-16 col">
+        <h3>Qualitative Measures</h3>
+        <h2 class="mb-6">Prompt Adherence Accuracy</h2>
+
+        <div class="bar-chart">
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">Gemma 3 1B</div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="background: linear-gradient(90deg, var(--green), #3dd68c); width: 0%;"
+                         data-width="100"></div>
+                </div>
+                <div class="bar-val">100%</div>
+            </div>
+
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">Qwen 3 0.6B</div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="background: linear-gradient(90deg, var(--yellow), #f0c040); width: 0%;"
+                         data-width="85"></div>
+                </div>
+                <div class="bar-val">~85%</div>
+            </div>
+
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">DeepSeek 1.5B</div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="background: linear-gradient(90deg, var(--yellow), #f0c040); width: 0%;"
+                         data-width="70"></div>
+                </div>
+                <div class="bar-val">~70%</div>
+            </div>
+
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">Mistral 7B</div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="background: linear-gradient(90deg, var(--red), #e05c4b); width: 0%;"
+                         data-width="50"></div>
+                </div>
+                <div class="bar-val">~50%</div>
+            </div>
+        </div>
+
+        <div class="callout-orange fragment fade-up" style="margin-top: 1.5rem;">
+            <strong>Key Insight:</strong> Model size does NOT guarantee better prompt adherence — Gemma 3 1B outperforms
+            larger models in rule-following.
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Dialog Accuracy</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 6: Cost Analysis -->
+    <section class="slide p-16 col">
+        <h3>Economic Evaluation</h3>
+        <h2 class="mb-6">Estimated Operational Costs</h2>
+
+        <div class="cols">
+            <div class="card card-orange">
+                <h4 style="color: var(--srh); margin-bottom: 0.8rem;">Cloud-Based (GPT-4o)</h4>
+                <p class="text-lg" style="margin-bottom: 0.5rem;"><strong>Per Player:</strong> ~$3.77</p>
+                <p style="font-size: 0.58em; line-height: 1.6;">
+                    • ~62,767 output tokens @ $10/1M<br>
+                    • ~1,255,340 input tokens @ $2.50/1M<br>
+                    • Equals <strong style="color: var(--srh);">15% of game price</strong> ($24.81 avg)
+                </p>
+            </div>
+
+            <div class="card card-blue">
+                <h4 style="color: var(--accent); margin-bottom: 0.8rem;">Local LLM (Gemma 3 1B)</h4>
+                <p class="text-lg" style="margin-bottom: 0.5rem;"><strong>Per Player:</strong> $0.00</p>
+                <p style="font-size: 0.58em; line-height: 1.6;">
+                    • One-time hardware investment<br>
+                    • No recurring API costs<br>
+                    • Higher minimum system requirements<br>
+                    • <strong style="color: var(--accent);">100% offline capability</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="rq-box fragment fade-up" style="margin-top: 1.5rem; font-size: 0.62em;">
+            At scale, cloud costs become unsustainable: 10,000 players = $37,700 in API fees alone.
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Dialog Accuracy</span>
+        </div>
+
+    </section>
+
+    <!-- SLIDE 7: CPU Utilization Timeline -->
+    <section class="slide p-16 col">
+        <h3>Runtime Behavior</h3>
+        <h2 class="mb-6">CPU Utilization Timeline</h2>
+
+        <div class="graph-container" style="animation-delay: 2s">
+            <canvas id="cpuTimelineChart"></canvas>
+        </div>
+
+        <div class="cols3" style="margin-top: 1rem; gap: 0.8rem; animation-delay: 2s">
+            <div class="card card-green">
+                <strong>Dialog Tree:</strong> Flat ~10% baseline
+            </div>
+            <div class="card card-blue">
+                <strong>Cloud LLM:</strong> Low local load, network latency
+            </div>
+            <div class="card card-orange">
+                <strong>Local LLM:</strong> Spike to 100% during generation
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Dialog Accuracy</span>
+        </div>
+
+    </section>
+
+    <!-- Slide 2 - Card moves and others appear -->
+    <section data-auto-animate>
+        <h3>Performance Comparison</h3>
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+            <div class="stat-card" style="width: 200px;">
+                <span class="stat-val">0.7s</span>
+                <span class="stat-label">Gemma 1B</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-val">2.8s</span>
+                <span class="stat-label">Qwen 0.6B</span>
+            </div>
+
+            <div class="stat-card winner">
+                <span class="stat-val">15.9s</span>
+                <span class="stat-label">DeepSeek 1.5B</span>
+            </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · 26.03.2026</span>
+            <span>Results · Dialog Accuracy</span>
+        </div>
+
+    </section>
+
 </section>
 <!-- end Chapter: Results -->
 
+
 <!-- Chart.js loaded once for all result slides -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>-->
