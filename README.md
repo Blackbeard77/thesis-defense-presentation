@@ -17,12 +17,11 @@ A polished reveal.js template for thesis/project/defense presentations.
 - Limitations and future work
 - Conclusion
 - Q&A
-- Vertical appendix slides
 
 ## Quick start
 
 1. Open `index.html` in your browser.
-2. Replace all `{placeholder}` text with your own content.
+2. Edit the HTML content in `index.html` to customize the slides with your own text, images, and code snippets.
 3. Edit `styles.css` if you want to change colors, spacing, or typography.
 
 ## Useful reveal.js shortcuts

@@ -84,6 +84,10 @@
 <!-- Reveal.js core -->
 <script src="node_modules/reveal.js/dist/reveal.js"></script>
 
+
+<!-- Reveal.js Notes -->
+<script src="plugin/notes/notes.js"></script>
+
 <script>
   // ── CHAPTER FILES ──────────────────────────────────────
   const chapters = [
@@ -110,6 +114,8 @@
         console.warn(`Could not load: ${file}`, err);
       }
     }
+
+
 
     // Initialize Reveal ONCE, AFTER slides are loaded
     Reveal.initialize({
