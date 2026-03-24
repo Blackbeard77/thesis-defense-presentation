@@ -95,7 +95,15 @@
 .slide-logo {
   position: absolute;
   top: 14px;
-  right: 24px;
+  right: 56px;
+  width: 56px;
+  opacity: 0.85;
+  z-index: 20;
+}
+.title-logo {
+  position: absolute;
+  top: 14px;
+  left: 24px;
   width: 56px;
   opacity: 0.85;
   z-index: 20;
