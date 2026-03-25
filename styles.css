@@ -1099,7 +1099,7 @@ DIALOG TREE SLIDE — POLISHED TREE VERSION
 
 /* Typography helpers for readable body-heavy slides */
 .text-large {
-    font-size: 0.9em;
+    font-size: 1em;
     line-height: 1.5;
 }
 
