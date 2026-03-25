@@ -24,18 +24,44 @@
         <canvas id="chart-latency" style="max-height:340px;"></canvas>
 
         <div class="cols3" style="margin-top:0.8rem;">
+
+            <!-- ROW 1 -->
             <div class="stat-card fragment fade-up">
                 <span class="stat-val" style="color:var(--accent);">~0 s</span>
                 <span class="stat-label">Dialog Tree</span>
             </div>
+
             <div class="stat-card winner fragment fade-up">
-                <span class="stat-val">0.7 s</span>
-                <span class="stat-label">Gemma 3 · 1B ✓ Best Local</span>
+                <span class="metric-value" style="color:var(--srh)" data-count="0.7">~0.7 s</span>
+                <span class="stat-label">OpenAI · GPT-4o</span>
             </div>
+
+            <div class="stat-card winner fragment fade-up">
+                <span class="metric-value" style="color: var(--srh)" data-count="0.7">~0.7 s</span>
+                <span class="stat-label">Gemma 3 · 1B</span>
+            </div>
+
+            <!-- ROW 2 -->
             <div class="stat-card fragment fade-up">
-                <span class="stat-val" style="color:var(--red);">25.2 s</span>
+                <span class="metric-value" style="color:var(--yellow);" data-count="2.8">~2.8 s</span>
+                <span class="stat-label">Qwen · 0.6B</span>
+            </div>
+
+            <div class="stat-card fragment fade-up">
+                <span class="metric-value" style="color:var(--red);" data-count="15.9">~15.9 s</span>
+                <span class="stat-label">DeepSeek · 1.5B</span>
+            </div>
+
+            <div class="stat-card fragment fade-up">
+                <span class="metric-value" style="color:var(--red);" data-count="25.2">~25.2 s</span>
                 <span class="stat-label">Mistral · 7B</span>
             </div>
+
+        </div>
+
+        <div class="callout-orange fragment fade-up" style="margin-top: 1.5rem;">
+            <strong>Critical Threshold:</strong> Latencies above 3s are incompatible with real-time interactive
+            dialogue.
         </div>
 
         <div class="slide-footer">
@@ -644,71 +670,66 @@
         </div>
     </section>
 
-    <!-- SLIDE 3: Response Latency Comparison -->
-    <section class="slide p-16 col">
-        <h3>Performance Analysis</h3>
-        <h2 class="mb-6">Response Latency Comparison</h2>
+    <!--    &lt;!&ndash; SLIDE 3: Response Latency Comparison &ndash;&gt;-->
+    <!--    <section class="slide p-16 col">-->
+    <!--        <h3>Performance Analysis</h3>-->
+    <!--        <h2 class="mb-6">Response Latency Comparison</h2>-->
 
-        <div class="bar-chart">
-            <div class="bar-row fragment fade-up">
-                <div class="bar-label">Dialog Tree</div>
-                <div class="bar-track">
-                    <div class="bar-fill dt" data-width="0.1"></div>
-                </div>
-                <div class="bar-val">~0ms</div>
-            </div>
+    <!--        <div class="bar-chart">-->
+    <!--            <div class="bar-row fragment fade-up">-->
+    <!--                <div class="bar-label">Dialog Tree</div>-->
+    <!--                <div class="bar-track">-->
+    <!--                    <div class="bar-fill" data-width="0.1"></div>-->
+    <!--                </div>-->
+    <!--                <div class="bar-val">~0ms</div>-->
+    <!--            </div>-->
 
-            <div class="bar-row fragment fade-up">
-                <div class="bar-label">Cloud (GPT-4o)</div>
-                <div class="bar-track">
-                    <div class="bar-fill cloud" data-width="3"></div>
-                </div>
-                <div class="bar-val">~700ms</div>
-            </div>
+    <!--            <div class="bar-row fragment fade-up">-->
+    <!--                <div class="bar-label">Cloud (GPT-4o)</div>-->
+    <!--                <div class="bar-track">-->
+    <!--                    <div class="bar-fill" data-width="3"></div>-->
+    <!--                </div>-->
+    <!--                <div class="bar-val">~700ms</div>-->
+    <!--            </div>-->
 
-            <div class="bar-row fragment fade-up">
-                <div class="bar-label">Gemma 3 1B</div>
-                <div class="bar-track">
-                    <div class="bar-fill local" data-width="3.5"></div>
-                </div>
-                <div class="bar-val">~700ms</div>
-            </div>
+    <!--            <div class="bar-row fragment fade-up">-->
+    <!--                <div class="bar-label">Gemma 3 1B</div>-->
+    <!--                <div class="bar-track">-->
+    <!--                    <div class="bar-fill" data-width="3.5"></div>-->
+    <!--                </div>-->
+    <!--                <div class="bar-val">~700ms</div>-->
+    <!--            </div>-->
 
-            <div class="bar-row fragment fade-up">
-                <div class="bar-label">Qwen 3 0.6B</div>
-                <div class="bar-track">
-                    <div class="bar-fill local" data-width="14"></div>
-                </div>
-                <div class="bar-val">~2.8s</div>
-            </div>
+    <!--            <div class="bar-row fragment fade-up">-->
+    <!--                <div class="bar-label">Qwen 3 0.6B</div>-->
+    <!--                <div class="bar-track">-->
+    <!--                    <div class="bar-fill" data-width="14"></div>-->
+    <!--                </div>-->
+    <!--                <div class="bar-val">~2.8s</div>-->
+    <!--            </div>-->
 
-            <div class="bar-row fragment fade-up">
-                <div class="bar-label">DeepSeek 1.5B</div>
-                <div class="bar-track">
-                    <div class="bar-fill local" data-width="79.5"></div>
-                </div>
-                <div class="bar-val">~15.9s</div>
-            </div>
+    <!--            <div class="bar-row fragment fade-up">-->
+    <!--                <div class="bar-label">DeepSeek 1.5B</div>-->
+    <!--                <div class="bar-track">-->
+    <!--                    <div class="bar-fill local" data-width="79.5"></div>-->
+    <!--                </div>-->
+    <!--                <div class="bar-val">~15.9s</div>-->
+    <!--            </div>-->
 
-            <div class="bar-row fragment fade-up">
-                <div class="bar-label">Mistral 7B</div>
-                <div class="bar-track">
-                    <div class="bar-fill local" data-width="100"></div>
-                </div>
-                <div class="bar-val">~25.2s</div>
-            </div>
-        </div>
+    <!--            <div class="bar-row fragment fade-up">-->
+    <!--                <div class="bar-label">Mistral 7B</div>-->
+    <!--                <div class="bar-track">-->
+    <!--                    <div class="bar-fill local" data-width="100"></div>-->
+    <!--                </div>-->
+    <!--                <div class="bar-val">~25.2s</div>-->
+    <!--            </div>-->
+    <!--        </div>-->
 
-        <div class="callout-orange fragment fade-up" style="margin-top: 1.5rem;">
-            <strong>Critical Threshold:</strong> Latencies above 3s are incompatible with real-time interactive
-            dialogue.
-        </div>
-
-        <div class="slide-footer">
-            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
-            <span>Results · Dialog Accuracy</span>
-        </div>
-    </section>
+    <!--        <div class="slide-footer">-->
+    <!--            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>-->
+    <!--            <span>Results · Dialog Accuracy</span>-->
+    <!--        </div>-->
+    <!--    </section>-->
 
     <!-- SLIDE 4: Local LLM Performance Summary -->
     <section class="slide p-16 col">
@@ -776,46 +797,72 @@
         <h2 class="mb-6">Prompt Adherence Accuracy</h2>
 
         <div class="bar-chart">
+
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">Dialog Tree</div>
+                <div class="bar-track">
+                    <div class="bar-fill"
+                         style="background: linear-gradient(90deg, var(--green), #3dd68c); width: 0%;"
+                         data-width="100"></div>
+                </div>
+                <div class="bar-val">100% · dist: 0</div>
+            </div>
+
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">OpenAI (GPT-4o)</div>
+                <div class="bar-track">
+                    <div class="bar-fill"
+                         style="background: linear-gradient(90deg, var(--green), #3dd68c); width: 0%;"
+                         data-width="100"></div>
+                </div>
+                <div class="bar-val">100% · dist: 0</div>
+            </div>
+
             <div class="bar-row fragment fade-up">
                 <div class="bar-label">Gemma 3 1B</div>
                 <div class="bar-track">
-                    <div class="bar-fill" style="background: linear-gradient(90deg, var(--green), #3dd68c); width: 0%;"
+                    <div class="bar-fill"
+                         style="background: linear-gradient(90deg, var(--green), #3dd68c); width: 0%;"
                          data-width="100"></div>
                 </div>
-                <div class="bar-val">100%</div>
+                <div class="bar-val">100% · dist: 0</div>
             </div>
 
             <div class="bar-row fragment fade-up">
                 <div class="bar-label">Qwen 3 0.6B</div>
                 <div class="bar-track">
-                    <div class="bar-fill" style="background: linear-gradient(90deg, var(--yellow), #f0c040); width: 0%;"
-                         data-width="85"></div>
+                    <div class="bar-fill"
+                         style="background: linear-gradient(90deg, var(--yellow), #f0c040); width: 0%;"
+                         data-width="50"></div>
                 </div>
-                <div class="bar-val">~85%</div>
-            </div>
-
-            <div class="bar-row fragment fade-up">
-                <div class="bar-label">DeepSeek 1.5B</div>
-                <div class="bar-track">
-                    <div class="bar-fill" style="background: linear-gradient(90deg, var(--yellow), #f0c040); width: 0%;"
-                         data-width="70"></div>
-                </div>
-                <div class="bar-val">~70%</div>
+                <div class="bar-val">~50% · dist: 194</div>
             </div>
 
             <div class="bar-row fragment fade-up">
                 <div class="bar-label">Mistral 7B</div>
                 <div class="bar-track">
-                    <div class="bar-fill" style="background: linear-gradient(90deg, var(--red), #e05c4b); width: 0%;"
-                         data-width="50"></div>
+                    <div class="bar-fill"
+                         style="background: linear-gradient(90deg, var(--red), #e05c4b); width: 0%;"
+                         data-width="12.5"></div>
                 </div>
-                <div class="bar-val">~50%</div>
+                <div class="bar-val">~12.5% · dist: 528</div>
             </div>
+
+            <div class="bar-row fragment fade-up">
+                <div class="bar-label">DeepSeek 1.5B</div>
+                <div class="bar-track">
+                    <div class="bar-fill"
+                         style="background: linear-gradient(90deg, var(--yellow), #f0c040); width: 0%;"
+                         data-width="0"></div>
+                </div>
+                <div class="bar-val">0% · dist: 767</div>
+            </div>
+
         </div>
 
         <div class="callout-orange fragment fade-up" style="margin-top: 1.5rem;">
-            <strong>Key Insight:</strong> Model size does NOT guarantee better prompt adherence — Gemma 3 1B outperforms
-            larger models in rule-following.
+            <strong>Key Insight:</strong> Model size does not guarantee better prompt adherence —
+            Gemma 3 1B outperforms larger models in rule-following.
         </div>
 
         <div class="slide-footer">

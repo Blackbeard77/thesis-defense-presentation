@@ -45,11 +45,11 @@ SRH University · Ashraf Lehawany · 2026
 /* Optional font-size tokens for consistency */
 :root {
     --fs-xxs: 0.35em;
-    --fs-xs:  0.42em;
-    --fs-sm:  0.5em;
-    --fs-md:  0.68em;
-    --fs-lg:  0.8em;
-    --fs-xl:  1.8em;
+    --fs-xs: 0.42em;
+    --fs-sm: 0.5em;
+    --fs-md: 0.68em;
+    --fs-lg: 0.8em;
+    --fs-xl: 1.8em;
     --fs-xxl: 2.2em;
 }
 
@@ -385,6 +385,7 @@ CARDS
 .stat-card.winner {
     border-color: var(--srh);
     box-shadow: 0 0 20px var(--srh-glow);
+    animation: glowPulse 2.5s ease-in-out infinite;
 }
 
 .stat-card .stat-val {
@@ -573,9 +574,8 @@ TITLE SLIDE
     content: '';
     position: absolute;
     inset: 0;
-    background-image:
-            linear-gradient(rgba(217, 78, 14, .05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(217, 78, 14, .05) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(217, 78, 14, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217, 78, 14, .05) 1px, transparent 1px);
     background-size: 60px 60px;
     animation: gridPan 20s linear infinite;
     pointer-events: none;
@@ -583,8 +583,12 @@ TITLE SLIDE
 }
 
 @keyframes gridPan {
-    from { background-position: 0 0; }
-    to   { background-position: 60px 60px; }
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 60px 60px;
+    }
 }
 
 #title-slide > * {
@@ -671,21 +675,23 @@ FRAGMENT ANIMATIONS
 }
 
 /* ============================================================
-ANIMATED BAR CHART (used in Results slides)
+   ANIMATED BAR CHART
 ============================================================ */
 .bar-chart {
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
-    margin-top: 0.8rem;
+    margin-top: 1rem;
+    width: 100%;
     font-size: 0.6em;
 }
 
 .bar-row {
     display: grid;
-    grid-template-columns: 130px 1fr 60px;
+    grid-template-columns: 220px 1fr 180px;
     align-items: center;
     gap: 0.8rem;
+    width: 100%;
 }
 
 .bar-label {
@@ -693,40 +699,36 @@ ANIMATED BAR CHART (used in Results slides)
     color: var(--text-soft);
     font-size: 0.9em;
     text-align: right;
+    white-space: nowrap;
+    line-height: 1.2;
 }
 
 .bar-track {
     background: var(--surface-2);
-    border-radius: 4px;
+    border-radius: 6px;
     height: 22px;
     overflow: hidden;
     border: 1px solid var(--border);
+    position: relative;
 }
 
 .bar-fill {
     height: 100%;
-    border-radius: 4px;
+    border-radius: 6px;
     width: 0%;
     transition: width 1.2s cubic-bezier(.4, 0, .2, 1);
 }
 
-.bar-fill.dt {
-    background: linear-gradient(90deg, #3a4a6a, #4f6fb0);
-}
-
-.bar-fill.local {
-    background: linear-gradient(90deg, var(--srh), #f07040);
-}
-
-.bar-fill.cloud {
-    background: linear-gradient(90deg, #2a4a3a, #3db070);
-}
-
 .bar-val {
+    display: flex;
+    lineheight: 1.1;
+    flex-direction: column;
+    align-items: flex-start;
     font-family: var(--font-mono);
     font-size: 0.85em;
     color: var(--text-soft);
     text-align: left;
+    white-space: nowrap;
 }
 
 /* ============================================================
@@ -768,10 +770,6 @@ ANIMATIONS — entrance effects for elements
     50% {
         box-shadow: 0 0 30px var(--srh-glow), 0 0 60px var(--srh-dim);
     }
-}
-
-.stat-card.winner {
-    animation: glowPulse 2.5s ease-in-out infinite;
 }
 
 @keyframes floatUp {
@@ -834,9 +832,15 @@ ANIMATIONS — Hover effect for elements
 }
 
 @keyframes floatUpDown {
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(-8px); }
-    100% { transform: translateY(0); }
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .zoom-slow {
@@ -858,9 +862,15 @@ ANIMATIONS — Hover effect for elements
 }
 
 @keyframes zoomInOut {
-    0%   { transform: scale(1); }
-    50%  { transform: scale(1.03); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .zoom-in-once {
@@ -870,8 +880,12 @@ ANIMATIONS — Hover effect for elements
 }
 
 @keyframes slowZoomIn {
-    0%   { transform: scale(1); }
-    100% { transform: scale(1.05); }
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
 }
 
 /* ============================================================
