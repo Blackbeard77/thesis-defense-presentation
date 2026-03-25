@@ -7,39 +7,39 @@
    Change ONLY these variables to restyle the entire deck.
    ─────────────────────────────────────────────────────────── */
 :root {
-  /* Backgrounds */
-  --bg:          #0a0c10;
-  --surface:     #13161d;
-  --surface-2:   #1c2030;
-  --border:      #252c3a;
+    /* Backgrounds */
+    --bg: #0a0c10;
+    --surface: #13161d;
+    --surface-2: #1c2030;
+    --border: #252c3a;
 
-  /* SRH Brand */
-  --srh:         #D94E0E;   /* exact SRH orange */
-  --srh-glow:    rgba(217, 78, 14, 0.25);
-  --srh-dim:     rgba(217, 78, 14, 0.12);
+    /* SRH Brand */
+    --srh: #D94E0E; /* exact SRH orange */
+    --srh-glow: rgba(217, 78, 14, 0.25);
+    --srh-dim: rgba(217, 78, 14, 0.12);
 
-  /* Accent (secondary — blue) */
-  --accent:      #4f8ef7;
-  --accent-glow: rgba(79, 142, 247, 0.2);
-  --accent-dim:  rgba(79, 142, 247, 0.1);
+    /* Accent (secondary — blue) */
+    --accent: #4f8ef7;
+    --accent-glow: rgba(79, 142, 247, 0.2);
+    --accent-dim: rgba(79, 142, 247, 0.1);
 
-  /* Status colors */
-  --green:       #3dd68c;
-  --green-dim:   rgba(61, 214, 140, 0.12);
-  --yellow:      #f0c040;
-  --yellow-dim:  rgba(240, 192, 64, 0.12);
-  --red:         #e05c4b;
-  --red-dim:     rgba(224, 92, 75, 0.12);
+    /* Status colors */
+    --green: #3dd68c;
+    --green-dim: rgba(61, 214, 140, 0.12);
+    --yellow: #f0c040;
+    --yellow-dim: rgba(240, 192, 64, 0.12);
+    --red: #e05c4b;
+    --red-dim: rgba(224, 92, 75, 0.12);
 
-  /* Text */
-  --text:        #eceef4;
-  --text-soft:   #a8afc4;
-  --muted:       #5a6278;
+    /* Text */
+    --text: #eceef4;
+    --text-soft: #a8afc4;
+    --muted: #5a6278;
 
-  /* Typography */
-  --font-head:   'DM Serif Display', Georgia, serif;
-  --font-body:   'DM Sans', sans-serif;
-  --font-mono:   'DM Mono', monospace;
+    /* Typography */
+    --font-head: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
 }
 
 /* ── GOOGLE FONTS ───────────────────────────────────────── */
@@ -47,10 +47,10 @@
 
 /* ── GLOBAL REVEAL OVERRIDES ────────────────────────────── */
 .reveal {
-  font-family: var(--font-body);
-  color: var(--text);
-  background: var(--bg);
-  font-size: 36px;
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--bg);
+    font-size: 36px;
 }
 
 /* Override black theme's aggressive uppercase + huge sizing */
@@ -58,139 +58,154 @@
 .reveal h2,
 .reveal h3,
 .reveal h4 {
-  text-transform: none !important;
-  font-weight: 400;
-  letter-spacing: normal;
-  text-shadow: none !important;
-  word-wrap: break-word;
-  margin: 0 0 0.3em 0;
+    text-transform: none !important;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-shadow: none !important;
+    word-wrap: break-word;
+    margin: 0 0 0.3em 0;
 }
 
 .reveal .slides {
-  text-align: left;
+    text-align: left;
 }
 
 .reveal .slides section {
-  padding: 2rem 3rem 2rem 3rem;
-  box-sizing: border-box;
-  height: 100%;
+    padding: 2rem 3rem 2rem 3rem;
+    box-sizing: border-box;
+    height: 100%;
 }
 
 /* Remove default reveal shadows / borders */
 .reveal .slide-background-content {
-  background: var(--bg);
+    background: var(--bg);
 }
 
 /* ── TOP ACCENT BAR (every slide) ───────────────────────── */
 .reveal .slides section::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--srh), var(--accent));
-  z-index: 10;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--srh), var(--accent));
+    z-index: 10;
 }
 
 /* ── LOGO (top-right every slide) ───────────────────────── */
 .slide-logo {
-  position: absolute;
-  top: 14px;
-  right: 56px;
-  width: 56px;
-  opacity: 0.85;
-  z-index: 20;
+    position: absolute;
+    top: 14px;
+    right: 56px;
+    width: 56px;
+    opacity: 0.85;
+    z-index: 20;
 }
+
 .title-logo {
-  position: absolute;
-  top: 14px;
-  left: 24px;
-  width: 56px;
-  opacity: 0.85;
-  z-index: 20;
+    position: absolute;
+    width: 56px;
+    opacity: 0.85;
+    z-index: 20;
 }
 
 /* ── PROGRESS BAR ───────────────────────────────────────── */
 .reveal .progress {
-  background: var(--border);
-  height: 3px;
+    background: var(--border);
+    height: 3px;
 }
+
 .reveal .progress span {
-  background: var(--srh);
+    background: var(--srh);
 }
 
 /* ── SLIDE NUMBER ───────────────────────────────────────── */
 .reveal .slide-number {
-  font-family: var(--font-mono);
-  font-size: 0.38em;
-  color: var(--muted);
-  background: transparent;
-  bottom: 12px;
-  right: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.38em;
+    color: var(--muted);
+    background: transparent;
+    bottom: 12px;
+    right: 16px;
 }
 
 /* ============================================================
    TYPOGRAPHY
    ============================================================ */
 .reveal h1 {
-  font-family: var(--font-head);
-  font-size: 2.2em;
-  color: var(--text);
-  line-height: 1.1;
-  margin-bottom: 0.3em;
-  text-shadow: 0 0 40px var(--srh-glow);
+    font-family: var(--font-head);
+    font-size: 2.2em;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 0.3em;
+    text-shadow: 0 0 40px var(--srh-glow);
 }
 
 .reveal h2 {
-  font-family: var(--font-head);
-  font-size: 1.6em;
-  color: var(--text);
-  line-height: 1.2;
-  margin-bottom: 0.5em;
+    font-family: var(--font-head);
+    font-size: 1.6em;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 0.5em;
 }
 
 /* Section label above h2 (e.g. "Introduction") */
 .reveal h3 {
-  font-family: var(--font-mono);
-  font-size: 0.5em;
-  font-weight: 500;
-  color: var(--srh);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin-bottom: 0.2em;
+    font-family: var(--font-mono);
+    font-size: 0.5em;
+    font-weight: 500;
+    color: var(--srh);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.2em;
 }
 
 /* Sub-label / eyebrow */
 .reveal h4 {
-  font-family: var(--font-mono);
-  font-size: 0.42em;
-  color: var(--muted);
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 0.3em;
+    font-family: var(--font-mono);
+    font-size: 0.42em;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.3em;
 }
 
 .reveal p {
-  font-size: 0.68em;
-  line-height: 1.75;
-  color: var(--text-soft);
-  margin-bottom: 0.6em;
+    font-size: 0.68em;
+    line-height: 1.75;
+    color: var(--text-soft);
+    margin-bottom: 0.6em;
 }
 
-.reveal strong { color: var(--srh); }
-.reveal em     { color: var(--accent); font-style: normal; font-weight: 600; }
+.reveal strong {
+    color: var(--srh);
+}
+
+.reveal em {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 600;
+}
 
 /* ── LISTS ──────────────────────────────────────────────── */
 .reveal ul,
 .reveal ol {
-  font-size: 0.68em;
-  line-height: 2;
-  color: var(--text-soft);
-  margin-left: 1.2em;
+    font-size: 0.68em;
+    line-height: 2;
+    color: var(--text-soft);
+    margin-left: 1.2em;
 }
 
-.reveal ul li::marker { color: var(--srh); }
-.reveal ol li::marker { color: var(--accent); font-weight: 600; }
+.reveal ul li::marker {
+    color: var(--srh);
+}
+
+.reveal ol li::marker {
+    color: var(--accent);
+    font-weight: 600;
+}
 
 /* ============================================================
    LAYOUT UTILITIES
@@ -198,377 +213,435 @@
 
 /* Two columns — equal */
 .cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.8rem;
-  align-items: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.8rem;
+    align-items: start;
 }
 
 /* Two columns — wide left */
-.cols.wide   { grid-template-columns: 1.6fr 1fr; }
+.cols.wide {
+    grid-template-columns: 1.6fr 1fr;
+}
 
 /* Two columns — wide right */
-.cols.narrow { grid-template-columns: 1fr 1.6fr; }
+.cols.narrow {
+    grid-template-columns: 1fr 1.6fr;
+}
 
 /* Three columns */
 .cols3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.2rem;
 }
 
 /* ============================================================
    CARDS
    ============================================================ */
 .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.1rem 1.3rem;
-  font-size: 0.64em;
-  line-height: 1.65;
-  color: var(--text-soft);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    font-size: 0.64em;
+    line-height: 1.65;
+    color: var(--text-soft);
 }
 
-.card-orange { border-left: 3px solid var(--srh); }
-.card-blue   { border-left: 3px solid var(--accent); }
-.card-green  { border-left: 3px solid var(--green); }
-.card-red    { border-left: 3px solid var(--red); }
+.card-orange {
+    border-left: 3px solid var(--srh);
+}
+
+.card-blue {
+    border-left: 3px solid var(--accent);
+}
+
+.card-green {
+    border-left: 3px solid var(--green);
+}
+
+.card-red {
+    border-left: 3px solid var(--red);
+}
 
 /* Glowing card on hover (used for winner cards) */
 .card-winner {
-  border: 1px solid var(--srh);
-  box-shadow: 0 0 24px var(--srh-glow), inset 0 0 20px var(--srh-dim);
+    border: 1px solid var(--srh);
+    box-shadow: 0 0 24px var(--srh-glow), inset 0 0 20px var(--srh-dim);
 }
 
 /* ── CALLOUT BOX ────────────────────────────────────────── */
 .callout {
-  background: var(--accent-dim);
-  border: 1px solid rgba(79,142,247,.3);
-  border-radius: 8px;
-  padding: 0.9rem 1.2rem;
-  font-size: 0.64em;
-  color: #b8caee;
-  line-height: 1.65;
+    background: var(--accent-dim);
+    border: 1px solid rgba(79, 142, 247, .3);
+    border-radius: 8px;
+    padding: 0.9rem 1.2rem;
+    font-size: 0.64em;
+    color: #b8caee;
+    line-height: 1.65;
 }
-.callout strong { color: #7aabff; }
+
+.callout strong {
+    color: #7aabff;
+}
 
 /* Orange callout (for key findings) */
 .callout-orange {
-  background: var(--srh-dim);
-  border: 1px solid rgba(217,78,14,.35);
-  border-radius: 8px;
-  padding: 0.9rem 1.2rem;
-  font-size: 0.64em;
-  color: #e8b49a;
-  line-height: 1.65;
+    background: var(--srh-dim);
+    border: 1px solid rgba(217, 78, 14, .35);
+    border-radius: 8px;
+    padding: 0.9rem 1.2rem;
+    font-size: 0.64em;
+    color: #e8b49a;
+    line-height: 1.65;
 }
-.callout-orange strong { color: var(--srh); }
+
+.callout-orange strong {
+    color: var(--srh);
+}
 
 /* ── RESEARCH QUESTION BOX ──────────────────────────────── */
 .rq-box {
-  background: var(--surface);
-  border: 2px solid var(--srh);
-  border-radius: 10px;
-  padding: 1.3rem 1.7rem;
-  font-family: var(--font-head);
-  font-size: 0.75em;
-  color: var(--text);
-  line-height: 1.6;
-  margin-top: 0.8rem;
-  box-shadow: 0 0 30px var(--srh-glow);
+    background: var(--surface);
+    border: 2px solid var(--srh);
+    border-radius: 10px;
+    padding: 1.3rem 1.7rem;
+    font-family: var(--font-head);
+    font-size: 0.75em;
+    color: var(--text);
+    line-height: 1.6;
+    margin-top: 0.8rem;
+    box-shadow: 0 0 30px var(--srh-glow);
 }
 
 /* ── TAGS / BADGES ──────────────────────────────────────── */
 .tag {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.5em;
-  padding: 0.25em 0.75em;
-  border-radius: 4px;
-  margin-right: 0.4em;
-  margin-bottom: 0.4em;
-  letter-spacing: 0.07em;
-  background: var(--accent-dim);
-  color: var(--accent);
-  border: 1px solid rgba(79,142,247,.25);
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.5em;
+    padding: 0.25em 0.75em;
+    border-radius: 4px;
+    margin-right: 0.4em;
+    margin-bottom: 0.4em;
+    letter-spacing: 0.07em;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid rgba(79, 142, 247, .25);
 }
+
 .tag.orange {
-  background: var(--srh-dim);
-  color: var(--srh);
-  border-color: rgba(217,78,14,.3);
+    background: var(--srh-dim);
+    color: var(--srh);
+    border-color: rgba(217, 78, 14, .3);
 }
+
 .tag.green {
-  background: var(--green-dim);
-  color: var(--green);
-  border-color: rgba(61,214,140,.25);
+    background: var(--green-dim);
+    color: var(--green);
+    border-color: rgba(61, 214, 140, .25);
 }
+
 .tag.red {
-  background: var(--red-dim);
-  color: var(--red);
-  border-color: rgba(224,92,75,.25);
+    background: var(--red-dim);
+    color: var(--red);
+    border-color: rgba(224, 92, 75, .25);
 }
+
 .tag.yellow {
-  background: var(--yellow-dim);
-  color: var(--yellow);
-  border-color: rgba(240,192,64,.25);
+    background: var(--yellow-dim);
+    color: var(--yellow);
+    border-color: rgba(240, 192, 64, .25);
 }
 
 /* ── STAT / METRIC CARDS ────────────────────────────────── */
 .stat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 1rem;
-  margin-top: 0.8rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+    margin-top: 0.8rem;
 }
 
 .stat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem;
-  text-align: center;
-  transition: box-shadow 0.3s ease;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
 }
 
 .stat-card.winner {
-  border-color: var(--srh);
-  box-shadow: 0 0 20px var(--srh-glow);
+    border-color: var(--srh);
+    box-shadow: 0 0 20px var(--srh-glow);
 }
 
 .stat-card .stat-val {
-  font-family: var(--font-mono);
-  font-size: 1.3em;
-  color: var(--accent);
-  font-weight: 500;
-  display: block;
+    font-family: var(--font-mono);
+    font-size: 1.3em;
+    color: var(--accent);
+    font-weight: 500;
+    display: block;
 }
 
-.stat-card.winner .stat-val { color: var(--srh); }
+.stat-card.winner .stat-val {
+    color: var(--srh);
+}
 
 .stat-card .stat-label {
-  font-family: var(--font-mono);
-  font-size: 0.42em;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  display: block;
-  margin-top: 0.3em;
+    font-family: var(--font-mono);
+    font-size: 0.42em;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: 0.3em;
 }
 
 /* ── COMPARISON TABLE ───────────────────────────────────── */
 .compare-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.58em;
-  margin-top: 0.6rem;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.58em;
+    margin-top: 0.6rem;
 }
 
 .compare-table th {
-  background: var(--surface-2);
-  color: var(--srh);
-  font-family: var(--font-mono);
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  padding: 0.65em 1em;
-  border-bottom: 2px solid var(--border);
-  text-align: left;
+    background: var(--surface-2);
+    color: var(--srh);
+    font-family: var(--font-mono);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    padding: 0.65em 1em;
+    border-bottom: 2px solid var(--border);
+    text-align: left;
 }
 
 .compare-table td {
-  padding: 0.55em 1em;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-soft);
+    padding: 0.55em 1em;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-soft);
 }
 
 .compare-table tr:hover td {
-  background: rgba(255,255,255,.025);
+    background: rgba(255, 255, 255, .025);
 }
 
 /* Cell color classes */
-.compare-table .yes    { color: var(--green);  font-weight: 600; }
-.compare-table .no     { color: var(--red);    font-weight: 600; }
-.compare-table .mid    { color: var(--yellow); font-weight: 600; }
-.compare-table .winner-col { color: var(--srh); font-weight: 700; }
+.compare-table .yes {
+    color: var(--green);
+    font-weight: 600;
+}
+
+.compare-table .no {
+    color: var(--red);
+    font-weight: 600;
+}
+
+.compare-table .mid {
+    color: var(--yellow);
+    font-weight: 600;
+}
+
+.compare-table .winner-col {
+    color: var(--srh);
+    font-weight: 700;
+}
 
 /* ── ARCHITECTURE FLOW ──────────────────────────────────── */
 .arch-flow {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-top: 0.8rem;
-  font-size: 0.55em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+    font-size: 0.55em;
 }
 
 .arch-node {
-  background: var(--surface-2);
-  border: 1px solid var(--accent);
-  border-radius: 6px;
-  padding: 0.5em 1em;
-  color: var(--text);
-  font-family: var(--font-mono);
-  white-space: nowrap;
+    background: var(--surface-2);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 0.5em 1em;
+    color: var(--text);
+    font-family: var(--font-mono);
+    white-space: nowrap;
 }
 
-.arch-node.orange { border-color: var(--srh); }
+.arch-node.orange {
+    border-color: var(--srh);
+}
 
 .arch-arrow {
-  color: var(--muted);
-  font-size: 1.3em;
-  padding: 0 0.1em;
+    color: var(--muted);
+    font-size: 1.3em;
+    padding: 0 0.1em;
 }
 
 /* ── CODE BLOCKS ────────────────────────────────────────── */
 .reveal pre {
-  font-family: var(--font-mono);
-  font-size: 0.52em;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1em 1.2em;
-  box-shadow: none;
+    font-family: var(--font-mono);
+    font-size: 0.52em;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1em 1.2em;
+    box-shadow: none;
 }
 
-.reveal code { font-family: var(--font-mono); color: #8fbbf5; }
+.reveal code {
+    font-family: var(--font-mono);
+    color: #8fbbf5;
+}
 
 /* ============================================================
    CHAPTER DIVIDER SLIDE
    ============================================================ */
 .slide-chapter {
-  display: flex !important;
-  flex-direction: column;
-  justify-content: center !important;
-  align-items: flex-start !important;
-  min-height: 100%;
-  background: var(--surface) !important;
-  border-left: 4px solid var(--srh) !important;
-  position: relative;
-  overflow: hidden;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    min-height: 100%;
+    background: var(--surface) !important;
+    border-left: 4px solid var(--srh) !important;
+    position: relative;
+    overflow: hidden;
 }
 
 /* Decorative large number watermark */
 .slide-chapter::after {
-  content: attr(data-num);
-  position: absolute;
-  right: -0.1em;
-  bottom: -0.2em;
-  font-family: var(--font-head);
-  font-size: 10em;
-  color: rgba(217,78,14,.05);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
+    content: attr(data-num);
+    position: absolute;
+    right: -0.1em;
+    bottom: -0.2em;
+    font-family: var(--font-head);
+    font-size: 10em;
+    color: rgba(217, 78, 14, .05);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
 }
 
 .slide-chapter .chapter-num {
-  font-family: var(--font-mono);
-  font-size: 0.5em;
-  color: var(--srh);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  margin-bottom: 0.5em;
+    font-family: var(--font-mono);
+    font-size: 0.5em;
+    color: var(--srh);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
 }
 
 .slide-chapter h2 {
-  font-size: 2em;
-  margin: 0 0 0.4em 0;
-  text-shadow: 0 0 40px var(--srh-glow);
+    font-size: 2em;
+    margin: 0 0 0.4em 0;
+    text-shadow: 0 0 40px var(--srh-glow);
 }
 
 .slide-chapter .chapter-sub {
-  font-family: var(--font-mono);
-  font-size: 0.42em;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  margin-top: 0.4em;
+    font-family: var(--font-mono);
+    font-size: 0.42em;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-top: 0.4em;
 }
 
 /* ============================================================
    TITLE SLIDE
    ============================================================ */
 #title-slide {
-  display: flex !important;
-  flex-direction: column;
-  justify-content: center !important;
-  position: relative;
-  overflow: hidden;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    position: relative;
+    overflow: hidden;
 }
 
 /* Animated grid background */
 #title-slide::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-          linear-gradient(rgba(217,78,14,.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(217,78,14,.05) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: gridPan 20s linear infinite;
-  pointer-events: none;
-  z-index: 0;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(217, 78, 14, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217, 78, 14, .05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridPan 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
 }
 
 @keyframes gridPan {
-  from { background-position: 0 0; }
-  to   { background-position: 60px 60px; }
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 60px 60px;
+    }
 }
 
-#title-slide > * { position: relative; z-index: 1; }
+#title-slide > * {
+    position: relative;
+    z-index: 1;
+}
 
 #title-slide .thesis-label {
-  font-family: var(--font-mono);
-  font-size: 0.42em;
-  color: var(--srh);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 0.8em;
+    font-family: var(--font-mono);
+    font-size: 0.42em;
+    color: var(--srh);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.8em;
 }
 
 #title-slide h1 {
-  font-size: 1.55em;
-  line-height: 1.25;
-  max-width: 85%;
+    font-size: 1.55em;
+    line-height: 1.25;
+    max-width: 85%;
 }
 
 #title-slide .title-divider {
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--srh), var(--accent));
-  margin: 1rem 0;
-  border-radius: 2px;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--srh), var(--accent));
+    margin: 1rem 0;
+    border-radius: 2px;
 }
 
 #title-slide .meta-grid {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.3em 1.2em;
-  font-family: var(--font-mono);
-  font-size: 0.4em;
-  color: var(--muted);
-  margin-top: 0.5em;
-  line-height: 1.9;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.3em 1.2em;
+    font-family: var(--font-mono);
+    font-size: 0.5em;
+    color: var(--muted);
+    margin-top: 1em;
+    line-height: 2;
 }
 
-#title-slide .meta-grid .meta-key  { color: var(--muted); }
-#title-slide .meta-grid .meta-val  { color: var(--text-soft); }
+#title-slide .meta-grid .meta-key {
+    color: var(--muted);
+}
+
+#title-slide .meta-grid .meta-val {
+    color: var(--text-soft);
+}
 
 /* ============================================================
    FOOTER LINE
    ============================================================ */
 .slide-footer {
-  position: absolute;
-  bottom: 1rem;
-  left: 3rem;
-  right: 5rem;
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.35em;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-  border-top: 1px solid var(--border);
-  padding-top: 0.5em;
+    position: absolute;
+    bottom: 1rem;
+    left: 3rem;
+    right: 5rem;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.35em;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    border-top: 1px solid var(--border);
+    padding-top: 0.5em;
 }
 
 /* ============================================================
@@ -585,94 +658,104 @@
    ============================================================ */
 
 .reveal .fragment.fade-up {
-  transform: translateY(16px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .reveal .fragment.fade-up.visible {
-  transform: translateY(0);
+    transform: translateY(0);
 }
 
 /* Custom fragment: highlight SRH orange */
-.reveal .fragment.highlight-srh.visible { color: var(--srh) !important; }
+.reveal .fragment.highlight-srh.visible {
+    color: var(--srh) !important;
+}
 
 /* ============================================================
    ANIMATED BAR CHART (used in Results slides)
    ============================================================ */
 .bar-chart {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  margin-top: 0.8rem;
-  font-size: 0.6em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin-top: 0.8rem;
+    font-size: 0.6em;
 }
 
 .bar-row {
-  display: grid;
-  grid-template-columns: 130px 1fr 60px;
-  align-items: center;
-  gap: 0.8rem;
+    display: grid;
+    grid-template-columns: 130px 1fr 60px;
+    align-items: center;
+    gap: 0.8rem;
 }
 
 .bar-label {
-  font-family: var(--font-mono);
-  color: var(--text-soft);
-  font-size: 0.9em;
-  text-align: right;
+    font-family: var(--font-mono);
+    color: var(--text-soft);
+    font-size: 0.9em;
+    text-align: right;
 }
 
 .bar-track {
-  background: var(--surface-2);
-  border-radius: 4px;
-  height: 22px;
-  overflow: hidden;
-  border: 1px solid var(--border);
+    background: var(--surface-2);
+    border-radius: 4px;
+    height: 22px;
+    overflow: hidden;
+    border: 1px solid var(--border);
 }
 
 .bar-fill {
-  height: 100%;
-  border-radius: 4px;
-  width: 0%;                       /* starts at 0, JS animates it */
-  transition: width 1.2s cubic-bezier(.4,0,.2,1);
+    height: 100%;
+    border-radius: 4px;
+    width: 0%; /* starts at 0, JS animates it */
+    transition: width 1.2s cubic-bezier(.4, 0, .2, 1);
 }
 
-.bar-fill.dt    { background: linear-gradient(90deg, #3a4a6a, #4f6fb0); }
-.bar-fill.local { background: linear-gradient(90deg, var(--srh), #f07040); }
-.bar-fill.cloud { background: linear-gradient(90deg, #2a4a3a, #3db070); }
+.bar-fill.dt {
+    background: linear-gradient(90deg, #3a4a6a, #4f6fb0);
+}
+
+.bar-fill.local {
+    background: linear-gradient(90deg, var(--srh), #f07040);
+}
+
+.bar-fill.cloud {
+    background: linear-gradient(90deg, #2a4a3a, #3db070);
+}
 
 .bar-val {
-  font-family: var(--font-mono);
-  font-size: 0.85em;
-  color: var(--text-soft);
-  text-align: left;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--text-soft);
+    text-align: left;
 }
 
 /* ============================================================
    Q&A SLIDE
    ============================================================ */
 .slide-qa {
-  display: flex !important;
-  flex-direction: column;
-  justify-content: center !important;
-  align-items: center !important;
-  text-align: center !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
 }
 
 .slide-qa h2 {
-  font-size: 3em;
-  background: linear-gradient(135deg, var(--srh), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0;
+    font-size: 3em;
+    background: linear-gradient(135deg, var(--srh), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
 }
 
 .slide-qa .qa-sub {
-  font-family: var(--font-mono);
-  font-size: 0.42em;
-  color: var(--muted);
-  letter-spacing: 0.15em;
-  margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.42em;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    margin-top: 1rem;
 }
 
 /* ============================================================
@@ -681,26 +764,43 @@
 
 /* Glow pulse on winner stat card */
 @keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 10px var(--srh-glow); }
-  50%       { box-shadow: 0 0 30px var(--srh-glow), 0 0 60px var(--srh-dim); }
+    0%, 100% {
+        box-shadow: 0 0 10px var(--srh-glow);
+    }
+    50% {
+        box-shadow: 0 0 30px var(--srh-glow), 0 0 60px var(--srh-dim);
+    }
 }
 
-.stat-card.winner { animation: glowPulse 2.5s ease-in-out infinite; }
+.stat-card.winner {
+    animation: glowPulse 2.5s ease-in-out infinite;
+}
 
 /* Subtle float for rq-box */
 @keyframes floatUp {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-4px); }
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
 }
 
-.rq-box { animation: floatUp 4s ease-in-out infinite; }
+.rq-box {
+    animation: floatUp 4s ease-in-out infinite;
+}
 
 /* ============================================================
    RESPONSIVE — smaller screens
    ============================================================ */
 @media (max-width: 900px) {
-  .cols, .cols3 { grid-template-columns: 1fr; }
-  .bar-row { grid-template-columns: 80px 1fr 50px; }
+    .cols, .cols3 {
+        grid-template-columns: 1fr;
+    }
+
+    .bar-row {
+        grid-template-columns: 80px 1fr 50px;
+    }
 }
 
 /* ============================================================
@@ -708,77 +808,93 @@
    ============================================================ */
 
 .hover-float {
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .hover-float:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
 }
 
 /*Another Hover Effect*/
 .float-slow {
-  position: relative;
-  animation: floatUpDown 4s ease-in-out infinite;
-  /* drop shadow */
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    position: relative;
+    animation: floatUpDown 4s ease-in-out infinite;
+    /* drop shadow */
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
 }
 
 /* subtle shadow on the “ground” */
 .float-slow::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -18px;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 10px;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 70%);
-  z-index: -1;
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 10px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: -1;
 }
 
 @keyframes floatUpDown {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-8px); }
-  100% { transform: translateY(0); }
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 /*Slow zoom in and out*/
 .zoom-slow {
-  position: relative;
-  animation: zoomInOut 5s ease-in-out infinite;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    position: relative;
+    animation: zoomInOut 5s ease-in-out infinite;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
 }
 
 .zoom-slow::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -18px;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 10px;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 70%);
-  z-index: -1;
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 10px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: -1;
 }
 
 @keyframes zoomInOut {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.03); }
-  100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .zoom-in-once {
-  animation: slowZoomIn 4s ease-out 1 forwards;
-  /* optional: shadow */
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
-  border-radius: 8px;
+    animation: slowZoomIn 4s ease-out 1 forwards;
+    /* optional: shadow */
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
 }
 
 @keyframes slowZoomIn {
-  0%   { transform: scale(1); }
-  100% { transform: scale(1.05); }
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
 }
 
 
