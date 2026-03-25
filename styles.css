@@ -1,7 +1,7 @@
 /* ============================================================
-   THESIS DEFENSE — STYLES.CSS
-   SRH University · Ashraf Lehawany · 2026
-   ============================================================ */
+THESIS DEFENSE — STYLES.CSS
+SRH University · Ashraf Lehawany · 2026
+============================================================ */
 
 /* ── DESIGN TOKENS ──────────────────────────────────────────
    Change ONLY these variables to restyle the entire deck.
@@ -42,6 +42,17 @@
     --font-mono: 'DM Mono', monospace;
 }
 
+/* Optional font-size tokens for consistency */
+:root {
+    --fs-xxs: 0.35em;
+    --fs-xs:  0.42em;
+    --fs-sm:  0.5em;
+    --fs-md:  0.68em;
+    --fs-lg:  0.8em;
+    --fs-xl:  1.8em;
+    --fs-xxl: 2.2em;
+}
+
 /* ── GOOGLE FONTS ───────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
 
@@ -50,7 +61,7 @@
     font-family: var(--font-body);
     color: var(--text);
     background: var(--bg);
-    font-size: 36px;
+    font-size: 42px;
 }
 
 /* Override black theme's aggressive uppercase + huge sizing */
@@ -71,7 +82,7 @@
 }
 
 .reveal .slides section {
-    padding: 2rem 3rem 2rem 3rem;
+    padding: 2rem 2rem 1rem 1rem;
     box-sizing: border-box;
     height: 100%;
 }
@@ -131,11 +142,11 @@
 }
 
 /* ============================================================
-   TYPOGRAPHY
-   ============================================================ */
+TYPOGRAPHY
+============================================================ */
 .reveal h1 {
     font-family: var(--font-head);
-    font-size: 2.2em;
+    font-size: var(--fs-xxl);
     color: var(--text);
     line-height: 1.1;
     margin-bottom: 0.3em;
@@ -144,7 +155,7 @@
 
 .reveal h2 {
     font-family: var(--font-head);
-    font-size: 1.6em;
+    font-size: var(--fs-xl);
     color: var(--text);
     line-height: 1.2;
     margin-bottom: 0.5em;
@@ -164,7 +175,7 @@
 /* Sub-label / eyebrow */
 .reveal h4 {
     font-family: var(--font-mono);
-    font-size: 0.42em;
+    font-size: var(--fs-xs);
     color: var(--muted);
     font-weight: 400;
     letter-spacing: 0.1em;
@@ -173,7 +184,7 @@
 }
 
 .reveal p {
-    font-size: 0.68em;
+    font-size: var(--fs-md);
     line-height: 1.75;
     color: var(--text-soft);
     margin-bottom: 0.6em;
@@ -192,7 +203,7 @@
 /* ── LISTS ──────────────────────────────────────────────── */
 .reveal ul,
 .reveal ol {
-    font-size: 0.68em;
+    font-size: var(--fs-md);
     line-height: 2;
     color: var(--text-soft);
     margin-left: 1.2em;
@@ -208,8 +219,8 @@
 }
 
 /* ============================================================
-   LAYOUT UTILITIES
-   ============================================================ */
+LAYOUT UTILITIES
+============================================================ */
 
 /* Two columns — equal */
 .cols {
@@ -237,14 +248,14 @@
 }
 
 /* ============================================================
-   CARDS
-   ============================================================ */
+CARDS
+============================================================ */
 .card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 1.1rem 1.3rem;
-    font-size: 0.64em;
+    font-size: var(--fs-md);
     line-height: 1.65;
     color: var(--text-soft);
 }
@@ -319,7 +330,7 @@
 .tag {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.5em;
+    font-size: 0.64em;
     padding: 0.25em 0.75em;
     border-radius: 4px;
     margin-right: 0.4em;
@@ -390,7 +401,7 @@
 
 .stat-card .stat-label {
     font-family: var(--font-mono);
-    font-size: 0.42em;
+    font-size: var(--fs-xs);
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -402,7 +413,7 @@
 .compare-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.58em;
+    font-size: var(--fs-md);
     margin-top: 0.6rem;
 }
 
@@ -495,8 +506,8 @@
 }
 
 /* ============================================================
-   CHAPTER DIVIDER SLIDE
-   ============================================================ */
+CHAPTER DIVIDER SLIDE
+============================================================ */
 .slide-chapter {
     display: flex !important;
     flex-direction: column;
@@ -533,22 +544,22 @@
 }
 
 .slide-chapter h2 {
-    font-size: 2em;
+    font-size: 1.9em;
     margin: 0 0 0.4em 0;
     text-shadow: 0 0 40px var(--srh-glow);
 }
 
 .slide-chapter .chapter-sub {
     font-family: var(--font-mono);
-    font-size: 0.42em;
+    font-size: var(--fs-xs);
     color: var(--muted);
     letter-spacing: 0.08em;
     margin-top: 0.4em;
 }
 
 /* ============================================================
-   TITLE SLIDE
-   ============================================================ */
+TITLE SLIDE
+============================================================ */
 #title-slide {
     display: flex !important;
     flex-direction: column;
@@ -562,8 +573,9 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(rgba(217, 78, 14, .05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(217, 78, 14, .05) 1px, transparent 1px);
+    background-image:
+            linear-gradient(rgba(217, 78, 14, .05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(217, 78, 14, .05) 1px, transparent 1px);
     background-size: 60px 60px;
     animation: gridPan 20s linear infinite;
     pointer-events: none;
@@ -571,12 +583,8 @@
 }
 
 @keyframes gridPan {
-    from {
-        background-position: 0 0;
-    }
-    to {
-        background-position: 60px 60px;
-    }
+    from { background-position: 0 0; }
+    to   { background-position: 60px 60px; }
 }
 
 #title-slide > * {
@@ -586,7 +594,7 @@
 
 #title-slide .thesis-label {
     font-family: var(--font-mono);
-    font-size: 0.42em;
+    font-size: var(--fs-xs);
     color: var(--srh);
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -627,8 +635,8 @@
 }
 
 /* ============================================================
-   FOOTER LINE
-   ============================================================ */
+FOOTER LINE
+============================================================ */
 .slide-footer {
     position: absolute;
     bottom: 1rem;
@@ -637,7 +645,7 @@
     display: flex;
     justify-content: space-between;
     font-family: var(--font-mono);
-    font-size: 0.35em;
+    font-size: var(--fs-xxs);
     color: var(--muted);
     letter-spacing: 0.06em;
     border-top: 1px solid var(--border);
@@ -645,17 +653,8 @@
 }
 
 /* ============================================================
-   FRAGMENT ANIMATIONS
-   (add class="fragment X" to any element)
-
-   Available:
-     fade-up       — slides up while fading in      ← default
-     fade-in       — just fades in
-     highlight-srh — turns text SRH orange
-     highlight-blue — turns text accent blue
-     grow          — scales up from 80%
-     strike        — strikethrough
-   ============================================================ */
+FRAGMENT ANIMATIONS
+============================================================ */
 
 .reveal .fragment.fade-up {
     transform: translateY(16px);
@@ -672,8 +671,8 @@
 }
 
 /* ============================================================
-   ANIMATED BAR CHART (used in Results slides)
-   ============================================================ */
+ANIMATED BAR CHART (used in Results slides)
+============================================================ */
 .bar-chart {
     display: flex;
     flex-direction: column;
@@ -707,7 +706,7 @@
 .bar-fill {
     height: 100%;
     border-radius: 4px;
-    width: 0%; /* starts at 0, JS animates it */
+    width: 0%;
     transition: width 1.2s cubic-bezier(.4, 0, .2, 1);
 }
 
@@ -731,8 +730,8 @@
 }
 
 /* ============================================================
-   Q&A SLIDE
-   ============================================================ */
+Q&A SLIDE
+============================================================ */
 .slide-qa {
     display: flex !important;
     flex-direction: column;
@@ -742,7 +741,7 @@
 }
 
 .slide-qa h2 {
-    font-size: 3em;
+    font-size: 2.4em;
     background: linear-gradient(135deg, var(--srh), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -752,17 +751,16 @@
 
 .slide-qa .qa-sub {
     font-family: var(--font-mono);
-    font-size: 0.42em;
+    font-size: var(--fs-xs);
     color: var(--muted);
     letter-spacing: 0.15em;
     margin-top: 1rem;
 }
 
 /* ============================================================
-   ANIMATIONS — entrance effects for elements
-   ============================================================ */
+ANIMATIONS — entrance effects for elements
+============================================================ */
 
-/* Glow pulse on winner stat card */
 @keyframes glowPulse {
     0%, 100% {
         box-shadow: 0 0 10px var(--srh-glow);
@@ -776,7 +774,6 @@
     animation: glowPulse 2.5s ease-in-out infinite;
 }
 
-/* Subtle float for rq-box */
 @keyframes floatUp {
     0%, 100% {
         transform: translateY(0);
@@ -791,10 +788,11 @@
 }
 
 /* ============================================================
-   RESPONSIVE — smaller screens
-   ============================================================ */
+RESPONSIVE — smaller screens
+============================================================ */
 @media (max-width: 900px) {
-    .cols, .cols3 {
+    .cols,
+    .cols3 {
         grid-template-columns: 1fr;
     }
 
@@ -804,8 +802,8 @@
 }
 
 /* ============================================================
-   ANIMATIONS — Hover effect for elements
-   ============================================================ */
+ANIMATIONS — Hover effect for elements
+============================================================ */
 
 .hover-float {
     transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -817,15 +815,12 @@
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
 }
 
-/*Another Hover Effect*/
 .float-slow {
     position: relative;
     animation: floatUpDown 4s ease-in-out infinite;
-    /* drop shadow */
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
 }
 
-/* subtle shadow on the “ground” */
 .float-slow::after {
     content: '';
     position: absolute;
@@ -839,18 +834,11 @@
 }
 
 @keyframes floatUpDown {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-    100% {
-        transform: translateY(0);
-    }
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
 }
 
-/*Slow zoom in and out*/
 .zoom-slow {
     position: relative;
     animation: zoomInOut 5s ease-in-out infinite;
@@ -870,31 +858,260 @@
 }
 
 @keyframes zoomInOut {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.03);
-    }
-    100% {
-        transform: scale(1);
-    }
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.03); }
+    100% { transform: scale(1); }
 }
 
 .zoom-in-once {
     animation: slowZoomIn 4s ease-out 1 forwards;
-    /* optional: shadow */
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
     border-radius: 8px;
 }
 
 @keyframes slowZoomIn {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.05);
-    }
+    0%   { transform: scale(1); }
+    100% { transform: scale(1.05); }
 }
 
+/* ============================================================
+DIALOG TREE SLIDE — POLISHED TREE VERSION
+============================================================ */
 
+.dialog-tree-slide {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dialog-tree-slide h3,
+.dialog-tree-slide h2 {
+    text-align: left;
+}
+
+.dialog-tree-layout {
+    margin-top: 0.7rem;
+    align-items: center;
+    grid-template-columns: 1.5fr 0.9fr;
+    gap: 2rem;
+    min-height: 68%;
+}
+
+.dialog-tree-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dialog-tree-intro {
+    font-size: var(--fs-lg);
+    line-height: 1.65;
+    max-width: 100%;
+    margin-bottom: 1rem;
+}
+
+.dialog-tree-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.35rem 1rem 1.1rem;
+    min-height: 460px;
+    justify-content: center;
+}
+
+/* lines */
+.tree-line {
+    background: linear-gradient(
+            180deg,
+            rgba(79, 142, 247, 0.85),
+            rgba(79, 142, 247, 0.45)
+    );
+    border-radius: 999px;
+}
+
+.tree-line.vertical {
+    width: 2px;
+    height: 24px;
+    margin: 0.35rem 0 0.35rem;
+}
+
+.tree-line.horizontal {
+    height: 2px;
+    width: 72%;
+    margin-bottom: 0.2rem;
+}
+
+.tree-line.stem {
+    width: 2px;
+    height: 18px;
+    margin: 0 auto;
+}
+
+.tree-line.stem.down {
+    margin-top: 0.15rem;
+    margin-bottom: 0.2rem;
+}
+
+.tree-line.unlock-stem {
+    height: 16px;
+    margin-top: 0.35rem;
+    background: linear-gradient(
+            180deg,
+            rgba(217, 78, 14, 0.9),
+            rgba(217, 78, 14, 0.45)
+    );
+}
+
+/* branch layout */
+.tree-choice-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 0.9rem;
+    width: 100%;
+    align-items: start;
+}
+
+.tree-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* nodes and choices */
+.tree-choice {
+    min-width: 160px;
+    text-align: center;
+    background: rgba(79, 142, 247, 0.08);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 0.55rem 0.75rem;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.56em;
+    white-space: nowrap;
+    box-shadow: 0 0 0 1px rgba(79, 142, 247, 0.08) inset;
+}
+
+.tree-choice.unlock-choice {
+    min-width: 150px;
+    border-color: var(--srh);
+    background: rgba(217, 78, 14, 0.08);
+}
+
+.tree-node {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.22rem;
+    min-height: 94px;
+    width: 100%;
+    max-width: 240px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.7rem 0.8rem;
+    text-align: center;
+}
+
+.npc-node {
+    border-color: var(--accent);
+    box-shadow: inset 0 0 18px rgba(79, 142, 247, 0.06);
+}
+
+.start-node {
+    max-width: 460px;
+    border-color: var(--srh);
+    box-shadow: inset 0 0 20px rgba(217, 78, 14, 0.08);
+}
+
+.highlight-node {
+    border-color: var(--srh);
+    box-shadow: inset 0 0 20px rgba(217, 78, 14, 0.08);
+}
+
+.small-node {
+    max-width: 220px;
+    min-height: 86px;
+}
+
+.node-label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--srh);
+}
+
+.node-text {
+    font-size: var(--fs-sm);
+    line-height: 1.45;
+    color: var(--text);
+}
+
+/* unlock area */
+.unlock-label {
+    margin: 0.15rem 0 0.35rem;
+    font-size: 0.45em;
+    font-family: var(--font-mono);
+    color: var(--text-soft);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.unlock-row {
+    flex-direction: row;
+    display: flex;
+    gap: 0.65rem;
+    justify-content: center;
+    align-items: start;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.unlock-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* side cards */
+.dialog-tree-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.9rem;
+}
+
+.dialog-card {
+    font-size: 0.78em;
+}
+
+.dialog-card ul {
+    margin: 0;
+    padding-left: 1.1em;
+    font-size: 0.92em;
+    line-height: 1.75;
+}
+
+/* Typography helpers for readable body-heavy slides */
+.text-large {
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.text-medium {
+    font-size: 0.85em;
+    line-height: 1.6;
+}
+
+.heading-strong {
+    font-size: 0.85em;
+}
+
+.table-large {
+    font-size: 0.85em;
+}

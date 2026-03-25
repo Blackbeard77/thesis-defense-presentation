@@ -9,8 +9,7 @@
         <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
         <div class="chapter-num">02 / Background</div>
         <h2>Background</h2>
-        <p class="chapter-sub">NPC Dialog Systems &nbsp;·&nbsp; Dialog Trees &nbsp;·&nbsp; Local LLM &nbsp;·&nbsp; Cloud
-            LLM</p>
+        <p class="chapter-sub">NPC Dialog Systems &nbsp;·&nbsp; Dialog Trees &nbsp;·&nbsp; Local LLM &nbsp;·&nbsp; Cloud LLM</p>
     </section>
 
 
@@ -22,15 +21,14 @@
 
         <div class="cols wide">
             <div>
-                <p>
+                <p class="text-large">
                     NPC dialog systems mediate structured conversations between
                     players and virtual characters — using predefined trees,
                     state machines, or rule-based logic to control
                     <strong>what each character says and when</strong>.
                 </p>
-                <ul>
-                    <li class="fragment fade-up">Early approaches relied on <em>hand-crafted grammars</em> — labor
-                        intensive and hard to scale
+                <ul class="text-medium">
+                    <li class="fragment fade-up">Early approaches relied on <em>hand-crafted grammars</em> — labor-intensive and hard to scale
                     </li>
                     <li class="fragment fade-up">Believability depends on the <strong>cognitive gap</strong> between
                         expected and perceived NPC behavior
@@ -38,17 +36,17 @@
                     <li class="fragment fade-up">Dialog must align with <strong>plot, genre, NPC identity</strong> and
                         player actions
                     </li>
-                    <li class="fragment fade-up">Modern ML techniques make <em>automated NPC dialog generation</em>
-                        increasingly feasible
+                    <li class="fragment fade-up">Modern Machine Learning (ML) techniques make <em>automated NPC dialog
+                        generation</em> increasingly feasible
                     </li>
                 </ul>
             </div>
 
             <div class="fragment fade-up">
                 <div class="card card-orange">
-                    <strong style="font-size:0.85em;">Feature Characterization Schema</strong>
+                    <strong class="heading-strong">Feature Characterization Schema</strong>
                     <br><br>
-                    <table class="compare-table" style="font-size:0.85em;">
+                    <table class="compare-table table-large">
                         <tbody>
                         <tr>
                             <td style="color:var(--srh);">World</td>
@@ -72,7 +70,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <p style="margin-top:0.6rem; font-size:0.8em; color:var(--muted);">
+                    <p class="text-medium" style="margin-top:0.6rem; color:var(--muted);">
                         Ilya Sokolov — NPC used in this thesis
                     </p>
                 </div>
@@ -89,53 +87,102 @@
     <!-- 3.2 ── Dialog Trees -->
     <section>
         <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
+
         <h3>Background</h3>
         <h2>Dialog Trees</h2>
 
-        <div class="cols">
-            <div>
-                <p>
+        <div class="cols wide dialog-tree-layout">
+            <div class="dialog-tree-main">
+                <p class="dialog-tree-intro text-large">
                     Dialog trees represent a <strong>finite state machine</strong> —
-                    nodes hold NPC responses, edges represent player choices.
-                    Every path is <em>pre-authored</em> and deterministic.
+                    nodes contain <strong>NPC responses</strong>, while edges represent
+                    <em>player choices</em>. Every conversation path is pre-authored and deterministic.
                 </p>
 
-                <!-- Visual flow diagram of a dialog tree -->
-                <div class="arch-flow fragment fade-up"
-                     style="flex-direction:column; align-items:flex-start; gap:0.3rem;">
-                    <div class="arch-node orange">Conversation Start</div>
-                    <div class="arch-arrow" style="margin-left:1rem;">↓</div>
-                    <div style="display:flex; gap:0.5rem;" class="fragment fade-up">
-                        <div class="arch-node">Hi</div>
-                        <div class="arch-node">Who are you?</div>
-                        <div class="arch-node">Where is everybody?</div>
+                <div class="dialog-tree-visual fragment fade-up">
+                    <div class="tree-node npc-node start-node">
+                        <span class="node-label">NPC</span>
+                        <span class="node-text">"Welcome, stranger. What do you want to know?"</span>
                     </div>
-                    <div class="arch-arrow" style="margin-left:1rem;">↓ (unlocks)</div>
-                    <div style="display:flex; gap:0.5rem;" class="fragment fade-up">
-                        <div class="arch-node orange">Taken by who?</div>
-                        <div class="arch-node orange">How do I survive?</div>
+
+                    <div class="tree-line vertical"></div>
+                    <div class="tree-line horizontal top-branch"></div>
+
+                    <div class="tree-choice-row fragment fade-up">
+                        <div class="tree-branch">
+                            <div class="tree-line stem"></div>
+                            <div class="tree-choice">Hi</div>
+                            <div class="tree-line stem down"></div>
+                            <div class="tree-node npc-node">
+                                <span class="node-label">NPC</span>
+                                <span class="node-text">"Hello."</span>
+                            </div>
+                        </div>
+
+                        <div class="tree-branch">
+                            <div class="tree-line stem"></div>
+                            <div class="tree-choice">Who are you?</div>
+                            <div class="tree-line stem down"></div>
+                            <div class="tree-node npc-node">
+                                <span class="node-label">NPC</span>
+                                <span class="node-text">"I am Ilya Sokolov, the town watchman."</span>
+                            </div>
+                        </div>
+
+                        <div class="tree-branch">
+                            <div class="tree-line stem"></div>
+                            <div class="tree-choice">Where is everybody?</div>
+                            <div class="tree-line stem down"></div>
+                            <div class="tree-node npc-node highlight-node">
+                                <span class="node-label">NPC</span>
+                                <span class="node-text">"Gone. Taken during the night."</span>
+                            </div>
+
+                            <div class="tree-line stem unlock-stem"></div>
+                            <div class="unlock-label">unlocks</div>
+
+                            <div class="unlock-row">
+                                <div class="unlock-branch">
+                                    <div class="tree-choice unlock-choice">Taken by who?</div>
+                                    <div class="tree-line stem down"></div>
+                                    <div class="tree-node npc-node small-node">
+                                        <span class="node-label">NPC</span>
+                                        <span class="node-text">"We do not say their name aloud."</span>
+                                    </div>
+                                </div>
+
+                                <div class="unlock-branch">
+                                    <div class="tree-choice unlock-choice">How do I survive?</div>
+                                    <div class="tree-line stem down"></div>
+                                    <div class="tree-node npc-node small-node">
+                                        <span class="node-label">NPC</span>
+                                        <span class="node-text">"Stay inside after sunset. Bolt the door."</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div>
-                <div class="card card-green fragment fade-up">
-                    <strong style="color:var(--green);">✓ Strengths</strong><br><br>
-                    <ul style="margin:0; padding-left:1em; font-size:0.85em;">
+            <div class="dialog-tree-side">
+                <div class="card card-green fragment fade-up dialog-card">
+                    <strong style="color:var(--green);" class="heading-strong">✓ Strengths</strong><br><br>
+                    <ul class="text-medium" style="margin:0; padding-left:1em;">
                         <li>Full narrative control</li>
                         <li>Near-zero runtime cost</li>
-                        <li>Easy to test &amp; validate</li>
+                        <li>Easy to test and validate</li>
                         <li>No external dependencies</li>
                     </ul>
                 </div>
 
-                <div class="card card-red fragment fade-up" style="margin-top:0.7rem;">
-                    <strong style="color:var(--red);">✗ Limitations</strong><br><br>
-                    <ul style="margin:0; padding-left:1em; font-size:0.85em;">
-                        <li>Rigid — no improvisation</li>
-                        <li>Authoring effort grows <strong>exponentially</strong></li>
-                        <li>Every branch must be manually written</li>
-                        <li>Not scalable for large games</li>
+                <div class="card card-red fragment fade-up dialog-card">
+                    <strong style="color:var(--red);" class="heading-strong">✗ Limitations</strong><br><br>
+                    <ul class="text-medium" style="margin:0; padding-left:1em;">
+                        <li>Rigid with no improvisation</li>
+                        <li>Authoring effort grows rapidly</li>
+                        <li>Every branch must be written manually</li>
+                        <li>Poor scalability for large dialogue spaces</li>
                     </ul>
                 </div>
             </div>
@@ -156,7 +203,7 @@
 
         <div class="cols">
             <div>
-                <p>
+                <p class="text-large">
                     LLMs are <strong>transformer-based neural networks</strong> trained on
                     massive text corpora — they generate responses
                     <em>probabilistically</em> at runtime based on learned
@@ -177,15 +224,17 @@
 
             <div>
                 <div class="callout fragment fade-up">
-                    <strong>Key difference from dialog trees</strong><br><br>
-                    Dialog trees produce <em>identical</em> output for identical input.
-                    LLMs sample from a probability distribution —
-                    same prompt can yield <strong>different responses</strong> each time.
+                    <strong class="heading-strong">Key difference from dialog trees</strong><br><br>
+                    <p class="text-medium" style="margin:0;">
+                        Dialog trees produce <em>identical</em> output for identical input.
+                        LLMs sample from a probability distribution —
+                        same prompt can yield <strong>different responses</strong> each time.
+                    </p>
                 </div>
 
                 <div class="card card-red fragment fade-up" style="margin-top:0.7rem;">
-                    <strong style="color:var(--red);">⚠ Challenges</strong><br><br>
-                    <ul style="margin:0; padding-left:1em; font-size:0.85em;">
+                    <strong style="color:var(--red);" class="heading-strong">⚠ Challenges</strong><br><br>
+                    <ul class="text-medium" style="margin:0; padding-left:1em;">
                         <li><strong>Hallucinations</strong> — fluent but wrong outputs</li>
                         <li>Non-determinism complicates testing</li>
                         <li>Requires prompt engineering for consistency</li>
@@ -202,13 +251,13 @@
     </section>
 
 
-    <!-- 3.4 ── Local LLM vs Cloud LLM -->
+    <!-- 3.4 ── Dialog Tree vs Local LLM vs Cloud LLM -->
     <section>
         <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
         <h3>Background</h3>
         <h2>Dialog Tree vs Local LLM vs Cloud LLM</h2>
 
-        <table class="compare-table">
+        <table class="compare-table table-large">
             <thead>
             <tr>
                 <th>Property</th>
