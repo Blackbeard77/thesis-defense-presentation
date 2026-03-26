@@ -101,66 +101,61 @@
                     <em>player choices</em>. Every conversation path is pre-authored and deterministic.
                 </p>
                 <div class="tree-scale-wrap">
-                    <div class="dialog-tree-visual fragment fade-up">
-                        <div class="tree-node npc-node start-node">
-                            <span class="node-label">NPC</span>
-                            <span class="node-text">"Welcome, stranger. What do you want to know?"</span>
+                    <div class="tree-root">
+                        <div class="tree-node start-node">
+                            <div class="node-label">NPC</div>
+                            <div class="node-text">"Welcome, stranger. What do you want to know?"</div>
                         </div>
 
-                        <div class="tree-line vertical"></div>
-                        <div class="tree-line horizontal top-branch"></div>
+                        <div class="tree-top-line"></div>
 
-                        <div class="tree-choice-row fragment fade-up">
+                        <div class="tree-choices-row">
                             <div class="tree-branch">
-                                <div class="tree-line stem"></div>
                                 <div class="tree-choice">Hi</div>
-                                <div class="tree-line stem down"></div>
-                                <div class="tree-node npc-node">
-                                    <span class="node-label">NPC</span>
-                                    <span class="node-text">"Hello."</span>
+                                <div class="tree-branch-line"></div>
+                                <div class="tree-node npc-node small-node">
+                                    <div class="node-label">NPC</div>
+                                    <div class="node-text">"Hello."</div>
                                 </div>
                             </div>
 
-                            <div class="tree-branch">
-                                <div class="tree-line stem"></div>
-                                <div class="tree-choice">Who are you?</div>
-                                <div class="tree-line stem down"></div>
-                                <div class="tree-node npc-node">
-                                    <span class="node-label">NPC</span>
-                                    <span class="node-text">"I am Ilya Sokolov, the town watchman."</span>
-                                </div>
-                            </div>
-
-                            <div class="tree-branch">
-                                <div class="tree-line stem"></div>
-                                <div class="tree-choice">Where is everybody?</div>
-                                <div class="tree-line stem down"></div>
-                                <div class="tree-node npc-node highlight-node">
-                                    <span class="node-label">NPC</span>
-                                    <span class="node-text">"Gone. Taken during the night."</span>
+                            <div class="tree-branch center-branch">
+                                <div class="tree-choice highlight-node">Where is everybody?</div>
+                                <div class="tree-branch-line"></div>
+                                <div class="tree-node npc-node small-node highlight-node">
+                                    <div class="node-label">NPC</div>
+                                    <div class="node-text">"Gone. Taken during the night."</div>
                                 </div>
 
-                                <div class="tree-line stem unlock-stem"></div>
-                                <div class="unlock-label">unlocks</div>
+                                <div class="unlock-label">Unlocks</div>
 
                                 <div class="unlock-row">
                                     <div class="unlock-branch">
                                         <div class="tree-choice unlock-choice">Taken by who?</div>
-                                        <div class="tree-line stem down"></div>
+                                        <div class="tree-branch-line"></div>
                                         <div class="tree-node npc-node small-node">
-                                            <span class="node-label">NPC</span>
-                                            <span class="node-text">"We do not say their name aloud."</span>
+                                            <div class="node-label">NPC</div>
+                                            <div class="node-text">"We do not say their name aloud."</div>
                                         </div>
                                     </div>
 
                                     <div class="unlock-branch">
                                         <div class="tree-choice unlock-choice">How do I survive?</div>
-                                        <div class="tree-line stem down"></div>
+                                        <div class="tree-branch-line"></div>
                                         <div class="tree-node npc-node small-node">
-                                            <span class="node-label">NPC</span>
-                                            <span class="node-text">"Stay inside after sunset. Bolt the door."</span>
+                                            <div class="node-label">NPC</div>
+                                            <div class="node-text">"Stay inside after sunset. Bolt the door."</div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="tree-branch">
+                                <div class="tree-choice">Who are you?</div>
+                                <div class="tree-branch-line"></div>
+                                <div class="tree-node npc-node small-node">
+                                    <div class="node-label">NPC</div>
+                                    <div class="node-text">"I am Ilya Sokolov, the town watchman."</div>
                                 </div>
                             </div>
                         </div>
