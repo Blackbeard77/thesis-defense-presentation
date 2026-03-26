@@ -4,6 +4,7 @@
      ============================================================ -->
 <section>
 
+
     <!-- 5.0 ── Chapter Divider -->
     <section class="slide-chapter" data-num="04">
         <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
@@ -14,7 +15,37 @@
     </section>
 
 
-    <!-- 5.1 ── Latency Comparison (animated bar chart) -->
+    <!-- 5.1   Image placement A-->
+    <section class="slide p-16 col center">
+        <h2 class="mb-6">Local LLMs Raw Data Collected</h2>
+
+        <div style="flex: 1; display: flex; align-items: center; justify-content: center; width: 100%;">
+            <img src="assets/images/compare_local_llm.png"
+                 class="zoom-in-once"
+                 alt="Dialogue tree screenshot"
+                 style="max-width: 90%; max-height: 800px; object-fit: contain;">
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
+            <span>Results · Latency</span>
+        </div>
+
+    </section>
+
+    <!-- 5.2   Image placement A-->
+    <section class="slide p-16 col center">
+        <h2 class="mb-6">Dialog Tree vs OpenAI vs Gemma3 (1B)</h2>
+
+        <div style="flex: 1; display: flex; align-items: center; justify-content: center; width: 100%;">
+            <img src="assets/images/compare_dialoguetree_openai_gemma3.png"
+                 class="zoom-in-once"
+                 alt="Dialogue tree screenshot"
+                 style="max-width: 90%; max-height: 800px; object-fit: contain;">
+        </div>
+    </section>
+
+    <!-- 5.3 ── Latency Comparison (animated bar chart) -->
     <section>
         <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
         <h3>Results</h3>
@@ -127,7 +158,12 @@
                                 y: {
                                     ticks: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}},
                                     grid: {color: '#252c3a'},
-                                    title: {display: true, text: 'Seconds', color: '#5a6278', font: {family: 'DM Mono'}}
+                                    title: {
+                                        display: true,
+                                        text: 'Seconds',
+                                        color: '#5a6278',
+                                        font: {family: 'DM Mono'}
+                                    }
                                 }
                             }
                         }
@@ -145,7 +181,8 @@
         <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
         <h3>Results</h3>
         <h2>CPU Usage During Conversation</h2>
-        <p style="font-size:0.55em;">CPU % over time — shaded regions = conversation window (player input → NPC response
+        <p style="font-size:0.55em;">CPU % over time — shaded regions = conversation window (player input → NPC
+            response
             received).</p>
 
         <canvas id="chart-cpu" style="max-height:340px;"></canvas>
@@ -252,7 +289,11 @@
                             },
                             scales: {
                                 x: {
-                                    ticks: {color: '#5a6278', font: {family: 'DM Mono', size: 9}, maxTicksLimit: 10},
+                                    ticks: {
+                                        color: '#5a6278',
+                                        font: {family: 'DM Mono', size: 9},
+                                        maxTicksLimit: 10
+                                    },
                                     grid: {color: '#1c2030'}
                                 },
                                 y: {
@@ -431,103 +472,6 @@
 
         <script>
             (function () {
-                function initCost() {
-                    var el = document.getElementById('chart-cost');
-                    if (!el || el._init) return;
-                    if (typeof Chart === 'undefined') {
-                        setTimeout(initCost, 300);
-                        return;
-                    }
-                    el._init = true;
-
-                    new Chart(el, {
-                        type: 'bar',
-                        data: {
-                            labels: ['Dialog Tree', 'Local LLM', 'Cloud LLM\n(per session)', 'Cloud LLM\n(per player)'],
-                            datasets: [{
-                                label: 'Cost (USD)',
-                                data: [0, 0, 0.0000568, 3.77],
-                                backgroundColor: [
-                                    'rgba(61,214,140,0.75)',
-                                    'rgba(61,214,140,0.75)',
-                                    'rgba(240,192,64,0.75)',
-                                    'rgba(224,92,75,0.85)'
-                                ],
-                                borderColor: [
-                                    'rgba(61,214,140,1)',
-                                    'rgba(61,214,140,1)',
-                                    'rgba(240,192,64,1)',
-                                    'rgba(224,92,75,1)'
-                                ],
-                                borderWidth: 2,
-                                borderRadius: 6,
-                            }]
-                        },
-                        options: {
-                            animation: {duration: 1600, easing: 'easeOutBounce'},
-                            responsive: true,
-                            plugins: {
-                                legend: {display: false},
-                                tooltip: {
-                                    callbacks: {
-                                        label: function (c) {
-                                            var v = c.parsed.y;
-                                            return v === 0 ? ' Free' : ' $' + v.toFixed(7).replace(/\.?0+$/, '');
-                                        }
-                                    }
-                                }
-                            },
-                            scales: {
-                                x: {
-                                    ticks: {color: '#a8afc4', font: {family: 'DM Mono', size: 10}},
-                                    grid: {color: '#252c3a'}
-                                },
-                                y: {
-                                    ticks: {
-                                        color: '#a8afc4',
-                                        font: {family: 'DM Mono', size: 10},
-                                        callback: function (v) {
-                                            return '$' + v;
-                                        }
-                                    },
-                                    grid: {color: '#252c3a'},
-                                    type: 'logarithmic'
-                                }
-                            }
-                        }
-                    });
-                }
-
-                setTimeout(initCost, 600);
-            })();
-        </script>
-    </section>
-
-
-    <!-- 5.5 ── Dialog Accuracy -->
-    <section>
-        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
-        <h3>Results</h3>
-        <h2>Dialog Accuracy</h2>
-        <p style="font-size:0.55em;">Error rate (%) when models deviate from the system prompt rules. Lower =
-            better.</p>
-
-        <canvas id="chart-accuracy" style="max-height:320px;"></canvas>
-
-        <div class="callout-orange fragment fade-up" style="margin-top:0.8rem;">
-            <strong>Key finding:</strong> Model size alone does NOT determine accuracy.
-            <strong>Gemma 3 (1B)</strong> achieved <em>0% error rate</em> —
-            perfect rule adherence — while Mistral 7B and DeepSeek 1.5B
-            deviated significantly. Prompt alignment matters more than parameter count.
-        </div>
-
-        <div class="slide-footer">
-            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
-            <span>Results · Dialog Accuracy</span>
-        </div>
-
-        <script>
-            (function () {
                 function initAccuracy() {
                     var el = document.getElementById('chart-accuracy');
                     if (!el || el._init) return;
@@ -636,7 +580,8 @@
         </div>
 
         <div class="callout fragment fade-up" style="margin-top: 1rem;">
-            <strong>Key Finding:</strong> Local LLMs show 81-99% CPU utilization during generation, while Dialog Tree
+            <strong>Key Finding:</strong> Local LLMs show 81-99% CPU utilization during generation, while Dialog
+            Tree
             and Cloud LLM remain under 20%.
         </div>
 
@@ -791,6 +736,24 @@
         </div>
     </section>
 
+    <!--    Image placement A-->
+    <section class="slide p-16 col center">
+        <h2 class="mb-6">Dialog Accuracy</h2>
+
+        <div style="flex: 1; display: flex; align-items: center; justify-content: center; width: 100%;">
+            <img src="assets/images/compare_error_rates.png"
+                 class="zoom-in-once"
+                 alt="Dialogue tree screenshot"
+                 style="max-width: 90%; max-height: 800px; object-fit: contain;">
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
+            <span>Results · Latency</span>
+        </div>
+
+    </section>
+
     <!-- SLIDE 5: Prompt Adherence Accuracy -->
     <section class="slide p-16 col">
         <h3>Qualitative Measures</h3>
@@ -805,7 +768,7 @@
                          style="background: linear-gradient(90deg, var(--green), #3dd68c); width: 0%;"
                          data-width="100"></div>
                 </div>
-                <div class="bar-val">100% · dist: 0</div>
+                <div class="bar-val">100% · LD: 0</div>
             </div>
 
             <div class="bar-row fragment fade-up">
@@ -815,7 +778,7 @@
                          style="background: linear-gradient(90deg, var(--green), #3dd68c); width: 0%;"
                          data-width="100"></div>
                 </div>
-                <div class="bar-val">100% · dist: 0</div>
+                <div class="bar-val">100% · LD: 0</div>
             </div>
 
             <div class="bar-row fragment fade-up">
@@ -825,7 +788,7 @@
                          style="background: linear-gradient(90deg, var(--green), #3dd68c); width: 0%;"
                          data-width="100"></div>
                 </div>
-                <div class="bar-val">100% · dist: 0</div>
+                <div class="bar-val">100% · LD: 0</div>
             </div>
 
             <div class="bar-row fragment fade-up">
@@ -835,7 +798,7 @@
                          style="background: linear-gradient(90deg, var(--yellow), #f0c040); width: 0%;"
                          data-width="50"></div>
                 </div>
-                <div class="bar-val">~50% · dist: 194</div>
+                <div class="bar-val">~50% · LD: 194</div>
             </div>
 
             <div class="bar-row fragment fade-up">
@@ -845,7 +808,7 @@
                          style="background: linear-gradient(90deg, var(--red), #e05c4b); width: 0%;"
                          data-width="12.5"></div>
                 </div>
-                <div class="bar-val">~12.5% · dist: 528</div>
+                <div class="bar-val">~12.5% · LD: 528</div>
             </div>
 
             <div class="bar-row fragment fade-up">
@@ -855,14 +818,16 @@
                          style="background: linear-gradient(90deg, var(--yellow), #f0c040); width: 0%;"
                          data-width="0"></div>
                 </div>
-                <div class="bar-val">0% · dist: 767</div>
+                <div class="bar-val">0% · LD: 767</div>
             </div>
 
         </div>
 
-        <div class="callout-orange fragment fade-up" style="margin-top: 1.5rem;">
-            <strong>Key Insight:</strong> Model size does not guarantee better prompt adherence —
-            Gemma 3 1B outperforms larger models in rule-following.
+        <div class="callout-orange fragment fade-up" style="margin-top:1.5rem;">
+            <strong>Key finding:</strong> Model size alone does NOT determine accuracy.
+            <strong>Gemma 3 (1B)</strong> achieved <em>0% error rate</em> —
+            perfect rule adherence — while Mistral 7B and DeepSeek 1.5B
+            deviated significantly. Prompt alignment matters more than parameter count.
         </div>
 
         <div class="slide-footer">
@@ -934,33 +899,6 @@
         <div class="slide-footer">
             <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
             <span>Results · Dialog Accuracy</span>
-        </div>
-
-    </section>
-
-    <!-- Slide 2 - Card moves and others appear -->
-    <section data-auto-animate>
-        <h3>Performance Comparison</h3>
-        <div style="display: flex; gap: 1rem; justify-content: center;">
-            <div class="stat-card" style="width: 200px;">
-                <span class="stat-val">0.7s</span>
-                <span class="stat-label">Gemma 1B</span>
-            </div>
-
-            <div class="stat-card">
-                <span class="stat-val">2.8s</span>
-                <span class="stat-label">Qwen 0.6B</span>
-            </div>
-
-            <div class="stat-card winner">
-                <span class="stat-val">15.9s</span>
-                <span class="stat-label">DeepSeek 1.5B</span>
-            </div>
-
-            <div class="slide-footer">
-                <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
-                <span>Results · Dialog Accuracy</span>
-            </div>
         </div>
 
     </section>

@@ -17,6 +17,7 @@
     <!------------------------------------------------------>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
     <style>
         .graph-container {
@@ -160,8 +161,9 @@
             if (cpuGpuCtx) {
                 new Chart(cpuGpuCtx, {
                     type: 'bar',
+                    plugins: [ChartDataLabels],
                     data: {
-                        labels: ['Dialog Tree', 'Cloud (GPT-4o)', 'Gemma 3 1B', 'Qwen 3 0.6B', 'DeepSeek 1.5B', 'Mistral 7B'],
+                        labels: ['Dialog Tree', 'GPT-4o', 'Gemma 3 1B', 'Qwen 3 0.6B', 'DeepSeek 1.5B', 'Mistral 7B'],
                         datasets: [
                             {
                                 label: 'CPU Usage (%)',
@@ -172,14 +174,64 @@
                             },
                             {
                                 label: 'GPU Usage (%)',
-                                data: [2, 3, 5, 5, 5, 5],
+                                data: [2, 3, 7, 18, 54, 50],
                                 backgroundColor: 'rgba(79, 142, 247, 0.7)',
                                 borderColor: '#4f8ef7',
                                 borderWidth: 2
                             }
                         ]
                     },
-                    options: {responsive: true, maintainAspectRatio: false}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 18
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                color: '#ffffff',
+                                anchor: 'end',
+                                align: 'top',
+                                offset: 4,
+                                font: {
+                                    size: 16,
+                                    weight: 'bold'
+                                },
+                                formatter: (value) => value + '%'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 16
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(255,255,255,0.08)'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 16
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(255,255,255,0.08)'
+                                }
+                            }
+                        }
+                    }
                 });
             }
 
@@ -187,8 +239,9 @@
             if (ramVramCtx) {
                 new Chart(ramVramCtx, {
                     type: 'bar',
+                    plugins: [ChartDataLabels],
                     data: {
-                        labels: ['Dialog Tree', 'Cloud (GPT-4o)', 'Gemma 3 1B', 'Qwen 3 0.6B', 'DeepSeek 1.5B', 'Mistral 7B'],
+                        labels: ['Dialog Tree', 'GPT-4o', 'Gemma 3 1B', 'Qwen 3 0.6B', 'DeepSeek 1.5B', 'Mistral 7B'],
                         datasets: [
                             {
                                 label: 'RAM (GB)',
@@ -206,7 +259,56 @@
                             }
                         ]
                     },
-                    options: {responsive: true, maintainAspectRatio: false}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 18
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                color: '#ffffff',
+                                anchor: 'end',
+                                align: 'top',
+                                offset: 4,
+                                font: {
+                                    size: 16,
+                                    weight: 'bold'
+                                },
+                                formatter: (value) => value + ' GB'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 16
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(255,255,255,0.08)'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 16
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(255,255,255,0.08)'
+                                }
+                            }
+                        }
+                    }
                 });
             }
 
@@ -246,7 +348,46 @@
                             }
                         ]
                     },
-                    options: {responsive: true, maintainAspectRatio: false}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 18
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 16
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(255,255,255,0.08)'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 16
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(255,255,255,0.08)'
+                                }
+                            }
+                        }
+                    }
                 });
             }
         });
