@@ -43,6 +43,12 @@
                  alt="Dialogue tree screenshot"
                  style="max-width: 90%; max-height: 800px; object-fit: contain;">
         </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
+            <span>Results · Latency</span>
+        </div>
+
     </section>
 
     <!-- 5.3 ── Latency Comparison (animated bar chart) -->
@@ -175,402 +181,7 @@
         </script>
     </section>
 
-
-    <!-- 5.2 ── CPU Usage Animated Line Chart -->
-    <section>
-        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
-        <h3>Results</h3>
-        <h2>CPU Usage During Conversation</h2>
-        <p style="font-size:0.55em;">CPU % over time — shaded regions = conversation window (player input → NPC
-            response
-            received).</p>
-
-        <canvas id="chart-cpu" style="max-height:340px;"></canvas>
-
-        <div class="callout fragment fade-up" style="margin-top:0.6rem; font-size:0.55em;">
-            <strong>Dialog Tree:</strong> near-zero CPU at all times &nbsp;·&nbsp;
-            <strong>OpenAI:</strong> low local CPU, latency comes from network &nbsp;·&nbsp;
-            <strong>Gemma 1B:</strong> sharp spikes to ~100% during generation, then drops fast
-        </div>
-
-        <div class="slide-footer">
-            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
-            <span>Results · CPU Usage</span>
-        </div>
-
-        <script>
-            (function () {
-                function initCPU() {
-                    var el = document.getElementById('chart-cpu');
-                    if (!el || el._init) return;
-                    if (typeof Chart === 'undefined') {
-                        setTimeout(initCPU, 300);
-                        return;
-                    }
-                    el._init = true;
-
-                    // Simulate time-series CPU data (40 time points)
-                    var labels = Array.from({length: 40}, function (_, i) {
-                        return i + 's';
-                    });
-
-                    // Dialog Tree — barely any CPU
-                    var dtData = labels.map(function (_, i) {
-                        return Math.random() * 3 + 1;
-                    });
-
-                    // OpenAI — small bumps during conversation windows
-                    var oaiData = labels.map(function (_, i) {
-                        var inConv = (i >= 6 && i <= 9) || (i >= 14 && i <= 17) || (i >= 22 && i <= 25) || (i >= 30 && i <= 33);
-                        return inConv ? Math.random() * 8 + 4 : Math.random() * 3 + 1;
-                    });
-
-                    // Gemma 1B — sharp spikes
-                    var gemmaData = labels.map(function (_, i) {
-                        var inConv = (i >= 6 && i <= 9) || (i >= 14 && i <= 17) || (i >= 22 && i <= 25) || (i >= 30 && i <= 33);
-                        return inConv ? Math.random() * 20 + 80 : Math.random() * 8 + 5;
-                    });
-
-                    new Chart(el, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [
-                                {
-                                    label: 'Dialog Tree',
-                                    data: dtData,
-                                    borderColor: 'rgba(79,142,247,0.9)',
-                                    backgroundColor: 'rgba(79,142,247,0.05)',
-                                    borderWidth: 2,
-                                    pointRadius: 0,
-                                    tension: 0.4,
-                                    fill: true,
-                                },
-                                {
-                                    label: 'Cloud (OpenAI)',
-                                    data: oaiData,
-                                    borderColor: 'rgba(61,214,140,0.9)',
-                                    backgroundColor: 'rgba(61,214,140,0.05)',
-                                    borderWidth: 2,
-                                    pointRadius: 0,
-                                    tension: 0.4,
-                                    fill: true,
-                                },
-                                {
-                                    label: 'Gemma3 (1B)',
-                                    data: gemmaData,
-                                    borderColor: 'rgba(217,78,14,0.95)',
-                                    backgroundColor: 'rgba(217,78,14,0.08)',
-                                    borderWidth: 2.5,
-                                    pointRadius: 0,
-                                    tension: 0.3,
-                                    fill: true,
-                                }
-                            ]
-                        },
-                        options: {
-                            animation: {duration: 1800, easing: 'easeInOutQuart'},
-                            responsive: true,
-                            interaction: {mode: 'index', intersect: false},
-                            plugins: {
-                                legend: {
-                                    display: true,
-                                    labels: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}, boxWidth: 12}
-                                },
-                                tooltip: {
-                                    callbacks: {
-                                        label: function (c) {
-                                            return ' ' + c.dataset.label + ': ' + c.parsed.y.toFixed(1) + '%';
-                                        }
-                                    }
-                                },
-                                // Conversation window annotations drawn as background rects
-                                annotation: {}
-                            },
-                            scales: {
-                                x: {
-                                    ticks: {
-                                        color: '#5a6278',
-                                        font: {family: 'DM Mono', size: 9},
-                                        maxTicksLimit: 10
-                                    },
-                                    grid: {color: '#1c2030'}
-                                },
-                                y: {
-                                    min: 0, max: 105,
-                                    ticks: {
-                                        color: '#a8afc4',
-                                        font: {family: 'DM Mono', size: 11},
-                                        callback: function (v) {
-                                            return v + '%';
-                                        }
-                                    },
-                                    grid: {color: '#252c3a'},
-                                    title: {
-                                        display: true,
-                                        text: 'CPU Usage (%)',
-                                        color: '#5a6278',
-                                        font: {family: 'DM Mono'}
-                                    }
-                                }
-                            }
-                        }
-                    });
-                }
-
-                setTimeout(initCPU, 600);
-            })();
-        </script>
-    </section>
-
-
-    <!-- 5.3 ── All Local LLMs Resource Bar Chart -->
-    <section>
-        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
-        <h3>Results</h3>
-        <h2>Local LLMs — Resource Comparison</h2>
-        <p style="font-size:0.55em;">Average resource consumption during output generation across all 4 tested
-            models.</p>
-
-        <canvas id="chart-localllm" style="max-height:330px;"></canvas>
-
-        <div class="cols3" style="margin-top:0.7rem;">
-            <div class="stat-card winner fragment fade-up">
-                <span class="stat-val">Gemma 1B</span>
-                <span class="stat-label">🏆 Best balance of speed + accuracy</span>
-            </div>
-            <div class="stat-card fragment fade-up">
-                <span class="stat-val" style="color:var(--yellow);">Qwen 0.6B</span>
-                <span class="stat-label">Lightest — but slower than Gemma</span>
-            </div>
-            <div class="stat-card fragment fade-up">
-                <span class="stat-val" style="color:var(--red);">Mistral 7B</span>
-                <span class="stat-label">Too slow for real-time dialog</span>
-            </div>
-        </div>
-
-        <div class="slide-footer">
-            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
-            <span>Results · Local LLMs</span>
-        </div>
-
-        <script>
-            (function () {
-                function initLocal() {
-                    var el = document.getElementById('chart-localllm');
-                    if (!el || el._init) return;
-                    if (typeof Chart === 'undefined') {
-                        setTimeout(initLocal, 300);
-                        return;
-                    }
-                    el._init = true;
-
-                    new Chart(el, {
-                        type: 'bar',
-                        data: {
-                            labels: ['Gemma3 (1B)', 'Qwen3 (0.6B)', 'Mistral (7B)', 'DeepSeek (1.5B)'],
-                            datasets: [
-                                {
-                                    label: 'Latency (s)',
-                                    data: [0.7, 2.8, 25.2, 15.9],
-                                    backgroundColor: 'rgba(217,78,14,0.75)',
-                                    borderColor: 'rgba(217,78,14,1)',
-                                    borderWidth: 2, borderRadius: 5,
-                                },
-                                {
-                                    label: 'Avg CPU (%)',
-                                    data: [81.3, 20.0, 99.0, 65.9],
-                                    backgroundColor: 'rgba(79,142,247,0.65)',
-                                    borderColor: 'rgba(79,142,247,1)',
-                                    borderWidth: 2, borderRadius: 5,
-                                },
-                                {
-                                    label: 'VRAM (GB)',
-                                    data: [1.3, 0.9, 1.3, 2.2],
-                                    backgroundColor: 'rgba(61,214,140,0.65)',
-                                    borderColor: 'rgba(61,214,140,1)',
-                                    borderWidth: 2, borderRadius: 5,
-                                }
-                            ]
-                        },
-                        options: {
-                            animation: {duration: 1400, easing: 'easeOutQuart'},
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    display: true,
-                                    labels: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}, boxWidth: 12}
-                                }
-                            },
-                            scales: {
-                                x: {
-                                    ticks: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}},
-                                    grid: {color: '#252c3a'}
-                                },
-                                y: {
-                                    ticks: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}},
-                                    grid: {color: '#252c3a'}
-                                }
-                            }
-                        }
-                    });
-                }
-
-                setTimeout(initLocal, 600);
-            })();
-        </script>
-    </section>
-
-
-    <!-- 5.4 ── Cost Analysis -->
-    <section>
-        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
-        <h3>Results</h3>
-        <h2>Cost Comparison</h2>
-
-        <div class="cols wide">
-            <div>
-                <canvas id="chart-cost" style="max-height:320px;"></canvas>
-            </div>
-
-            <div>
-                <div class="card card-orange fragment fade-up">
-                    <strong>Per Session</strong>
-                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--srh); margin:0.4em 0;">≈
-                        $0.0000568
-                    </div>
-                    <span style="font-size:0.8em; color:var(--muted);">6 dialog turns · GPT-4o pricing</span>
-                </div>
-
-                <div class="card card-orange fragment fade-up" style="margin-top:0.6rem;">
-                    <strong>Per Player (full game)</strong>
-                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--srh); margin:0.4em 0;">≈
-                        $3.77
-                    </div>
-                    <span style="font-size:0.8em; color:var(--muted);">~161k word dialog · 38.8% completion rate</span>
-                </div>
-
-                <div class="callout-orange fragment fade-up" style="margin-top:0.6rem;">
-                    <strong>~15%</strong> of the average game price ($24.81)
-                    would go to cloud dialog costs alone.
-                </div>
-
-                <div class="card card-green fragment fade-up" style="margin-top:0.6rem;">
-                    <strong style="color:var(--green);">Dialog Tree &amp; Local LLM</strong>
-                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--green); margin:0.4em 0;">
-                        $0.00
-                    </div>
-                    <span style="font-size:0.8em; color:var(--muted);">Zero per-session runtime cost</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide-footer">
-            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
-            <span>Results · Cost</span>
-        </div>
-
-        <script>
-            (function () {
-                function initAccuracy() {
-                    var el = document.getElementById('chart-accuracy');
-                    if (!el || el._init) return;
-                    if (typeof Chart === 'undefined') {
-                        setTimeout(initAccuracy, 300);
-                        return;
-                    }
-                    el._init = true;
-
-                    new Chart(el, {
-                        type: 'bar',
-                        data: {
-                            labels: ['Gemma3 (1B)', 'Qwen3 (0.6B)', 'Mistral (7B)', 'DeepSeek (1.5B)'],
-                            datasets: [
-                                {
-                                    label: 'Error Rate (%)',
-                                    data: [0, 50, 87.5, 100],
-                                    backgroundColor: [
-                                        'rgba(61,214,140,0.85)',
-                                        'rgba(240,192,64,0.75)',
-                                        'rgba(224,92,75,0.75)',
-                                        'rgba(224,92,75,0.95)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(61,214,140,1)',
-                                        'rgba(240,192,64,1)',
-                                        'rgba(224,92,75,1)',
-                                        'rgba(224,92,75,1)'
-                                    ],
-                                    borderWidth: 2,
-                                    borderRadius: 6,
-                                    yAxisID: 'y'
-                                },
-                                {
-                                    label: 'Avg Levenshtein Distance (errors)',
-                                    data: [0, 194, 528, 767],
-                                    backgroundColor: 'rgba(79,142,247,0.5)',
-                                    borderColor: 'rgba(79,142,247,1)',
-                                    borderWidth: 2,
-                                    borderRadius: 6,
-                                    type: 'bar',
-                                    yAxisID: 'y2'
-                                }
-                            ]
-                        },
-                        options: {
-                            animation: {duration: 1400, easing: 'easeOutQuart'},
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    display: true,
-                                    labels: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}, boxWidth: 12}
-                                }
-                            },
-                            scales: {
-                                x: {
-                                    ticks: {color: '#a8afc4', font: {family: 'DM Mono', size: 11}},
-                                    grid: {color: '#252c3a'}
-                                },
-                                y: {
-                                    position: 'left',
-                                    min: 0, max: 105,
-                                    ticks: {
-                                        color: '#a8afc4',
-                                        font: {family: 'DM Mono', size: 11},
-                                        callback: function (v) {
-                                            return v + '%';
-                                        }
-                                    },
-                                    grid: {color: '#252c3a'},
-                                    title: {
-                                        display: true,
-                                        text: 'Error Rate (%)',
-                                        color: '#5a6278',
-                                        font: {family: 'DM Mono'}
-                                    }
-                                },
-                                y2: {
-                                    position: 'right',
-                                    ticks: {color: '#4f8ef7', font: {family: 'DM Mono', size: 11}},
-                                    grid: {drawOnChartArea: false},
-                                    title: {
-                                        display: true,
-                                        text: 'Levenshtein Distance',
-                                        color: '#4f8ef7',
-                                        font: {family: 'DM Mono'}
-                                    }
-                                }
-                            }
-                        }
-                    });
-                }
-
-                setTimeout(initAccuracy, 600);
-            })();
-        </script>
-    </section>
-
-    <!-- SLIDE 1: CPU & GPU Resource Usage -->
+    <!-- SLIDE 4: CPU & GPU Resource Usage -->
     <section class="slide p-16 col">
         <h3>Performance Analysis</h3>
         <h2 class="mb-6">CPU &amp; GPU Resource Usage</h2>
@@ -587,11 +198,45 @@
 
         <div class="slide-footer">
             <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
-            <span>Results · Dialog Accuracy</span>
+            <span>Results · CPU Usage</span>
         </div>
     </section>
 
-    <!-- SLIDE 2: Memory Consumption Comparison -->
+    <!-- SLIDE 5: CPU Utilization Timeline -->
+    <section class="slide p-16 col">
+        <h3>Runtime Behavior</h3>
+        <h2 class="mb-6">CPU Utilization Timeline</h2>
+
+        <div class="graph-container" style="animation-delay: 2s">
+            <canvas id="cpuTimelineChart"></canvas>
+        </div>
+
+        <div class="cols3" style="margin-top: 1rem; gap: 0.8rem; animation-delay: 2s">
+            <div class="card card-green">
+                <strong>Dialog Tree:</strong> Flat ~10% baseline
+            </div>
+            <div class="card card-blue">
+                <strong>Cloud LLM:</strong> Low local load, network latency
+            </div>
+            <div class="card card-orange">
+                <strong>Local LLM:</strong> Spike to 100% during generation
+            </div>
+        </div>
+
+        <div class="callout fragment fade-up" style="margin-top:0.6rem; font-size:0.55em;">
+            <strong>Dialog Tree:</strong> near-zero CPU at all times &nbsp;·&nbsp;
+            <strong>OpenAI:</strong> low local CPU, latency comes from network &nbsp;·&nbsp;
+            <strong>Gemma 1B:</strong> sharp spikes to ~100% during generation, then drops fast
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
+            <span>Results · CPU Usage</span>
+        </div>
+
+    </section>
+
+    <!-- SLIDE 6: Memory Consumption Comparison -->
     <section class="slide p-16 col">
         <h3>Performance Analysis</h3>
         <h2 class="mb-6">Memory Consumption</h2>
@@ -611,70 +256,9 @@
 
         <div class="slide-footer">
             <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
-            <span>Results · Dialog Accuracy</span>
+            <span>Results · Memory Consumption</span>
         </div>
     </section>
-
-    <!--    &lt;!&ndash; SLIDE 3: Response Latency Comparison &ndash;&gt;-->
-    <!--    <section class="slide p-16 col">-->
-    <!--        <h3>Performance Analysis</h3>-->
-    <!--        <h2 class="mb-6">Response Latency Comparison</h2>-->
-
-    <!--        <div class="bar-chart">-->
-    <!--            <div class="bar-row fragment fade-up">-->
-    <!--                <div class="bar-label">Dialog Tree</div>-->
-    <!--                <div class="bar-track">-->
-    <!--                    <div class="bar-fill" data-width="0.1"></div>-->
-    <!--                </div>-->
-    <!--                <div class="bar-val">~0ms</div>-->
-    <!--            </div>-->
-
-    <!--            <div class="bar-row fragment fade-up">-->
-    <!--                <div class="bar-label">Cloud (GPT-4o)</div>-->
-    <!--                <div class="bar-track">-->
-    <!--                    <div class="bar-fill" data-width="3"></div>-->
-    <!--                </div>-->
-    <!--                <div class="bar-val">~700ms</div>-->
-    <!--            </div>-->
-
-    <!--            <div class="bar-row fragment fade-up">-->
-    <!--                <div class="bar-label">Gemma 3 1B</div>-->
-    <!--                <div class="bar-track">-->
-    <!--                    <div class="bar-fill" data-width="3.5"></div>-->
-    <!--                </div>-->
-    <!--                <div class="bar-val">~700ms</div>-->
-    <!--            </div>-->
-
-    <!--            <div class="bar-row fragment fade-up">-->
-    <!--                <div class="bar-label">Qwen 3 0.6B</div>-->
-    <!--                <div class="bar-track">-->
-    <!--                    <div class="bar-fill" data-width="14"></div>-->
-    <!--                </div>-->
-    <!--                <div class="bar-val">~2.8s</div>-->
-    <!--            </div>-->
-
-    <!--            <div class="bar-row fragment fade-up">-->
-    <!--                <div class="bar-label">DeepSeek 1.5B</div>-->
-    <!--                <div class="bar-track">-->
-    <!--                    <div class="bar-fill local" data-width="79.5"></div>-->
-    <!--                </div>-->
-    <!--                <div class="bar-val">~15.9s</div>-->
-    <!--            </div>-->
-
-    <!--            <div class="bar-row fragment fade-up">-->
-    <!--                <div class="bar-label">Mistral 7B</div>-->
-    <!--                <div class="bar-track">-->
-    <!--                    <div class="bar-fill local" data-width="100"></div>-->
-    <!--                </div>-->
-    <!--                <div class="bar-val">~25.2s</div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-
-    <!--        <div class="slide-footer">-->
-    <!--            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>-->
-    <!--            <span>Results · Dialog Accuracy</span>-->
-    <!--        </div>-->
-    <!--    </section>-->
 
     <!-- SLIDE 4: Local LLM Performance Summary -->
     <section class="slide p-16 col">
@@ -732,8 +316,142 @@
 
         <div class="slide-footer">
             <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
-            <span>Results · Dialog Accuracy</span>
+            <span>Results · Local LLMs</span>
         </div>
+    </section>
+
+    <!-- 5.3 ── All Local LLMs Resource Bar Chart -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
+        <h3>Results</h3>
+        <h2>Local LLMs — Resource Comparison</h2>
+        <p style="font-size:0.55em;">Average resource consumption during output generation across all 4 tested
+            models.</p>
+
+        <canvas id="chart-localllm" style="max-height:330px;"></canvas>
+
+        <div class="cols4" style="margin-top:0.7rem;">
+            <div class="stat-card winner fragment fade-up">
+                <span class="stat-val">Gemma 1B</span>
+                <span class="stat-label">🏆 Best balance of speed + accuracy</span>
+            </div>
+            <div class="stat-card fragment fade-up">
+                <span class="stat-val" style="color:var(--yellow);">Qwen 0.6B</span>
+                <span class="stat-label">Lightest — but slower than Gemma</span>
+            </div>
+            <div class="stat-card fragment fade-up">
+                <span class="stat-val" style="color:var(--red);">Deepseek 1.5B</span>
+                <span class="stat-label">Too slow for real-time dialog</span>
+            </div>
+            <div class="stat-card fragment fade-up">
+                <span class="stat-val" style="color:var(--red);">Mistral 7B</span>
+                <span class="stat-label">Too slow for real-time dialog</span>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
+            <span>Results · Local LLMs</span>
+        </div>
+    </section>
+
+    <!-- 5.4 ── Cost Analysis -->
+    <section>
+        <img src="assets/images/srh_logo.png" alt="SRH Logo" class="slide-logo"/>
+        <h3>Results</h3>
+        <h2>Cost Comparison</h2>
+
+        <div class="cols wide">
+            <div class="card fragment fade-up" style="padding:1rem;">
+                <strong style="color:var(--accent);">Cost Model</strong>
+
+                <div style="font-size:1.4em; margin-top:0.6rem; color:#ffffff;">
+                    \( C = (T_{\mathrm{IN}} \cdot P_{\mathrm{IN}}) + (T_{\mathrm{OUT}} \cdot P_{\mathrm{OUT}}) \)
+                </div>
+
+                <div style="margin-top:0.6rem; font-size:0.85em; color:var(--muted);">
+                    \(T_{\mathrm{IN}}, T_{\mathrm{OUT}}\): tokens &nbsp;&nbsp;
+                    \(P_{\mathrm{IN}}, P_{\mathrm{OUT}}\): price per token
+                </div>
+            </div>
+
+            <div>
+                <div class="card card-orange fragment fade-up">
+                    <strong>Per Session</strong>
+                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--srh); margin:0.4em 0;">≈
+                        $0.0000568
+                    </div>
+                    <span style="font-size:0.8em; color:var(--muted);">6 dialog turns · GPT-4o pricing</span>
+                </div>
+
+
+                <div class="card card-orange fragment fade-up" style="margin-top:0.6rem;">
+                    <strong>Per Player (full game)</strong>
+                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--srh); margin:0.4em 0;">≈
+                        $3.77
+                    </div>
+                    <span style="font-size:0.8em; color:var(--muted);">~161k word dialog · 38.8% completion rate</span>
+                </div>
+
+                <div class="callout-orange fragment fade-up" style="margin-top:0.6rem;">
+                    <strong>~15%</strong> of the average game price ($24.81)
+                    would go to cloud dialog costs alone.
+                </div>
+
+                <div class="card card-green fragment fade-up" style="margin-top:0.6rem;">
+                    <strong style="color:var(--green);">Dialog Tree &amp; Local LLM</strong>
+                    <div style="font-family:var(--font-mono); font-size:1.1em; color:var(--green); margin:0.4em 0;">
+                        $0.00
+                    </div>
+                    <span style="font-size:0.8em; color:var(--muted);">Zero per-session runtime cost</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
+            <span>Results · Cost</span>
+        </div>
+
+    </section>
+
+    <!-- SLIDE 6: Cost Analysis -->
+    <section class="slide p-16 col">
+        <h3>Economic Evaluation</h3>
+        <h2 class="mb-6">Estimated Operational Costs</h2>
+
+        <div class="cols">
+            <div class="card card-orange">
+                <h4 style="color: var(--srh); margin-bottom: 0.8rem;">Cloud-Based (GPT-4o)</h4>
+                <p class="text-lg" style="margin-bottom: 0.5rem;"><strong>Per Player:</strong> ~$3.77</p>
+                <p style="font-size: 0.58em; line-height: 1.6;">
+                    • ~62,767 output tokens @ $10/1M<br>
+                    • ~1,255,340 input tokens @ $2.50/1M<br>
+                    • Equals <strong style="color: var(--srh);">15% of game price</strong> ($24.81 avg)
+                </p>
+            </div>
+
+            <div class="card card-blue">
+                <h4 style="color: var(--accent); margin-bottom: 0.8rem;">Local LLM (Gemma 3 1B)</h4>
+                <p class="text-lg" style="margin-bottom: 0.5rem;"><strong>Per Player:</strong> $0.00</p>
+                <p style="font-size: 0.58em; line-height: 1.6;">
+                    • One-time hardware investment<br>
+                    • No recurring API costs<br>
+                    • Higher minimum system requirements<br>
+                    • <strong style="color: var(--accent);">100% offline capability</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="rq-box fragment fade-up" style="margin-top: 1.5rem; font-size: 0.62em;">
+            At scale, cloud costs become unsustainable: 10,000 players = $37,700 in API fees alone.
+        </div>
+
+        <div class="slide-footer">
+            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
+            <span>Results · Cost</span>
+        </div>
+
     </section>
 
     <!--    Image placement A-->
@@ -836,72 +554,6 @@
         </div>
     </section>
 
-    <!-- SLIDE 6: Cost Analysis -->
-    <section class="slide p-16 col">
-        <h3>Economic Evaluation</h3>
-        <h2 class="mb-6">Estimated Operational Costs</h2>
-
-        <div class="cols">
-            <div class="card card-orange">
-                <h4 style="color: var(--srh); margin-bottom: 0.8rem;">Cloud-Based (GPT-4o)</h4>
-                <p class="text-lg" style="margin-bottom: 0.5rem;"><strong>Per Player:</strong> ~$3.77</p>
-                <p style="font-size: 0.58em; line-height: 1.6;">
-                    • ~62,767 output tokens @ $10/1M<br>
-                    • ~1,255,340 input tokens @ $2.50/1M<br>
-                    • Equals <strong style="color: var(--srh);">15% of game price</strong> ($24.81 avg)
-                </p>
-            </div>
-
-            <div class="card card-blue">
-                <h4 style="color: var(--accent); margin-bottom: 0.8rem;">Local LLM (Gemma 3 1B)</h4>
-                <p class="text-lg" style="margin-bottom: 0.5rem;"><strong>Per Player:</strong> $0.00</p>
-                <p style="font-size: 0.58em; line-height: 1.6;">
-                    • One-time hardware investment<br>
-                    • No recurring API costs<br>
-                    • Higher minimum system requirements<br>
-                    • <strong style="color: var(--accent);">100% offline capability</strong>
-                </p>
-            </div>
-        </div>
-
-        <div class="rq-box fragment fade-up" style="margin-top: 1.5rem; font-size: 0.62em;">
-            At scale, cloud costs become unsustainable: 10,000 players = $37,700 in API fees alone.
-        </div>
-
-        <div class="slide-footer">
-            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
-            <span>Results · Dialog Accuracy</span>
-        </div>
-
-    </section>
-
-    <!-- SLIDE 7: CPU Utilization Timeline -->
-    <section class="slide p-16 col">
-        <h3>Runtime Behavior</h3>
-        <h2 class="mb-6">CPU Utilization Timeline</h2>
-
-        <div class="graph-container" style="animation-delay: 2s">
-            <canvas id="cpuTimelineChart"></canvas>
-        </div>
-
-        <div class="cols3" style="margin-top: 1rem; gap: 0.8rem; animation-delay: 2s">
-            <div class="card card-green">
-                <strong>Dialog Tree:</strong> Flat ~10% baseline
-            </div>
-            <div class="card card-blue">
-                <strong>Cloud LLM:</strong> Low local load, network latency
-            </div>
-            <div class="card card-orange">
-                <strong>Local LLM:</strong> Spike to 100% during generation
-            </div>
-        </div>
-
-        <div class="slide-footer">
-            <span>Ashraf Lehawany · Thesis Defense · Supervisors: Prof. Dr. Andreas Jäger & Christoph Hahn · 26.03.2026</span>
-            <span>Results · Dialog Accuracy</span>
-        </div>
-
-    </section>
 
     <!--    Image placement A-->
     <section class="slide p-16 col center">

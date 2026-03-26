@@ -18,6 +18,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
         .graph-container {
@@ -62,7 +63,7 @@
 
         .metric-label {
             font-family: var(--font-mono);
-            font-size: 0.38em;
+            font-size: 0.5em;
             color: var(--muted);
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -137,6 +138,14 @@
             showSlideNumber: 'all',
             fragments: true,
             plugins: []
+        });
+
+        Reveal.on('ready', () => {
+            if (window.MathJax) MathJax.typeset();
+        });
+
+        Reveal.on('slidechanged', () => {
+            if (window.MathJax) MathJax.typeset();
         });
 
         // Animate latency bars when fragments appear

@@ -246,6 +246,12 @@ LAYOUT UTILITIES
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1.2rem;
 }
+/* Four columns */
+.cols4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1.2rem;
+}
 
 /* ============================================================
 CARDS
@@ -1101,7 +1107,7 @@ DIALOG TREE SLIDE — POLISHED TREE VERSION
 }
 
 .dialog-card {
-    font-size: 0.78em;
+    font-size: 0.68em;
 }
 
 .dialog-card ul {
@@ -1128,4 +1134,11 @@ DIALOG TREE SLIDE — POLISHED TREE VERSION
 
 .table-large {
     font-size: 0.85em;
+}
+
+.tree-scale-wrap {
+    transform: scale(0.88);
+    transform-origin: top center;
+    width: 113%;
+    margin-left: -6.5%;
 }
